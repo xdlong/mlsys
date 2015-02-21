@@ -1,0 +1,13 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Contained:</strong>
+  <%= @language_identification_lexicon_character.contained %>
+</p>
+<p>
+  <strong>Words:</strong>
+  <%= @language_identification_lexicon_character.words.join("，") %>
+</p>
+
+<%= link_to 'Edit', edit_language_identification_lexicon_character_path(@language_identification_lexicon_character) %> |
+<%= link_to 'Back', language_identification_lexicon_characters_path %>

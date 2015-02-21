@@ -27,6 +27,8 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 # Use thin as the app server
 gem 'thin'
 
+gem 'kaminari' # 列表分页
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

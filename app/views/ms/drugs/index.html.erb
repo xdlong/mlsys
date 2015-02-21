@@ -1,0 +1,62 @@
+<div class="panel panel-default" style="margin-bottom:0">
+  <!-- Default panel contents -->
+  <div class="panel-heading">
+    <div class="row">
+      <div class="col-lg-8 col-xs-8">
+        <span class="glyphicon glyphicon-list glyphicon-lg" style="font-size:30px"></span>
+      </div><!-- /.col-lg-8 -->
+      <div class="col-lg-4 col-xs-4">
+        <form accept-charset="UTF-8" action="/ms/drugs" method="get">
+          <div class="input-group">
+            <input name="search" type="text" class="form-control" placeholder="药名">
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="submit">搜索</button>
+            </span>
+          </div><!-- /input-group -->
+        </form>
+      </div><!-- /.col-lg-4 -->
+    </div><!-- /.row -->
+  </div>
+  <div class="panel-body">
+    <span class="pull-right">
+      <a href="/ms/drugs/new" type="button" class='btn btn-success'>新建</a>
+    </span>
+    已入库的药
+  </div>
+  <!-- Table -->
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>药名</th>
+        <th>药性</th>
+        <th>库存</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @ms_drugs.each_with_index do |ms_drug,i| %>
+        <tr>
+          <td><%= i %></td>
+          <td><%= ms_drug.name %></td>
+          <td><%= ms_drug.type %></td>
+          <td><%= ms_drug.inventory %></td>
+          <td><%= link_to '查看', ms_drug %></td>
+          <td><%= link_to '修改', edit_ms_drug_path(ms_drug) %></td>
+          <td>
+          <form accept-charset="UTF-8" action="/ms/drugs/<%=ms_drug.id%>" method="post" novalidate="novalidate">
+            <input type='hidden' name='authenticity_token'value="<%=form_authenticity_token%>"/>
+            <input name="_method" type="hidden" value="delete">
+            <button type="submit" data-toggle="tooltip">删除</button>
+          </form>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<div>
+<%= paginate @ms_drugs, :window => 3 %>
+</div>

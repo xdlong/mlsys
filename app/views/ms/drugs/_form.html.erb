@@ -1,0 +1,25 @@
+<form accept-charset="UTF-8" action=<%= "/ms/drugs" + (@ms_drug.new_record? ? '' : "/#{@ms_drug.id}/")%> method=<%= @ms_drug.new_record? ? "post" : "put" %>><div style="display:none"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="0K1JOoSisHNEpGlocGDXzPxNG1IaZp/hSOVW4KJuC/E=" /></div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group form-group-bottom">
+        <lable class="col-xs-4 col-sm-4 col-md-4 col-lg-4 control-label"><b>药名:</b></lable>
+        <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8">
+          <input class="form-control ws-doctor-desc" rows="1" placeholder="药名" required="required" name="ms_drug[name]" value=<%= @ms_drug.name %>>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group form-group-bottom">
+        <lable class="col-xs-4 col-sm-4 col-md-4 col-lg-4 control-label">
+          <b>药性:</b>
+        </lable>
+        <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8">
+          <input class="form-control ws-doctor-decide" rows="1" placeholder="药性类别" name="ms_drug[type]" value=<%= @ms_drug.type %>>
+        </div>
+      </div>
+    </div>
+  </div>
+  <input name="commit" type="submit" value="提交" />
+</form>
