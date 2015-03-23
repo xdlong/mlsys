@@ -1,25 +1,35 @@
-<form accept-charset="UTF-8" action=<%= "/ms/drugs" + (@ms_drug.new_record? ? '' : "/#{@ms_drug.id}/")%> method=<%= @ms_drug.new_record? ? "post" : "put" %>><div style="display:none"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="0K1JOoSisHNEpGlocGDXzPxNG1IaZp/hSOVW4KJuC/E=" /></div>
+<form accept-charset="UTF-8" action=<%= "/ms/drugs" + (@ms_drug.new_record? ? '' : "/#{@ms_drug.id}/")%> method="post">
+  <div style="display:none">
+    <input name=<%= request_forgery_protection_token.to_s %> value=<%=form_authenticity_token %> />
+    <input name="_method" value=<%= @ms_drug.new_record? ? "post" : "put"%> />
+  </div>
   <div class="row">
-    <div class="col-md-4">
-      <div class="form-group form-group-bottom">
-        <lable class="col-xs-4 col-sm-4 col-md-4 col-lg-4 control-label"><b>药名:</b></lable>
-        <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8">
-          <input class="form-control ws-doctor-desc" rows="1" placeholder="药名" required="required" name="ms_drug[name]" value=<%= @ms_drug.name %>>
-        </div>
+    <div class="col-md-6 col-xs-6">
+      <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">药名</span>
+        <input type="text" class="form-control" placeholder="药名" aria-describedby="basic-addon1" name="ms_drug[name]" value=<%=@ms_drug.name%> >
+      </div>
+    </div>
+    <div class="col-md-6 col-xs-6">
+      <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">别名</span>
+        <input type="text" class="form-control" placeholder="别名" aria-describedby="basic-addon1" name="ms_drug[byname][]" value=<%=@ms_drug.byname.try(:last)%> >
       </div>
     </div>
   </div>
   <div class="row">
-    <div class="col-md-4">
-      <div class="form-group form-group-bottom">
-        <lable class="col-xs-4 col-sm-4 col-md-4 col-lg-4 control-label">
-          <b>药性:</b>
-        </lable>
-        <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8">
-          <input class="form-control ws-doctor-decide" rows="1" placeholder="药性类别" name="ms_drug[type]" value=<%= @ms_drug.type %>>
-        </div>
+    <div class="col-md-6 col-xs-6">
+      <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">药性</span>
+        <input type="text" class="form-control" placeholder="药性" aria-describedby="basic-addon1" name="ms_drug[type]" value=<%=@ms_drug.type%> >
+      </div>
+    </div>
+    <div class="col-md-6 col-xs-6">
+      <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">库存</span>
+        <input type="text" class="form-control" placeholder="库存" aria-describedby="basic-addon1" name="ms_drug[inventory]" value=<%=@ms_drug.inventory%> >
       </div>
     </div>
   </div>
-  <input name="commit" type="submit" value="提交" />
+  <div style="mergin-top: 20px;"><button type="submit">提交</button></div>
 </form>

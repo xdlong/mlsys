@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
+  root 'application#index'
   namespace :ms do
     resources :drugs
   end
 
-  root 'language_identification/lexicon/characters#index'
   namespace :language_identification do
     namespace :lexicon do
       resources :characters

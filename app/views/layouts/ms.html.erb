@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>药房管理系统</title>
+  <title>药房系统</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_tag 'application', 'data-turbolinks-track' => true %>
+  <%= javascript_tag 'select2' %>
   <%= csrf_meta_tags %>
 
   <!-- 新 Bootstrap 核心 CSS 文件 -->
@@ -15,9 +16,30 @@
   <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
   <%= javascript_tag 'bootstrap/bootstrap.min' %>
 </head>
-<body>
-
-<%= yield %>
-
+<body style="padding-top: 70px;padding-bottom: 70px;">
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/ms/drugs">中药</a></li>
+        <li><a href="#">西药</a></li>
+        <li><a href="#">自制药</a></li>
+      </ul>
+    </div>
+  </nav>
+  <div class="container">
+    <%= yield %>
+  </div>
+  <nav class="navbar navbar-inverse navbar-fixed-bottom">
+    <div class="container">
+      <a href="" class="btn btn-link"><h4><font face="楷体" color=#fefefe>熊家药店</font></h4></a>
+      <div class="pull-right">
+        <h5>
+          <font face="楷体" color=#fefefe >药店地址：德江县煎茶镇老街</font>
+          <br>
+          <font face="楷体" color=#fefefe >联系电话：15121668909(熊医生)</font>
+        </h5>
+      </div>
+    </div>
+  </nav>
 </body>
 </html>

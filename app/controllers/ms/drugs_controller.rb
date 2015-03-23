@@ -5,7 +5,8 @@ class Ms::DrugsController < ApplicationController
   # GET /ms/drugs
   # GET /ms/drugs.json
   def index
-    @ms_drugs = (params[:search].present? ? Ms::Drug.where(name:params[:search]) : Ms::Drug.all).page(params[:page]).per(params[:per]||10)
+    @ms_drugs = (params[:search].present? ? Ms::Drug.where(name:params[:search]) : Ms::Drug.all).
+      page(params[:page]).per(params[:per]||10)
   end
 
   # GET /ms/drugs/1
