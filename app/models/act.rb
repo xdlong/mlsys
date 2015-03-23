@@ -1,7 +1,7 @@
 class Act
   include Mongoid::Document
-  field :ii, type: HL7::InstanceIdentifier
-  field :code, type: HL7::ConceptDescriptor
+  field :ii, type: Basic::InstanceIdentifier
+  field :code, type: Basic::ConceptDescriptor
   field :title, type: String
   field :text, type: String
   field :status_code, type: String
