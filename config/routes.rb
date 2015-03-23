@@ -1,7 +1,16 @@
 Rails.application.routes.draw do
+  devise_for :users, controllers: {
+    sessions: 'users/sessions'
+  }
+  resources :users
   root 'application#index'
+
   namespace :ms do
     resources :drugs
+  end
+
+  namespace :erp do
+    resources :home
   end
 
   namespace :language_identification do

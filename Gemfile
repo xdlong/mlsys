@@ -26,6 +26,8 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0',          group: :doc
 # Use thin as the app server
 gem 'thin'
+# Use devise as the user server
+gem 'devise'
 
 gem 'kaminari' # 列表分页
 gem "select2-rails"

@@ -1,4 +1,5 @@
 class LanguageIdentification::Lexicon::CharactersController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_language_identification_lexicon_character, only: [:show, :edit, :update, :destroy]
 
   # GET /language_identification/lexicon/characters
