@@ -34,5 +34,5 @@ class User
   field :unlock_token,    type: String # Only if unlock strategy is :email or :both
   field :locked_at,       type: Time
 
-  belongs_to :person, class_name: 'Entity::Person', inverse_of: :users, autosave: true
+  belongs_to :person, class_name: 'Entity::Person', inverse_of: :user, autosave: true
 end

@@ -35,12 +35,13 @@ class Role
   def set_inverse_instance args
     args||={}
     args.each do |inverse_key,inverse_elm|
+      next unless inverse_elm.present?
       if meta=self.associations[inverse_key.to_s.gsub(/\[(\d+)\]/,'')] 
         case meta.class_name
         when /^Entity::/
-          inverse_elm_ii = (inverse_elm&&(inverse_elm[:id]||inverse_elm[:ii]))
-          inverse_elm_ii = inverse_elm_ii.symbolize_keys if inverse_elm_ii
-          ent = eval(meta.class_name).where('ii.extension' => inverse_elm_ii[:extension].to_s,'ii.root' => inverse_elm_ii[:root].to_s).last if inverse_elm_ii&&inverse_elm_ii.is_a?(Hash)
+          inverse_elm.deep_symbolize_keys!
+          ent=inverse_elm[:id] ? eval(meta.class_name).find(inverse_elm[:id]) : nil
+          ent||=eval(meta.class_name).where('ii.extension' => inverse_elm[:ii][:extension].to_s,'ii.root' => inverse_elm[:ii][:root].to_s).last if inverse_elm[:ii]&&inverse_elm[:ii].is_a?(Hash)
           if ent
             ent.update_attributes(inverse_elm)
             self.player=ent if meta.foreign_key[/player/]
@@ -64,27 +65,37 @@ class Role
     when Hash
       part_elm=element.select {|k,v| part.embedded_relations.include?(k.to_s)||(not part.relations.include?(k.to_s.gsub(/\[(\d+)\]/,''))) }
       element.each do |act_key,act_elm|
+        next unless act_elm.present?
         if meta=part.associations[act_key.to_s.gsub(/\[(\d+)\]/,'')]
           case act_elm
           when Hash
-            act_elm_ii = (act_elm&&(act_elm[:id]||act_elm[:ii]))
-            act_elm_ii = act_elm_ii.symbolize_keys if act_elm_ii
-            act = eval(meta.class_name).where('ii.extension' => act_elm_ii[:extension].to_s,'ii.root' => act_elm_ii[:root].to_s).last if act_elm_ii&&act_elm_ii.is_a?(Hash)
+            act_elm.deep_symbolize_keys!
+            act=act_elm[:id] ? eval(meta.class_name).find(act_elm[:id]) : nil
+            act||=eval(meta.class_name).where('ii.extension' => act_elm[:ii][:extension].to_s,'ii.root' => act_elm[:ii][:root].to_s).last if act_elm[:ii]&&act_elm[:ii].is_a?(Hash)
             if act
               act.update_attributes(act_elm)
-              self.participation<<eval(name).new(part_elm.merge({:act=>act})) unless self.participation.map{|v| v.act_id}.include?(act.id)
+              if exist_part = self.participation.map{|v| v if v.act_id == act.id}.compact.last
+                exist_part.update_attributes(part_elm)
+              else
+                self.participation<<eval(name).new(part_elm.merge({:act=>act}))
+              end
             else
               act=eval(meta.class_name).new act_elm
               self.participation<<eval(name).new(part_elm.merge({:act=>act}))
             end
           when Array
             act_elm.each do |elm|
-              elm_ii = (elm&&(elm[:ii]||elm[:id]))
-              elm_ii = elm_ii.symbolize_keys if elm_ii
-              act = eval(meta.class_name).where('ii.extension' => elm_ii[:extension].to_s,'ii.root' => elm_ii[:root].to_s).last if elm_ii&&elm_ii.is_a?(Hash)
+              next unless elm.is_a?(Hash)
+              elm.deep_symbolize_keys!
+              act=elm[:id] ? eval(meta.class_name).find(elm[:id]) : nil
+              act||=eval(meta.class_name).where('ii.extension' => elm[:ii][:extension].to_s,'ii.root' => elm[:ii][:root].to_s).last if elm[:ii]&&elm[:ii].is_a?(Hash)
               if act
                 act.update_attributes(elm)
-                self.participation<<eval(name).new(part_elm.merge({:act=>act})) unless self.participation.map{|v| v.act_id}.include?(act.id)
+                if exist_part = self.participation.map{|v| v if v.act_id == act.id}.compact.last
+                  exist_part.update_attributes(part_elm)
+                else
+                  self.participation<<eval(name).new(part_elm.merge({:act=>act}))
+                end
               else
                 act=eval(meta.class_name).new elm
                 self.participation<<eval(name).new(part_elm.merge({:act=>act}))
@@ -100,12 +111,16 @@ class Role
           if meta=part.associations[act_key.to_s.gsub(/\[(\d+)\]/,'')]
             case act_elm
             when Hash
-              act_elm_ii = (act_elm&&(act_elm[:ii]||act_elm[:id]))
-              act_elm_ii = act_elm_ii.symbolize_keys if act_elm_ii
-              act = eval(meta.class_name).where('ii.extension' => act_elm_ii[:extension].to_s,'ii.root' => act_elm_ii[:root].to_s).last if act_elm_ii&&act_elm_ii.is_a?(Hash)
+              act_elm.deep_symbolize_keys!
+              act=act_elm[:id] ? eval(meta.class_name).find(act_elm[:id]) : nil
+              act||=eval(meta.class_name).where('ii.extension' => act_elm[:ii][:extension].to_s,'ii.root' => act_elm[:ii][:root].to_s).last if act_elm[:ii]&&act_elm[:ii].is_a?(Hash)
               if act
                 act.update_attributes(act_elm)
-                self.participation<<eval(name).new(part_elm.merge({:act=>act})) unless self.participation.map{|v| v.act_id}.include?(act.id)
+                if exist_part = self.participation.map{|v| v if v.act_id == act.id}.compact.last
+                  exist_part.update_attributes(part_elm)
+                else
+                  self.participation<<eval(name).new(part_elm.merge({:act=>act}))
+                end
               else
                 act=eval(meta.class_name).new act_elm
                 self.participation<<eval(name).new(part_elm.merge({:act=>act}))

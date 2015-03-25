@@ -36,11 +36,13 @@ class Entity
   def set_inverse_instance args
     args||={}
     args.each do |inverse_key,inverse_elm|
+      next unless inverse_elm.is_a?(Hash)
       if meta=self.associations[inverse_key.to_s.gsub(/\[(\d+)\]/,'')] || self.associations['as_' + inverse_key.to_s.gsub(/\[(\d+)\]/,'')]
+        inverse_elm.deep_symbolize_keys!
         case meta.class_name
         when /^Role::/
-          inverse_elm_ii = inverse_elm&&(inverse_elm[:id]||inverse_elm[:ii])
-          role=eval(meta.class_name).where('ii.root' => inverse_elm_ii[:root].to_s, 'ii.extension' => inverse_elm_ii[:extension].to_s).last if inverse_elm_ii&&inverse_elm_ii.is_a?(Hash)
+          role=inverse_elm[:id].present? ? eval(meta.class_name).find(inverse_elm[:id]) : nil
+          role||=eval(meta.class_name).where('ii.root' => inverse_elm[:ii][:root].to_s, 'ii.extension' => inverse_elm[:ii][:extension].to_s).last if inverse_elm[:ii]&&inverse_elm[:ii].is_a?(Hash)
           if role
             role.update_attributes(inverse_elm)
             self.playeds<<role if meta.foreign_key[/player/]&&(not self.playeds.map{|v| v.id}.include?(role.id))
@@ -50,10 +52,10 @@ class Entity
             self.scopeds<<eval(meta.class_name).new(inverse_elm) if meta.foreign_key[/scoper/]
           end
         when 'User'
-          inverse_elm_ii = inverse_elm&&(inverse_elm[:id]||inverse_elm[:ii])
-          user=User.where(email: inverse_elm_ii[:email].to_s).last if inverse_elm_ii&&inverse_elm_ii.is_a?(Hash)
+          user=inverse_elm[:id].present? ? User.find(inverse_elm[:email]) : nil
+          user||=User.where(email: inverse_elm[:email].to_s).last if inverse_elm[:email].present?
           if user
-            self.users<<user unless self.users.map{|v| v.id}.include?(user.id))
+            self.user<<user unless self.user.map{|v| v.id}.include?(user.id)
           end
         end
       end
