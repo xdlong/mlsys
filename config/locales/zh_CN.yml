@@ -1,2 +1,17 @@
 zh_CN:
   email: 电子邮箱
+  unit:
+      age_of_year: '岁'
+      day: '天'
+      week: '周'
+      year: '年'
+  datetime:
+     prompts:
+         year:   "年"
+         quarter: "季度"
+         month:  "月"
+         week:   "周"
+         day:    "日"
+         hour:   "时"
+         minute: "分"
+         second: "秒"

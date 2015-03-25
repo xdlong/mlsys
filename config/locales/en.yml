@@ -39,3 +39,18 @@ en:
           other: "Displaying <b>all %{count}</b> %{entry_name}"
       more_pages:
         display_entries: "Displaying %{entry_name} <b>%{first}&nbsp;-&nbsp;%{last}</b> of <b>%{total}</b> in total"
+  unit:
+    age_of_year: "years old"
+    day: 'days old'
+    week: 'weeks old'
+    year: 'year'
+  datetime:
+    prompts:
+      year:   "year"
+      quarter: "quarter"
+      month:  "month"
+      week:   "week"
+      day:    "day"
+      hour:   "hour"
+      minute: "minute"
+      second: "second"
