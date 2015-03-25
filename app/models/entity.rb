@@ -49,6 +49,12 @@ class Entity
             self.playeds<<eval(meta.class_name).new(inverse_elm) if meta.foreign_key[/player/]
             self.scopeds<<eval(meta.class_name).new(inverse_elm) if meta.foreign_key[/scoper/]
           end
+        when 'User'
+          inverse_elm_ii = inverse_elm&&(inverse_elm[:id]||inverse_elm[:ii])
+          user=User.where(email: inverse_elm_ii[:email].to_s).last if inverse_elm_ii&&inverse_elm_ii.is_a?(Hash)
+          if user
+            self.users<<user unless self.users.map{|v| v.id}.include?(user.id))
+          end
         end
       end
     end
