@@ -1,15 +1,15 @@
 class Role
   include Mongoid::Document
-  field :ii, type: Basic::InstanceIdentifier
+  field :ii,   type: Basic::InstanceIdentifier
   field :code, type: Basic::ConceptDescriptor
   field :name, type: String
   field :desc, type: String
   
-  has_many :outbound_links, :class_name=>'RoleLink', :foreign_key=>'source_id', :autosave=>true
-  has_many :inbound_links,  :class_name=>'RoleLink', :foreign_key=>'target_id', :autosave=>true
-  has_many :participation, :class_name=>'Participation', :foreign_key=>'role_id', :autosave=>true
-  belongs_to :player, :class_name=>"Entity", :inverse_of=>:playeds, :autosave=>true
-  belongs_to :scoper, :class_name=>"Entity", :inverse_of=>:scopeds, :autosave=>true
+  has_many :outbound_links, class_name: 'RoleLink', foreign_key: 'source_id', autosave: true
+  has_many :inbound_links, class_name: 'RoleLink', foreign_key: 'target_id', autosave: true
+  has_many :participation, class_name: 'Participation', foreign_key: 'role_id', autosave: true
+  belongs_to :player, class_name: 'Entity', inverse_of: :playeds, autosave: true
+  belongs_to :scoper, class_name: 'Entity', inverse_of: :scopeds, autosave: true
 
   def initialize attrs=nil
     attrs||={}
@@ -62,6 +62,7 @@ class Role
     part=eval(name).new
     case element
     when Hash
+      part_elm=element.select {|k,v| part.embedded_relations.include?(k.to_s)||(not part.relations.include?(k.to_s.gsub(/\[(\d+)\]/,''))) }
       element.each do |act_key,act_elm|
         if meta=part.associations[act_key.to_s.gsub(/\[(\d+)\]/,'')]
           case act_elm
@@ -71,10 +72,10 @@ class Role
             act = eval(meta.class_name).where('ii.extension' => act_elm_ii[:extension].to_s,'ii.root' => act_elm_ii[:root].to_s).last if act_elm_ii&&act_elm_ii.is_a?(Hash)
             if act
               act.update_attributes(act_elm)
-              self.participation<<eval(name).new(:act=>act) unless self.participation.map{|v| v.act_id}.include?(act.id)
+              self.participation<<eval(name).new(part_elm.merge({:act=>act})) unless self.participation.map{|v| v.act_id}.include?(act.id)
             else
               act=eval(meta.class_name).new act_elm
-              self.participation<<eval(name).new(:act=>act)
+              self.participation<<eval(name).new(part_elm.merge({:act=>act}))
             end
           when Array
             act_elm.each do |elm|
@@ -83,10 +84,10 @@ class Role
               act = eval(meta.class_name).where('ii.extension' => elm_ii[:extension].to_s,'ii.root' => elm_ii[:root].to_s).last if elm_ii&&elm_ii.is_a?(Hash)
               if act
                 act.update_attributes(elm)
-                self.participation<<eval(name).new(:act=>act) unless self.participation.map{|v| v.act_id}.include?(act.id)
+                self.participation<<eval(name).new(part_elm.merge({:act=>act})) unless self.participation.map{|v| v.act_id}.include?(act.id)
               else
                 act=eval(meta.class_name).new elm
-                self.participation<<eval(name).new(:act=>act)
+                self.participation<<eval(name).new(part_elm.merge({:act=>act}))
               end
             end
           end
@@ -94,6 +95,7 @@ class Role
       end
     when Array
       element.each do |elm|
+        part_elm=elm.select {|k,v| part.embedded_relations.include?(k.to_s)||(not part.relations.include?(k.to_s.gsub(/\[(\d+)\]/,''))) }
         elm.each do |act_key,act_elm|
           if meta=part.associations[act_key.to_s.gsub(/\[(\d+)\]/,'')]
             case act_elm
@@ -103,10 +105,10 @@ class Role
               act = eval(meta.class_name).where('ii.extension' => act_elm_ii[:extension].to_s,'ii.root' => act_elm_ii[:root].to_s).last if act_elm_ii&&act_elm_ii.is_a?(Hash)
               if act
                 act.update_attributes(act_elm)
-                self.participation<<eval(name).new(:act=>act) unless self.participation.map{|v| v.act_id}.include?(act.id)
+                self.participation<<eval(name).new(part_elm.merge({:act=>act})) unless self.participation.map{|v| v.act_id}.include?(act.id)
               else
                 act=eval(meta.class_name).new act_elm
-                self.participation<<eval(name).new(:act=>act)
+                self.participation<<eval(name).new(part_elm.merge({:act=>act}))
               end
             end
           end 
@@ -132,6 +134,7 @@ class Role
     case element
     when Array
       element.each do |elm|
+        link_elm=elm.select {|k,v| link.embedded_relations.include?(k.to_s)||(not link.relations.include?(k.to_s.gsub(/\[(\d+)\]/,''))) }
         elm.each do |role_key, role_elm|
           if meta=link.associations[role_key.to_s.gsub(/\[(\d+)\]/,'')]
             role_elm_ii = (role_elm&&(role_elm[:id]||role_elm[:ii]))
@@ -139,15 +142,16 @@ class Role
             role=eval(meta.class_name).where('ii.root' => role_elm_ii[:root].to_s, 'ii.extension' => role_elm_ii[:extension].to_s).last  if role_elm_ii&&role_elm_ii.is_a?(Hash)
             if role
               role.update_attributes(role_elm)
-              self.outbound_links<<eval(name).new(:target=>role) unless self.outbound_links.map{|v| v.target_id}.include?(role.id)
+              self.outbound_links<<eval(name).new(link_elm.merge({:target=>role})) unless self.outbound_links.map{|v| v.target_id}.include?(role.id)
             else
               role=eval(meta.class_name).new role_elm
-              self.outbound_links<<eval(name).new(:target=>role)
+              self.outbound_links<<eval(name).new(link_elm.merge({:target=>role}))
             end
           end
         end
       end
     when Hash
+      link_elm=element.select {|k,v| link.embedded_relations.include?(k.to_s)||(not link.relations.include?(k.to_s.gsub(/\[(\d+)\]/,''))) }
       element.each do |role_key, role_elm|
         if meta=link.associations[role_key.to_s.gsub(/\[(\d+)\]/,'')]
           case role_elm
@@ -157,10 +161,10 @@ class Role
             role=eval(meta.class_name).where('ii.root' => role_elm_ii[:root].to_s, 'ii.extension' => role_elm_ii[:extension].to_s).last  if role_elm_ii&&role_elm_ii.is_a?(Hash)
             if role
               role.update_attributes(role_elm)
-              self.outbound_links<<eval(name).new(:target=>role) unless self.outbound_links.map{|v| v.target_id}.include?(role.id)
+              self.outbound_links<<eval(name).new(link_elm.merge({:target=>role})) unless self.outbound_links.map{|v| v.target_id}.include?(role.id)
             else
               role=eval(meta.class_name).new role_elm
-              self.outbound_links<<eval(name).new(:target=>role)
+              self.outbound_links<<eval(name).new(link_elm.merge({:target=>role}))
             end
           end
         end

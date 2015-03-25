@@ -1,18 +1,60 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>ERP系统</title>
-  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_tag 'application', 'data-turbolinks-track' => true %>
-  <%= javascript_tag 'select2' %>
-  <%= csrf_meta_tags %>
+  <title>用户管理</title>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
   <%= stylesheet_link_tag 'bootstrap/bootstrap.min' %>
   <%= stylesheet_link_tag 'bootstrap/bootstrap-theme.min' %>
-  <%= javascript_tag 'bootstrap/bootstrap.min' %>
+  <%= javascript_include_tag 'application' %>
+  <%= javascript_include_tag 'comeon' %>
+  <%= javascript_include_tag 'bootstrap/bootstrap.min' %>
+  <%= csrf_meta_tags %>
 </head>
 <body>
 
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/users">库存管理</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="/users/helper">^_^您好！</a></li>
+        <li class="dropdown">
+          <a href="/users/<%=current_user.id%>" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><%=current_user.email%><span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#">个人信息</a></li>
+            <li><a href="#">修改密码</a></li>
+            <li><a href="#">账户注销</a></li>
+            <li class="divider"></li>
+            <li><a href="" class="sign-out">登出系统</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+<div class="container-fluid">
 <%= yield %>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+  <div class="container-fluid">
+    <div class="navbar-right">
+      <a class="navbar-brand" href="/">HostDragon Working Office.</a>
+    </div>
+  </div>
+</nav>
 
 </body>
 </html>

@@ -2,15 +2,15 @@
 <html>
 <head>
   <title>药房系统</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_tag 'application', 'data-turbolinks-track' => true %>
-  <%= javascript_tag 'select2' %>
-  <%= csrf_meta_tags %>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
   <%= stylesheet_link_tag 'bootstrap/bootstrap.min' %>
   <%= stylesheet_link_tag 'bootstrap/bootstrap-theme.min' %>
-  <%= javascript_tag 'bootstrap/bootstrap.min' %>
+  <%= javascript_include_tag 'application' %>
+  <%= javascript_include_tag 'comeon' %>
+  <%= javascript_include_tag 'bootstrap/bootstrap.min' %>
+  <%= csrf_meta_tags %>
 </head>
-<body style="padding-top: 70px;padding-bottom: 70px;">
+<body>
   <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
       <ul class="nav navbar-nav">
@@ -18,6 +18,23 @@
         <li><a href="#">西药</a></li>
         <li><a href="#">自制药</a></li>
       </ul>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="/users/helper">^_^您好！</a></li>
+          <li class="dropdown">
+            <a href="/users/<%=current_user.id%>" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><%=current_user.email%><span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="#">个人信息</a></li>
+              <li><a href="#">修改密码</a></li>
+              <li><a href="#">账户注销</a></li>
+              <li class="divider"></li>
+              <li><a href="" class="sign-out">登出系统</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
     </div>
   </nav>
   <div class="container">
@@ -25,13 +42,18 @@
   </div>
   <nav class="navbar navbar-inverse navbar-fixed-bottom">
     <div class="container">
-      <a href="" class="btn btn-link"><h4><font face="楷体" color=#fefefe>熊家药店</font></h4></a>
-      <div class="pull-right">
+      <div class="navbar-header">
+        <a href="" class="btn btn-link"><h4><font face="楷体" color=#fefefe>熊家药店</font></h4></a>
+      </div>
+      <div class="pull-left">
         <h5>
           <font face="楷体" color=#fefefe >药店地址：德江县煎茶镇老街</font>
           <br>
           <font face="楷体" color=#fefefe >联系电话：15121668909(熊医生)</font>
         </h5>
+      </div>
+      <div class="navbar-right">
+        <a class="navbar-brand" href="/">HostDragon Working Office.</a>
       </div>
     </div>
   </nav>

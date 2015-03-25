@@ -2,8 +2,8 @@ class RoleLink
   include Mongoid::Document
   field :priority_number, :type => Integer
   
-  belongs_to :source, :class_name=>'Role', :inverse_of=> :outbound_links,  :autosave=>true
-  belongs_to :target, :class_name=>'Role', :inverse_of=> :inbound_links,  :autosave=>true
+  belongs_to :source, class_name: 'Role', inverse_of: :outbound_links, autosave: true
+  belongs_to :target, class_name: 'Role', inverse_of: :inbound_links, autosave: true
   validates_presence_of :source_id
   validates_presence_of :target_id
 

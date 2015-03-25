@@ -1,5 +1,5 @@
-<p>Welcome <%= @email %>!</p>
+<p>您好 <%= @email %>!</p>
 
-<p>You can confirm your account email through the link below:</p>
+<p>您已在HostDragon Working Office注册了账号，请点击下面的链接以认证您的账户：</p>
 
-<p><%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %></p>
+<p><%= link_to '账户激活', confirmation_url(@resource, confirmation_token: @token) %></p>

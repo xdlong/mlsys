@@ -1,12 +1,15 @@
 class Entity
   include Mongoid::Document
-  field :ii, type: Basic::InstanceIdentifier
-  field :code, type: Basic::ConceptDescriptor
-  field :name, type: String
-  field :desc, type: String
+  field :class_code, type: String
+  field :determiner, type: String
+  field :ii,         type: Basic::InstanceIdentifier
+  field :code,       type: Basic::ConceptDescriptor
+  field :name,       type: String
+  field :desc,       type: String
+  field :quantity,   type: Basic::PhysicalQuantity
 
-  has_many :playeds, :class_name=>"Role", :foreign_key=>'player_id', :autosave=>true
-  has_many :scopeds, :class_name=>"Role", :foreign_key=>'scoper_id', :autosave=>true
+  has_many :playeds, class_name: 'Role', foreign_key: 'player_id', autosave: true
+  has_many :scopeds, class_name: 'Role', foreign_key: 'scoper_id', autosave: true
 
   def initialize attrs=nil
     attrs||={}
