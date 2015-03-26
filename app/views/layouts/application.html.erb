@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link rel="shortcut icon" href="/assets/log.png" />
   <title>ML</title>
   <%= stylesheet_link_tag 'application', media: 'all' %>
   <%= csrf_meta_tags %>
@@ -24,31 +25,7 @@
       </button>
       <a class="navbar-brand" href="/">系统菜单</a>
     </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="/helper">^_^您好！</a></li>
-        <li class="dropdown">
-          <%- if current_user %>
-          <a href="/users/<%=current_user.id%>" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><%=current_user.email%><span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="/users/<%=current_user.id%>">个人信息</a></li>
-            <li><a href="#">修改密码</a></li>
-            <li><a href="#">账户注销</a></li>
-            <li class="divider"></li>
-            <li><a href="#" class="sign-out">登出系统</a></li>
-          </ul>
-          <% else %>
-          <a href="/users/sign_in" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">请登录<span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="/users/sign_in">登录</a></li>
-            <li><a href="/users/sign_up">注册</a></li>
-          </ul>
-          <% end -%>
-        </li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
+    <%= render 'layouts/userinfo' %>
   </div><!-- /.container-fluid -->
 </nav>
 

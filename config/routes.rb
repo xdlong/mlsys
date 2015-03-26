@@ -1,17 +1,22 @@
 Rails.application.routes.draw do
+  root 'application#index'
   resources :tests
 
   devise_for :users, controllers: {
-    sessions: 'users/sessions'
+    sessions: 'users/sessions',
+    passwords: 'users/passwords',
+    registrations: 'users/registrations',
+    confirmations: 'users/confirmations',
+    unlocks: 'users/unlocks',
   }
   resources :users
-  root 'application#index'
 
   namespace :ms do
     resources :drugs
   end
 
   namespace :erp do
+    root 'home#index'
     resources :home
     resources :orgs
   end
