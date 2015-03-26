@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 
   namespace :erp do
     resources :home
+    resources :orgs
   end
 
   namespace :language_identification do

@@ -32,6 +32,7 @@ gem 'devise'
 gem 'i18n'
 gem 'kaminari' # 列表分页
 gem "select2-rails"
+gem "daemons"
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

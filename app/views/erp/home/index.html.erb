@@ -1,1 +1,31 @@
-ERP home index
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">组织机构</div>
+  <div class="panel-body">
+    <div class="pull-right">
+      <a href="/erp/orgs/new" type="button" class="btn btn-default btn-mini"><i class="glyphicon glyphicon-plus"></i>新建</a>
+    </div>
+    <p><h4>请在下表中选择您要进入的组织或机构。如果下表中没有您需要的，您可以新建一个。</h4></p>
+  </div>
+
+  <!-- List group -->
+  <ul class="list-group">
+    <%- if @organizations.empty? %>
+    <li class="list-group-item"><h5>列表空空如也，请先新建一个组织或机构。</h5></li>
+    <% else %>
+      <% @organizations.each do |org| %>
+      <li class="list-group-item">
+        <h2><a href="/erp/orgs/<%=org.id%>"><%=org.name%></a><small>（代码：<%=org.ii%>）</small></h2>
+        <span class="pull-right">
+          <a href="/erp/orgs/<%=org.id%>/edit" type='button' class="btn btn-default btn-sm"><i class="glyphicon glyphicon-edit"></i>修改</a>
+        </span>
+        <p><h3>简介：<small><%=org.desc%></small></h3></p>
+      </li>
+      <% end %>
+    <% end -%>
+  </ul>
+
+  <div class="panel-footer">
+    <p>...</p>
+  </div>
+</div>

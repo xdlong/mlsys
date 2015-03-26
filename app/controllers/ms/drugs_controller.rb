@@ -1,5 +1,5 @@
 class Ms::DrugsController < ApplicationController
-  before_action :authenticate_user!
+  # before_action :authenticate_user!
   before_action :set_ms_drug, only: [:show, :edit, :update, :destroy]
   layout 'ms'
 

@@ -150,6 +150,7 @@ PLATFORMS
 
 DEPENDENCIES
   coffee-rails (~> 4.0.0)
+  daemons
   devise
   i18n
   jbuilder (~> 2.0)

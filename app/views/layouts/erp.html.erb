@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>用户管理</title>
+  <title>库存管理</title>
   <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= csrf_meta_tags %>
   <%= stylesheet_link_tag 'bootstrap/bootstrap.min' %>
   <%= stylesheet_link_tag 'bootstrap/bootstrap-theme.min' %>
   <%= javascript_include_tag 'application' %>
   <%= javascript_include_tag 'comeon' %>
   <%= javascript_include_tag 'bootstrap/bootstrap.min' %>
-  <%= csrf_meta_tags %>
 </head>
 <body>
 
@@ -22,22 +22,30 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="/users">库存管理</a>
+      <a class="navbar-brand" href="/erp">库存管理</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="/users/helper">^_^您好！</a></li>
+        <li><a href="/erp/helper">^_^您好！</a></li>
         <li class="dropdown">
+          <%- if current_user %>
           <a href="/users/<%=current_user.id%>" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><%=current_user.email%><span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="#">个人信息</a></li>
+            <li><a href="/users/<%=current_user.id%>">个人信息</a></li>
             <li><a href="#">修改密码</a></li>
             <li><a href="#">账户注销</a></li>
             <li class="divider"></li>
-            <li><a href="" class="sign-out">登出系统</a></li>
+            <li><a href="#" class="sign-out">登出系统</a></li>
           </ul>
+          <% else %>
+          <a href="/users/sign_in" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">请登录<span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="/users/sign_in">登录</a></li>
+            <li><a href="/users/sign_up">注册</a></li>
+          </ul>
+          <% end -%>
         </li>
       </ul>
     </div><!-- /.navbar-collapse -->
