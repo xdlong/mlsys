@@ -2,22 +2,35 @@
   <!-- Default panel contents -->
   <div class="panel-heading">组织机构</div>
   <div class="panel-body">
-    <div class="pull-right">
-      <a href="/erp/orgs/new" type="button" class="btn btn-default btn-mini"><i class="glyphicon glyphicon-plus"></i>新建</a>
-    </div>
-    <p><h4>请在下表中选择您要进入的组织或机构。如果下表中没有您需要的，您可以新建一个。</h4></p>
+    <p><h4>下表列出了正在使用此软件的组织或机构。请选择自己的组织或机构进入，您也可以新建自己的组织或机构。</h4></p>
   </div>
 
   <!-- List group -->
   <ul class="list-group">
+    <li class="list-group-item">
+      <div class="row">
+        <div class="col-lg-8 pull-left">
+          <a href="/erp/orgs/new" type="button" class="btn btn-default btn-sm"><i class="glyphicon glyphicon-plus"></i>新建</a>
+        </div>
+        <div class="col-lg-4">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="查找...">
+            <span class="input-group-btn">
+              <button class="btn btn-info" type="button"><i class="glyphicon glyphicon-search"></i></button>
+            </span>
+          </div><!-- /input-group -->
+        </div><!-- /.col-lg-6 -->
+      </div><!-- /.row -->
+
+    </li>
     <%- if @organizations.empty? %>
-    <li class="list-group-item"><h5>列表空空如也，请先新建一个组织或机构。</h5></li>
+    <li class="list-group-item"><h5>列表空空如也。</h5></li>
     <% else %>
       <% @organizations.each do |org| %>
       <li class="list-group-item">
-        <h2><a href="/erp/orgs/<%=org.id%>"><%=org.name%></a><small>（代码：<%=org.ii%>）</small></h2>
+        <h2><%=org.name%><small>（代码：<%=org.ii%>）<a href="/erp/orgs/<%=org.id%>/edit"><i class="glyphicon glyphicon-edit"></i></a></small></h2>
         <span class="pull-right">
-          <a href="/erp/orgs/<%=org.id%>/edit" type='button' class="btn btn-default btn-sm"><i class="glyphicon glyphicon-edit"></i>修改</a>
+          <a href="/erp/orgs/<%=org.id%>" type='button' class="btn btn-default btn-sm">进入<i class="glyphicon glyphicon-arrow-right"></i></a>
         </span>
         <p><h3>简介：<small><%=org.desc%></small></h3></p>
       </li>

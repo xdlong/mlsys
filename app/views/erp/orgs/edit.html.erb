@@ -2,9 +2,6 @@
   <li><a href="/erp/home">组织机构</a></li>
   <li class="active">编辑</li>
 </ol>
-<article class="page-header">
-  <h3>编辑<small><p>修改您创建的组织机构信息。</p></small></h3>
-</article>
 <%= form_for @organization , :url=> {:controller =>'orgs', :action => 'update'} , :html=>{:class=>"form-horizontal"} do |f| %>
 <div class="panel panel-default">
   <div class="panel-heading">
@@ -13,7 +10,7 @@
     </div>
     <div class="panel-title">信息修改</div>
   </div>
-  <div class="row panel-body" style="padding:60px;">
+  <div class="row panel-body">
     <div class="container">
       <div class="row">
         <div class="col-sm-12 col-md-10">
