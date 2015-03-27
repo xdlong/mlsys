@@ -18,7 +18,11 @@ Rails.application.routes.draw do
   namespace :erp do
     root 'home#index'
     resources :home
-    resources :orgs
+    resources :orgs do
+      resources :menus do
+        resources :products
+      end
+    end
   end
 
   namespace :language_identification do

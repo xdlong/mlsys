@@ -10,6 +10,7 @@ class Erp::OrgsController < ActionController::Base
     end
   end
   def show
+    @menus = @organization.as_located_entity.last.try(:receiver)||[]
     respond_to do |format|
       format.html
       format.json { render json: @organization }

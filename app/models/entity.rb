@@ -8,6 +8,8 @@ class Entity
   field :desc,        type: String
   field :status_code, type: String
   field :quantity,    type: Basic::PhysicalQuantity
+  field :created_at,  type: Time
+  field :updated_at,  type: Time
 
   has_many :playeds, class_name: 'Role', foreign_key: 'player_id', autosave: true
   has_many :scopeds, class_name: 'Role', foreign_key: 'scoper_id', autosave: true
@@ -18,6 +20,8 @@ class Entity
     super owner
     inverses=attrs.select {|k,v| not owner.include?(k) }
     set_inverse_instance inverses
+    self.created_at ||= Time.now()
+    self.updated_at = Time.now()
   end
 
   def update_attributes attrs=nil

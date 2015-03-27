@@ -2,8 +2,8 @@
   <div class="col-sm-4 col-md-4 col-lg-4"></div>
   <div class="col-sm-4 col-md-4 col-lg-4">
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-      <h2>请先登录</h2>
-      <%= f.email_field :email, :class => "form-control", :placeholder => "您的电子邮箱", autofocus: true %>
+      <center><h2>云上工作室</h2><hr></center>
+      <%= f.email_field :email, :class => "form-control", :placeholder => "您的电子邮箱", autofocus: true %><br>
       <%= f.password_field :password, :class => "form-control", :placeholder => "登录密码", autocomplete: "off" %>
       <div class="checkbox">
         <label>
@@ -11,7 +11,7 @@
         </label>
       </div>
       <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
-    <% end %>
+    <% end %><hr>
   </div>
   <div class="col-sm-4 col-md-4 col-lg-4"></div>
 </div> <!-- /container -->

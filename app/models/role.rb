@@ -1,9 +1,12 @@
 class Role
   include Mongoid::Document
-  field :ii,   type: Basic::InstanceIdentifier
-  field :code, type: Basic::ConceptDescriptor
-  field :name, type: String
-  field :desc, type: String
+  field :class_code, type: String
+  field :ii,         type: Basic::InstanceIdentifier
+  field :code,       type: Basic::ConceptDescriptor
+  field :name,       type: String
+  field :desc,       type: String
+  field :created_at, type: Time
+  field :updated_at, type: Time
   
   has_many :outbound_links, class_name: 'RoleLink', foreign_key: 'source_id', autosave: true
   has_many :inbound_links, class_name: 'RoleLink', foreign_key: 'target_id', autosave: true
@@ -17,6 +20,8 @@ class Role
     super owner
     inverses=attrs.select {|k,v| not owner.include?(k) }
     set_inverse_instance inverses
+    self.created_at ||= Time.now()
+    self.updated_at = Time.now()
   end
 
   def update_attributes attrs=nil

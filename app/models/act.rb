@@ -7,6 +7,8 @@ class Act
   field :title,       type: String
   field :text,        type: String
   field :status_code, type: String
+  field :created_at,  type: Time
+  field :updated_at,  type: Time
 
   has_many :participation, class_name: 'Participation', foreign_key: 'act_id', autosave: true
   has_many :outbounds, class_name: 'ActRelationship', foreign_key: 'source_id', inverse_of: :source, autosave: true
@@ -22,6 +24,8 @@ class Act
     else
       super
     end
+    self.created_at ||= Time.now()
+    self.updated_at = Time.now()
   end
 
   def update_attributes attrs=nil
