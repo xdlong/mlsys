@@ -9,10 +9,10 @@
   <ul class="list-group">
     <li class="list-group-item">
       <div class="row">
-        <div class="col-lg-8 pull-left">
+        <div class="col-sm-8 col-md-8 col-lg-8 pull-left">
           <a href="/erp/orgs/new" type="button" class="btn btn-default btn-sm"><i class="glyphicon glyphicon-plus"></i>新建</a>
         </div>
-        <div class="col-lg-4">
+        <div class="col-sm-4 col-md-4 col-lg-4">
           <div class="input-group">
             <input type="text" class="form-control" placeholder="查找...">
             <span class="input-group-btn">
@@ -28,9 +28,9 @@
     <% else %>
       <% @organizations.each do |org| %>
       <li class="list-group-item">
-        <h2><%=org.name%><small>（代码：<%=org.ii%>）<a href="/erp/orgs/<%=org.id%>/edit"><i class="glyphicon glyphicon-edit"></i></a></small></h2>
+        <h2><%=org.name%><small>（代码：<%=org.ii%>）<a type='button' href="/erp/orgs/<%=org.id%>/edit" class="btn btn-default btn-sm"><i class="glyphicon glyphicon-edit"></i>编辑</a></small></h2>
         <span class="pull-right">
-          <a href="/erp/orgs/<%=org.id%>" type='button' class="btn btn-default btn-sm">进入<i class="glyphicon glyphicon-arrow-right"></i></a>
+          <a href="/erp/orgs/<%=org.id%>" type='button' class="btn btn-default btn-mini">进入<i class="glyphicon glyphicon-arrow-right"></i></a>
         </span>
         <p><h3>简介：<small><%=org.desc%></small></h3></p>
       </li>

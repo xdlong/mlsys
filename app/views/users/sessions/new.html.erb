@@ -1,6 +1,6 @@
 <div class="row container">
-  <div class="col-lg-4"></div>
-  <div class="col-lg-4">
+  <div class="col-sm-4 col-md-4 col-lg-4"></div>
+  <div class="col-sm-4 col-md-4 col-lg-4">
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <h2>请先登录</h2>
       <%= f.email_field :email, :class => "form-control", :placeholder => "您的电子邮箱", autofocus: true %>
@@ -13,7 +13,7 @@
       <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
     <% end %>
   </div>
-  <div class="col-lg-4"></div>
+  <div class="col-sm-4 col-md-4 col-lg-4"></div>
 </div> <!-- /container -->
 <%= render "users/shared/links" %>
 

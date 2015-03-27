@@ -1,7 +1,7 @@
 <!-- Collect the nav links, forms, and other content for toggling -->
 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
   <ul class="nav navbar-nav navbar-right">
-    <li><a href="/helper">^_^您好！</a></li>
+    <li><a href="/helper"><%= h = Time.now.hour;  case ;  when h>=5&&h<11;    '上午';  when h>=11&&h<13;    '中午';  when h>=13&&h<19;    '下午';  when h>=19||h<5;    '晚上';  end %>好！(^_^)</a></li>
     <li class="dropdown">
       <%- if current_user %>
       <a href="/users/<%=current_user.id%>" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><%=current_user.email%><span class="caret"></span></a>

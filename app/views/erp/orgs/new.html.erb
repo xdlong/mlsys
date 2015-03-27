@@ -1,7 +1,3 @@
-<ol class="breadcrumb">
-  <li><a href="/erp/home">组织机构</a></li>
-  <li class="active">新建</li>
-</ol>
 <%= form_for @organization , :url=> {:controller =>'orgs', :action => 'create'} , :html=>{:class=>"form-horizontal"} do |f| %>
 <div class="panel panel-default">
   <div class="panel-heading">
@@ -13,30 +9,30 @@
   <div class="row panel-body">
     <div class="container">
       <div class="row">
-        <div class="col-sm-12 col-md-10">
+        <div class="col-sm-10 col-md-10">
           <div class="form-group">
             <label class="col-sm-4 col-md-4 control-label">名称</label>
-            <div class="col-sm-2 col-md-5 ">
+            <div class="col-sm-5 col-md-5 ">
               <input id="type_form" type="text" class="form-control" placeholder="请输入组织机构名称" name="erp_org[name]" autofocus>
             </div>
           </div>
         </div>
       </div>
       <div class="row">
-        <div class="col-md-10 ">
+        <div class="col-md-10 col-sm-10">
           <div class="form-group">
-            <label class="col-md-4 control-label">标识码</label>
-            <div class="col-md-5">
+            <label class="col-md-4 col-sm-4 control-label">标识码</label>
+            <div class="col-md-5 col-sm-5">
               <input id="type_form" type="text" class="form-control" placeholder="请输入标识码" name="erp_org[ii][root]">
             </div>
           </div>
         </div>
       </div>
       <div class="row">
-        <div class="col-md-10">
+        <div class="col-md-10 col-sm-10">
           <div class="form-group">
-            <label class="col-md-4 control-label">简要介绍</label>
-            <div class="col-md-5 ">
+            <label class="col-md-4 col-sm-4 control-label">简要介绍</label>
+            <div class="col-md-5 col-sm-5">
               <%= f.text_area :desc, :name=>'erp_org[desc]', :placeholder=>'请输入20字符以内',:class=>"form-control",:rows =>6, :autofocus => true %>
             </div>
           </div>
