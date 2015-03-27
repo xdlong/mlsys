@@ -57,7 +57,7 @@ class Erp::MenusController < ActionController::Base
     end
   end
   def destroy
-    @menu.destroy
+    @menu.destroy unless @menu.component.present?||@menu.subject.present?
     respond_to do |format|
       format.html { redirect_to controller:'home', action:'index'}
       format.json { render json: true }

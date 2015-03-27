@@ -11,11 +11,12 @@ class Entity
   field :created_at,  type: Time
   field :updated_at,  type: Time
 
-  has_many :playeds, class_name: 'Role', foreign_key: 'player_id', autosave: true
-  has_many :scopeds, class_name: 'Role', foreign_key: 'scoper_id', autosave: true
+  has_many :playeds, class_name: 'Role', foreign_key: 'player_id', inverse_of: :player, autosave: true
+  has_many :scopeds, class_name: 'Role', foreign_key: 'scoper_id', inverse_of: :scoper, autosave: true
 
   def initialize attrs=nil
     attrs||={}
+    attrs.delete(:id)
     owner=fetch_ownner_attribute(attrs)
     super owner
     inverses=attrs.select {|k,v| not owner.include?(k) }
@@ -30,6 +31,7 @@ class Entity
     super owner
     inverses=attrs.select {|k,v| not owner.include?(k) }
     set_inverse_instance inverses
+    self.updated_at = Time.now()
   end
 
   def fetch_ownner_attribute args
@@ -46,8 +48,9 @@ class Entity
         case meta.class_name
         when /^Role::/
           role=inverse_elm[:id].present? ? eval(meta.class_name).find(inverse_elm[:id]) : nil
-          role||=eval(meta.class_name).where('ii.root' => inverse_elm[:ii][:root].to_s, 'ii.extension' => inverse_elm[:ii][:extension].to_s).last if inverse_elm[:ii]&&inverse_elm[:ii].is_a?(Hash)
+          role||=eval(meta.class_name).where('ii.root' => inverse_elm[:ii][:root].to_s, 'ii.extension' => inverse_elm[:ii][:extension].to_s).last if inverse_elm[:ii]&&inverse_elm[:ii].is_a?(Hash)&&inverse_elm[:ii][:root].present?&&inverse_elm[:ii][:extension].present?
           if role
+            inverse_elm.delete(:id)
             role.update_attributes(inverse_elm)
             self.playeds<<role if meta.foreign_key[/player/]&&(not self.playeds.map{|v| v.id}.include?(role.id))
             self.scopeds<<role if meta.foreign_key[/scoper/]&&(not self.scopeds.map{|v| v.id}.include?(role.id))

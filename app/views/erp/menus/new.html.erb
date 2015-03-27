@@ -2,6 +2,8 @@
 <%- if @pre_menu %>
 <input name="pre_menu_id" value="<%=@pre_menu.id%>" hidden>
 <% end -%>
+<input name="erp_menu[ii][root]" value="<%=@organization.ii.root%>" hidden>
+<input name="erp_menu[ii][extension]" hidden>
 <div class="panel panel-default">
   <div class="panel-heading">
     <div class="pull-right" >
@@ -46,3 +48,10 @@
   <div class="panel-footer"><p><a href="/erp/orgs/<%=@organization.id%>" type='button' class="btn btn-default btn-sm"><i class="glyphicon glyphicon-arrow-left"></i>返回</a></p></div>
 </div>
 <% end %>
+<script type="text/javascript">
+  $('input[name="erp_menu[code][code]"]').change(function() {
+    var str = $(this).val();
+    console.log(str);
+    $('input[name="erp_menu[ii][extension]"]').val(str);
+  })
+</script>

@@ -1,6 +1,6 @@
 class Erp::ProductsController < ActionController::Base
   before_action :authenticate_user!
-  before_action :set_erp_menu
+  before_action :set_erp_org,:set_erp_menu
   before_action :set_erp_product, only: [:show, :edit, :update, :destroy]
   layout 'erp'  
   def index
@@ -11,7 +11,7 @@ class Erp::ProductsController < ActionController::Base
     end
   end
   def new
-    @product = Entity::Product.new()
+    @product = Role::ManufacturedProduct.new()
     respond_to do |format|
       format.html
       format.json { render json: @product }
@@ -30,10 +30,13 @@ class Erp::ProductsController < ActionController::Base
     end
   end
   def create
-    @product = Entity::Product.new(erp_product_params)
+    @product = Role::ManufacturedProduct.new(erp_product_params)
+    @product.save
+    subject = @menu.subject.new()
+    subject.manufactured_product = @product
     respond_to do |format|
-      if @product.save
-        format.html { redirect_to controller:'home', action:'index'}
+      if @menu.save
+        format.html { redirect_to action:'index'}
         format.json { render json: @product }
       else
         format.html { render 'new'}
@@ -44,7 +47,7 @@ class Erp::ProductsController < ActionController::Base
   def update
     respond_to do |format|
       if @product.update_attributes(erp_product_params)
-        format.html { redirect_to controller:'home', action:'index'}
+        format.html { redirect_to action:'index'}
         format.json { render json: @product }
       else
         format.html { render 'edit'}
@@ -53,20 +56,36 @@ class Erp::ProductsController < ActionController::Base
     end
   end
   def destroy
+    @product.product.destroy if @product.product
     @product.destroy
     respond_to do |format|
-      format.html { redirect_to controller:'home', action:'index'}
+      format.html { redirect_to action:'index'}
       format.json { render json: true }
     end
   end
   private
+  def set_erp_org
+    @organization = Entity::Organization.find(params[:org_id])
+  end
   def set_erp_menu
     @menu = Act::Classification.find(params[:menu_id])
   end
   def set_erp_product
-    @product = Entity::Product.find(params[:id])
+    @product = Role::ManufacturedProduct.find(params[:id])
   end
   def erp_product_params
-    params.require(:erp_product).permit(:title, :text, code: [:code, :display_name, :code_system], ii: [:root, :extension])
+    attrs = params.require(:erp_product).permit(:name, :desc, :product_id, quantity:[:value, :unit], code: [:code, :display_name, :code_system], ii: [:root, :extension]).deep_symbolize_keys
+    {
+      ii: attrs[:ii],
+      code: attrs[:code],
+      name: attrs[:name],
+      product: {
+        id:attrs[:product_id],
+        ii:attrs[:ii],
+        code: attrs[:code],
+        name: attrs[:name],
+        quantity: attrs[:quantity]
+      }
+    }
   end
 end

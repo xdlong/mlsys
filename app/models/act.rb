@@ -10,13 +10,14 @@ class Act
   field :created_at,  type: Time
   field :updated_at,  type: Time
 
-  has_many :participation, class_name: 'Participation', foreign_key: 'act_id', autosave: true
+  has_many :participation, class_name: 'Participation', foreign_key: 'act_id', inverse_of: :act, autosave: true
   has_many :outbounds, class_name: 'ActRelationship', foreign_key: 'source_id', inverse_of: :source, autosave: true
   has_many :inbounds, class_name: 'ActRelationship', foreign_key: 'target_id', inverse_of: :target, autosave: true
 
   def initialize attrs=nil
     case attrs
     when Hash
+      attrs.delete(:id)
       owner=fetch_ownner_attribute(attrs)
       super owner
       inverses=attrs.select {|k,v| not owner.include?(k) }
@@ -38,6 +39,7 @@ class Act
     else
       raise "Error in Act.update_attributes\n params type must be Hash"
     end
+    self.updated_at = Time.now()
   end
 
   def fetch_ownner_attribute args
@@ -70,10 +72,12 @@ class Act
           if meta=part.associations[role_key.to_s.gsub(/\[(\d+)\]/,'')]
             role_elm.deep_symbolize_keys!
             role=role_elm[:id].present? ? eval(meta.class_name).find(role_elm[:id]) : nil
-            role||=eval(meta.class_name).where('ii.root' => role_elm[:ii][:root].to_s, 'ii.extension' => role_elm[:ii][:extension].to_s).last if role_elm[:ii]&&role_elm[:ii].is_a?(Hash)
+            role||=eval(meta.class_name).where('ii.root' => role_elm[:ii][:root].to_s, 'ii.extension' => role_elm[:ii][:extension].to_s).last if role_elm[:ii]&&role_elm[:ii].is_a?(Hash)&&role_elm[:ii][:root].present?&&role_elm[:ii][:extension].present?
             if role
+              role_elm.delete(:id)
               role.update_attributes(role_elm)
               if exist_part = self.participation.map{|v| v if v.role_id == role.id}.compact.last
+                part_elm.delete(:id)
                 exist_part.update_attributes(part_elm.merge({:type_code=>role_elm[:type_code]}))
               else
                 self.participation<<eval(name).new(part_elm.merge({:type_code=>role_elm[:type_code],:role=>role}))
@@ -93,10 +97,12 @@ class Act
           when Hash
             role_elm.deep_symbolize_keys!
             role=role_elm[:id].present? ? eval(meta.class_name).find(role_elm[:id]) : nil
-            role||=eval(meta.class_name).where('ii.root' => role_elm[:ii][:root].to_s, 'ii.extension' => role_elm[:ii][:extension].to_s).last if role_elm[:ii]&&role_elm[:ii].is_a?(Hash)
+            role||=eval(meta.class_name).where('ii.root' => role_elm[:ii][:root].to_s, 'ii.extension' => role_elm[:ii][:extension].to_s).last if role_elm[:ii]&&role_elm[:ii].is_a?(Hash)&&role_elm[:ii][:root].present?&&role_elm[:ii][:extension].present?
             if role
+              role_elm.delete(:id)
               role.update_attributes(role_elm)
               if exist_part = self.participation.map{|v| v if v.role_id == role.id}.compact.last
+                part_elm.delete(:id)
                 exist_part.update_attributes(part_elm.merge({:type_code=>role_elm[:type_code]}))
               else
                 self.participation<<eval(name).new(part_elm.merge({:type_code=>role_elm[:type_code],:role=>role}))
@@ -110,10 +116,12 @@ class Act
               next unless elm.is_a?(Hash)
               elm.deep_symbolize_keys!
               role=elm[:id].present? ? eval(meta.class_name).find(elm[:id]) : nil
-              role||=eval(meta.class_name).where('ii.root' => elm[:ii][:root].to_s, 'ii.extension' => elm[:ii][:extension].to_s).last if elm[:ii]&&elm[:ii].is_a?(Hash)
+              role||=eval(meta.class_name).where('ii.root' => elm[:ii][:root].to_s, 'ii.extension' => elm[:ii][:extension].to_s).last if elm[:ii]&&elm[:ii].is_a?(Hash)&&elm[:ii][:root].present?&&elm[:ii][:extension].present?
               if role
+                elm.delete(:id)
                 role.update_attributes(elm)
                 if exist_part = self.participation.map{|v| v if v.role_id == role.id}.compact.last
+                  part_elm.delete(:id)
                   exist_part.update_attributes(part_elm.merge({:type_code=>role_elm[:type_code]}))
                 else
                   self.participation<<eval(name).new(part_elm.merge({:type_code=>role_elm[:type_code],:role=>role}))
@@ -141,17 +149,20 @@ class Act
             act_name= meta.class_name=='Act::Act' ? 'Act' : meta.class_name
             act_elm.deep_symbolize_keys!
             act=act_elm[:id].present? ? eval(act_name).find(act_elm[:id]) : nil
-            act||=eval(act_name).where(mood_code:mood_code, 'ii.root' => act_elm[:ii][:root].to_s, 'ii.extension' => act_elm[:ii][:extension].to_s).last if act_elm[:ii]&&act_elm[:ii].is_a?(Hash)
+            act||=eval(act_name).where(mood_code:mood_code, 'ii.root' => act_elm[:ii][:root].to_s, 'ii.extension' => act_elm[:ii][:extension].to_s).last if act_elm[:ii]&&act_elm[:ii].is_a?(Hash)&&act_elm[:ii][:root].present?&&act_elm[:ii][:extension].present?
             if act
+              act_elm.delete(:id)
               act.update_attributes(act_elm)
               if meta.inverse_of[/target/]
                 if exist_relate = self.outbounds.map{|v| v if v.target_id == act.id}.compact.last
+                  relate_elm.delete(:id)
                   exist_relate.update_attributes(relate_elm)
                 else
                   self.outbounds<<eval(name).new(relate_elm.merge({:target=>act}))
                 end
               elsif meta.inverse_of[/source/]
                 if exist_relate = self.inbounds.map{|v| v if v.source_id == act.id}.compact.last
+                  relate_elm.delete(:id)
                   exist_relate.update_attributes(relate_elm)
                 else
                   self.inbounds<<eval(name).new(relate_elm.merge({:source=>act}))
@@ -174,17 +185,20 @@ class Act
           when Hash
               act_elm.deep_symbolize_keys!
               act=act_elm[:id].present? ? eval(act_name).find(act_elm[:id]) : nil
-              act||=eval(act_name).where(mood_code:mood_code, 'ii.root' => act_elm[:ii][:root].to_s, 'ii.extension' => act_elm[:ii][:extension].to_s).last if act_elm[:ii]&&act_elm[:ii].is_a?(Hash)
+              act||=eval(act_name).where(mood_code:mood_code, 'ii.root' => act_elm[:ii][:root].to_s, 'ii.extension' => act_elm[:ii][:extension].to_s).last if act_elm[:ii]&&act_elm[:ii].is_a?(Hash)&&act_elm[:ii][:root].present?&&act_elm[:ii][:extension].present?
               if act
+                act_elm.delete(:id)
                 act.update_attributes(act_elm)
                 if meta.inverse_of[/target/]
                   if exist_relate = self.outbounds.map{|v| v if v.target_id == act.id}.compact.last
+                    relate_elm.delete(:id)
                     exist_relate.update_attributes(relate_elm)
                   else
                     self.outbounds<<eval(name).new(relate_elm.merge({:target=>act}))
                   end
                 elsif meta.inverse_of[/source/]
                   if exist_relate = self.inbounds.map{|v| v if v.source_id == act.id}.compact.last
+                    relate_elm.delete(:id)
                     exist_relate.update_attributes(relate_elm)
                   else
                     self.inbounds<<eval(name).new(relate_elm.merge({:source=>act}))
@@ -200,17 +214,20 @@ class Act
               next unless elm.is_a?(Hash)
               elm.deep_symbolize_keys!
               act=elm[:id].present? ? eval(act_name).find(elm[:id]) : nil
-              act||=eval(act_name).where(mood_code:mood_code, 'ii.root' => elm[:ii][:root].to_s, 'ii.extension' => elm[:ii][:extension].to_s).last if elm[:ii]&&elm[:ii].is_a?(Hash)
+              act||=eval(act_name).where(mood_code:mood_code, 'ii.root' => elm[:ii][:root].to_s, 'ii.extension' => elm[:ii][:extension].to_s).last if elm[:ii]&&elm[:ii].is_a?(Hash)&&elm[:ii][:root].present?&&elm[:ii][:extension].present?
               if act
+                elm.delete(:id)
                 act.update_attributes(elm)
                 if meta.inverse_of[/target/]
                   if exist_relate = self.outbounds.map{|v| v if v.target_id == act.id}.compact.last
+                    relate_elm.delete(:id)
                     exist_relate.update_attributes(relate_elm)
                   else
                     self.outbounds<<eval(name).new(relate_elm.merge({:target=>act}))
                   end
                 elsif meta.inverse_of[/source/]
                   if exist_relate = self.inbounds.map{|v| v if v.source_id == act.id}.compact.last
+                    relate_elm.delete(:id)
                     exist_relate.update_attributes(relate_elm)
                   else
                     self.inbounds<<eval(name).new(relate_elm.merge({:source=>act}))

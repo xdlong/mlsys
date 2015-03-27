@@ -1,6 +1,6 @@
 <div class="panel panel-default">
   <!-- Default panel contents -->
-  <div class="panel-heading"><%=@organization.name%>产品目录</div>
+  <div class="panel-heading">产品目录</div>
   <div class="panel-body">
     <p>...</p>
   </div>
@@ -22,51 +22,55 @@
       </div><!-- /.row -->
     </li>
   </ul>
-
-  <!-- Table -->
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th width="10%" style="text-align:left">#</th>
-        <th width="10%" style="text-align:left">类别</th>
-        <th width="10%" style="text-align:left">标识码</th>
-        <th width="20%" style="text-align:left">说明</th>
-        <th width="20%" style="text-align:left">更新时间</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <%- @menus.each_with_index do |menu,i|
-            menu = menu.classification %>
-      <tr>
-        <td class="text_left"><%=i%></td>
-        <td class="text_left"><%=menu.title %></td>
-        <td class="text_left"><%=menu.code.code %></td>
-        <td class="text_left"><%=menu.text %></td>
-        <td class="text_left"><%=menu.updated_at.strftime("%Y-%2m-%2d %H:%M:%S") %></td>
-        <td style="text-align:center">
+  <ul class="list-group">
+    <li class="list-group-item"></li>
+    <li class="list-group-item">
+      <div class="row">
+        <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 text_left"><b>#</b></div>
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text_left"><b>类别</b></div>
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text_left"><b>标识码</b></div>
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 text_left"><b>说明</b></div>
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text_left"><b>更新时间</b></div>
+        <div style="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-align:center"></div>
+      </div>
+    </li>
+    <%- @menus.each_with_index do |menu,i|
+      if menu = menu.classification %>
+    <li class="list-group-item">
+      <div class="row">
+        <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 text_left"><%=i%></div>
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text_left"><%=menu.title %></div>
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text_left"><%=menu.code.code %></div>
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 text_left"><%=menu.text %></div>
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text_left"><%=menu.updated_at.strftime("%Y-%2m-%2d %H:%M:%S") %></div>
+        <div style="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-align:center">
           <span class="pull-right">
-            <a href="/erp/orgs/<%=@organization.id%>/menus/<%=menu.id%>/edit">
+            <a type='button' class='btn btn-default btn-xs' href="/erp/orgs/<%=@organization.id%>/menus/<%=menu.id%>/edit">
               <i class="glyphicon glyphicon-edit"></i>
             </a>
-            <a href="/erp/orgs/<%=@organization.id%>/menus/<%=menu.id%>">
+            <a type='button' class='btn btn-default btn-xs' href="/erp/orgs/<%=@organization.id%>/menus/<%=menu.id%>">
               <i class="glyphicon glyphicon-info-sign"></i>
             </a>
             <%- if menu.component.present? %>
-            <span class="erp_sub_menu_key" id="erp_menu_<%=i%>">
+            <button class="erp_sub_menu_key btn btn-default btn-xs" id="erp_menu_<%=i%>">
               <span class="badge">子目录：<%=menu.component.size%></span>
-            </span>
+            </button>
+            <% else %>
+            <a type='button' class='btn btn-default btn-xs' href='/erp/orgs/<%=@organization.id%>/menus/<%=menu.id%>/products'>
+              <i class='glyphicon glyphicon-list-alt'></i>
+            </a>
             <% end -%>
-            <a href="/erp/orgs/<%=@organization.id%>/menus/new?pre_menu_id=<%=menu.id%>">
+            <a type='button' class='btn btn-default btn-xs' href="/erp/orgs/<%=@organization.id%>/menus/new?pre_menu_id=<%=menu.id%>">
               <i class="glyphicon glyphicon-plus"></i>
             </a>
           </span>
-        </td>
-      </tr>
-      <%=raw render_menu(@organization,menu.component,[i]) %>
-      <% end -%>
-    </tbody>
-  </table>
+        </div>
+      </div>
+    </li>
+    <%=raw render_menu(@organization,menu.component,[i]) %>
+    <% end; end -%>
+    <li class="list-group-item"></li>
+  </ul>
   <div class="panel-footer">
     <p>...</p>
   </div>

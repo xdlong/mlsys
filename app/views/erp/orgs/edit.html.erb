@@ -1,4 +1,5 @@
 <%= form_for @organization , :url=> {:controller =>'orgs', :action => 'update'} , :html=>{:class=>"form-horizontal"} do |f| %>
+<input name="erp_org[ii][extension]" value="0" hidden>
 <div class="panel panel-default">
   <div class="panel-heading">
     <div class="pull-right" >

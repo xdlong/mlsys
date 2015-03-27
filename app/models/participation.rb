@@ -3,8 +3,8 @@ class Participation
   field :type_code,       type: String
   field :priority_number, type: Integer
 
-  belongs_to :act, class_name: 'Act', foreign_key: 'act_id', autosave: true, index: true
-  belongs_to :role, class_name: 'Role', foreign_key: 'role_id', autosave: true, index: true
+  belongs_to :act, class_name: 'Act', foreign_key: 'act_id', inverse_of: :participation, autosave: true, index: true
+  belongs_to :role, class_name: 'Role', foreign_key: 'role_id', inverse_of: :participation, autosave: true, index: true
 
   def to_hash
     ret={}

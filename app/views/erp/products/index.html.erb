@@ -1,0 +1,78 @@
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">产品列表</div>
+  <div class="panel-body">
+    <p>...</p>
+  </div>
+  <!-- List group -->
+  <ul class="list-group">
+    <li class="list-group-item">
+      <div class="row">
+        <div class="col-sm-8 col-md-8 col-lg-8 pull-left">
+          <a href="/erp/orgs/<%=@organization.id%>/menus/<%=@menu.id%>/products/new" type="button" class="btn btn-default btn-sm"><i class="glyphicon glyphicon-plus"></i>新建</a>
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="查找...">
+            <span class="input-group-btn">
+              <button class="btn btn-info" type="button"><i class="glyphicon glyphicon-search"></i></button>
+            </span>
+          </div><!-- /input-group -->
+        </div><!-- /.col-lg-6 -->
+      </div><!-- /.row -->
+    </li>
+  </ul>
+
+  <!-- Table -->
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th width="10%" style="text-align:left">#</th>
+        <th width="10%" style="text-align:left">型号</th>
+        <th width="10%" style="text-align:left">名称</th>
+        <th width="20%" style="text-align:left">库存量</th>
+        <th width="20%" style="text-align:left">更新时间</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <%- @products.each_with_index do |subject,i|
+        if product = subject.manufactured_product %>
+      <tr>
+        <td class="text_left"><%=i%></td>
+        <td class="text_left"><%=product.code.code %></td>
+        <td class="text_left"><%=product.name %></td>
+        <td class="text_left"><%=product.product.try(:quantity) %></td>
+        <td class="text_left"><%=product.updated_at.strftime("%Y-%2m-%2d %H:%M:%S") %></td>
+        <td style="text-align:center">
+          <span class="pull-right">
+            <a type="button" class="btn btn-default btn-xs" href="/erp/orgs/<%=@organization.id%>/menus/<%=@menu.id%>/products/<%=product.id%>/edit">
+              <i class="glyphicon glyphicon-edit"></i>
+            </a>
+            <a type="button" class="btn btn-default btn-xs" href="/erp/orgs/<%=@organization.id%>/menus/<%=@menu.id%>/products/<%=product.id%>">
+              <i class="glyphicon glyphicon-info-sign"></i>
+            </a>
+            <form action="/erp/orgs/<%=@organization.id%>/menus/<%=@menu.id%>/products/<%=product.id%>" method="post" style="display:inline">
+              <input name="_method" type="hidden" value="delete">
+              <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token%>" />
+              <button type="submit" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-trash"></i></button>
+            </form>
+          </span>
+        </td>
+      </tr>
+      <% end; end -%>
+    </tbody>
+  </table>
+  <div class="panel-footer">
+    <p>...</p>
+  </div>
+</div>
+<script type="text/javascript">
+  $(".erp_sub_menu_key").on('click',function(){
+    var trs = $("."+this.id);
+    console.log(trs);
+    trs.each(function(){
+      $(this).toggleClass("hidden");
+    });
+  })
+</script>
