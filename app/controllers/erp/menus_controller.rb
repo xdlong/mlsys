@@ -48,7 +48,7 @@ class Erp::MenusController < ActionController::Base
   def update
     respond_to do |format|
       if @menu.update_attributes(erp_menu_params)
-        format.html { redirect_to controller:'home', action:'index'}
+        format.html { redirect_to controller:'orgs', action:'show', id:@organization.id}
         format.json { render json: @menu }
       else
         format.html { render 'edit'}
@@ -57,9 +57,13 @@ class Erp::MenusController < ActionController::Base
     end
   end
   def destroy
-    @menu.destroy unless @menu.component.present?||@menu.subject.present?
+    unless @menu.component.present?||@menu.subject.present?
+      @menu.inbounds.dup.each{|rela| rela.destroy}
+      @menu.outbounds.dup.each{|rela| rela.destroy}
+      @menu.destroy
+    end
     respond_to do |format|
-      format.html { redirect_to controller:'home', action:'index'}
+      format.html { redirect_to controller:'orgs', action:'show', id:@organization.id}
       format.json { render json: true }
     end
   end

@@ -57,6 +57,7 @@ class Erp::ProductsController < ActionController::Base
   end
   def destroy
     @product.product.destroy if @product.product
+    @product.participation.dup.each{|part| part.destroy}
     @product.destroy
     respond_to do |format|
       format.html { redirect_to action:'index'}
@@ -79,6 +80,7 @@ class Erp::ProductsController < ActionController::Base
       ii: attrs[:ii],
       code: attrs[:code],
       name: attrs[:name],
+      desc: attrs[:desc],
       product: {
         id:attrs[:product_id],
         ii:attrs[:ii],
