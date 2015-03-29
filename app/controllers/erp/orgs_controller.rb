@@ -10,7 +10,7 @@ class Erp::OrgsController < ActionController::Base
     end
   end
   def show
-    @menus = @organization.as_located_entity.last.try(:receiver)||[]
+    @menus = (recs = @organization.as_located_entity.last.try(:receiver)) ? recs.asc('priority_number') : []
     respond_to do |format|
       format.html
       format.json { render json: @organization }
@@ -46,6 +46,8 @@ class Erp::OrgsController < ActionController::Base
     end
   end
   def destroy
+    @organization.playeds.dup.each{|role| role.destroy}
+    @organization.scopeds.dup.each{|role| role.destroy}
     @organization.destroy
     respond_to do |format|
       format.html { redirect_to controller:'home', action:'index'}

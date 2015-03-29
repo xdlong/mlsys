@@ -1,3 +1,4 @@
+#encoding: utf-8
 class RoleLink
   include Mongoid::Document
   field :priority_number, :type => Integer

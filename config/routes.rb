@@ -20,6 +20,9 @@ Rails.application.routes.draw do
     resources :home
     resources :orgs do
       resources :menus do
+        collection do
+          get :init
+        end
         resources :products
       end
     end

@@ -1,3 +1,4 @@
+#encoding: utf-8
 class Act
   include Mongoid::Document
   field :class_code,  type: String

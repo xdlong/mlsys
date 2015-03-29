@@ -1,0 +1,202 @@
+menu:
+  receiver:
+    - priority_number: '0'
+      classification:
+        title: "卫浴"
+        component:
+          - priority_number: '0'
+            classification:
+              title: "浴室柜"
+              component:
+                - priority_number: '0'
+                  classification:
+                    title: "贝多芬"
+                - priority_number: '1'
+                  classification:
+                    title: "迪琦"
+                - priority_number: '2'
+                  classification:
+                    title: "辉煌"
+                - priority_number: '3'
+                  classification:
+                    title: "罗唯"
+                - priority_number: '4'
+                  classification:
+                    title: "盛威"
+                - priority_number: '5'
+                  classification:
+                    title: "欣卫浴"
+                - priority_number: '6'
+                  classification:
+                    title: "其他"
+          - priority_number: '1'
+            classification:
+              title: "五金挂件"
+              component:
+                - priority_number: '0'
+                  classification:
+                    title: "龙头"
+                    component:
+                      - priority_number: '0'
+                        classification:
+                          title: "面盆龙头"
+                      - priority_number: '1'
+                        classification:
+                          title: "菜盆龙头"
+                      - priority_number: '2'
+                        classification:
+                          title: "淋浴花洒"
+                      - priority_number: '3'
+                        classification:
+                          title: "其他"
+                - priority_number: '1'
+                  classification:
+                    title: "菜盆"
+                    component:
+                      - priority_number: '0'
+                        classification:
+                          title: "金海森"
+                      - priority_number: '1'
+                        classification:
+                          title: "红彬"
+                - priority_number: '2'
+                  classification:
+                    title: "挂件"
+                    component:
+                      - priority_number: '0'
+                        classification:
+                          title: "铜"
+                      - priority_number: '1'
+                        classification:
+                          title: "铝合金"
+                      - priority_number: '2'
+                        classification:
+                          title: "不锈钢"
+          - priority_number: '2'
+            classification:
+              title: "陶瓷"
+              component:
+                - priority_number: '0'
+                  classification:
+                    title: "坐便器"
+                - priority_number: '1'
+                  classification:
+                    title: "蹲便器"
+                - priority_number: '2'
+                  classification:
+                    title: "水箱"
+                - priority_number: '3'
+                  classification:
+                    title: "其他"
+          - priority_number: '3'
+            classification:
+              title: "玻璃"
+              component:
+                - priority_number: '0'
+                  classification:
+                    title: "名立雅"
+                - priority_number: '1'
+                  classification:
+                    title: "其他"
+    - priority_number: '1'
+      classification:
+        title: "陶瓷"
+        component:
+          - priority_number: '0'
+            classification:
+              title: "嘉宾"
+              component:
+                - priority_number: '0'
+                  classification:
+                    title: "大砖"
+                    component:
+                      - priority_number: '0'
+                        classification:
+                          title: "微晶石"
+                      - priority_number: '1'
+                        classification:
+                          title: "超平釉"
+                      - priority_number: '2'
+                        classification:
+                          title: "全抛釉"
+                      - priority_number: '3'
+                        classification:
+                          title: "抛光砖"
+                - priority_number: '1'
+                  classification:
+                    title: "瓷片"
+          - priority_number: '1'
+            classification:
+              title: "意美嘉"
+              component:
+                - priority_number: '0'
+                  classification:
+                    title: "大砖"
+                    component:
+                      - priority_number: '0'
+                        classification:
+                          title: "微晶石"
+                      - priority_number: '1'
+                        classification:
+                          title: "超平釉"
+                      - priority_number: '2'
+                        classification:
+                          title: "全抛釉"
+                      - priority_number: '3'
+                        classification:
+                          title: "抛光砖"
+                - priority_number: '1'
+                  classification:
+                    title: "瓷片"
+          - priority_number: '2'
+            classification:
+              title: "恒裕"
+              component:
+                - priority_number: '0'
+                  classification:
+                    title: "大砖"
+                    component:
+                      - priority_number: '0'
+                        classification:
+                          title: "微晶石"
+                      - priority_number: '1'
+                        classification:
+                          title: "超平釉"
+                      - priority_number: '2'
+                        classification:
+                          title: "全抛釉"
+                      - priority_number: '3'
+                        classification:
+                          title: "抛光砖"
+                - priority_number: '1'
+                  classification:
+                    title: "瓷片"
+          - priority_number: '3'
+            classification:
+              title: "上筑"
+              component:
+                - priority_number: '0'
+                  classification:
+                    title: "大砖"
+                    component:
+                      - priority_number: '0'
+                        classification:
+                          title: "微晶石"
+                      - priority_number: '1'
+                        classification:
+                          title: "超平釉"
+                      - priority_number: '2'
+                        classification:
+                          title: "全抛釉"
+                      - priority_number: '3'
+                        classification:
+                          title: "抛光砖"
+                - priority_number: '1'
+                  classification:
+                    title: "瓷片"
+          - priority_number: '4'
+            classification:
+              title: "阳台砖"
+          - priority_number: '5'
+            classification:
+              title: "其他"

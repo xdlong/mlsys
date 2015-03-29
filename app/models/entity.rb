@@ -1,3 +1,4 @@
+#encoding: utf-8
 class Entity
   include Mongoid::Document
   field :class_code,  type: String

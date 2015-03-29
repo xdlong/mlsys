@@ -1,3 +1,4 @@
+#encoding:utf-8
 class Erp::MenusController < ActionController::Base
   before_action :authenticate_user!
   before_action :set_erp_org, :set_pre_menu
@@ -60,12 +61,28 @@ class Erp::MenusController < ActionController::Base
     unless @menu.component.present?||@menu.subject.present?
       @menu.inbounds.dup.each{|rela| rela.destroy}
       @menu.outbounds.dup.each{|rela| rela.destroy}
+      @menu.participation.dup.each{|part| part.destroy}
       @menu.destroy
     end
     respond_to do |format|
       format.html { redirect_to controller:'orgs', action:'show', id:@organization.id}
       format.json { render json: true }
     end
+  end
+  def init
+    menus = YAML.load_file(Rails.root+"config/init_ymls/product_menu.yml").deep_symbolize_keys[:menu]
+    as_located_entity = @organization.as_located_entity.last
+    as_located_entity ||= @organization.as_located_entity.new()
+    menus[:receiver].each do |receiver_elm|
+      receiver_elm.deep_symbolize_keys!
+      menu = add_menu({classification: receiver_elm.delete(:classification)})
+      receiver = as_located_entity.receiver.new(receiver_elm)
+      receiver.classification = menu
+      receiver.save
+    end
+    as_located_entity.save
+    @organization.save
+    render json: menus.to_json
   end
   private
   def set_erp_org
@@ -79,5 +96,18 @@ class Erp::MenusController < ActionController::Base
   end
   def erp_menu_params
     params.require(:erp_menu).permit(:title, :text, code: [:code, :display_name, :code_system], ii: [:root, :extension])
+  end
+  def add_menu attrs
+    attrs.deep_symbolize_keys!
+    components = attrs[:classification].delete(:component)||[]
+    ret = Act::Classification.new(attrs[:classification])
+    components.each do |component_elm|
+      menu = add_menu({classification: component_elm.delete(:classification)})
+      component = ret.component.new(component_elm)
+      component.classification = menu
+      component.save
+    end
+    ret.save
+    ret
   end
 end

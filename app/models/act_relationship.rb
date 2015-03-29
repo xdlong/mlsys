@@ -1,10 +1,11 @@
+#encoding: utf-8
 class ActRelationship
   include Mongoid::Document
   field :type_code,       type: String
   field :priority_number, type: Integer
 
-  belongs_to :source, class_name: 'Act', foreign_key: 'source_id', inverse_of: :outbounds, autosave: true, index: true
-  belongs_to :target, class_name: 'Act', foreign_key: 'target_id', inverse_of: :inbounds, autosave: true, index: true
+  belongs_to :source, class_name: 'Act', foreign_key: 'source_id', inverse_of: :outbounds, autosave: true
+  belongs_to :target, class_name: 'Act', foreign_key: 'target_id', inverse_of: :inbounds, autosave: true
 
   def to_hash
     ret={}
