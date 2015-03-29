@@ -6,5 +6,8 @@
   <% else %>
   <li ><a href="/erp/orgs/<%=@organization.id%>"><%=@organization.name%></a></li>
   <% end -%>
+  <%- if @menu %>
+  <li class="active"><%=@menu.title%></li>
+  <% end -%>
 </ol>
 <% end -%>
