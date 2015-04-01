@@ -28,8 +28,9 @@
       <tr>
         <th width="5%" style="text-align:left">#</th>
         <th width="15%" style="text-align:left">型号</th>
+        <th width="15%" style="text-align:left">名称</th>
         <th width="15%" style="text-align:left">库存量</th>
-        <th width="40%" style="text-align:left">描述</th>
+        <th width="25%" style="text-align:left">描述</th>
         <th width="15%" style="text-align:left">上次修改</th>
         <th></th>
       </tr>
@@ -41,6 +42,7 @@
       <tr>
         <td class="text_left"><%=i %></td>
         <td class="text_left"><%=product.ii.extension %></td>
+        <td class="text_left"><%=product.name %></td>
         <td class="text_left"><%=product.quantity %></td>
         <td class="text_left"><%=product.desc %></td>
         <td class="text_left"><%=product.updated_at.strftime("%Y-%2m-%2d %H:%M:%S") %></td>
@@ -52,6 +54,11 @@
             <a type='button' class='btn btn-default btn-xs' href="/erp/orgs/<%=@organization.id%>/products/<%=product.id%>">
               <i class="fa fa-info-circle"></i>
             </a>
+            <form action="/erp/orgs/<%=@organization.id%>/products/<%=product.id%>" method="post" style="display:inline">
+              <input name="_method" type="hidden" value="delete">
+              <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token%>" />
+              <button type="submit" class="btn btn-danger btn-xs"><i class="fa fa-remove"></i></button>
+            </form>
           </span>
         </td>
       </tr>

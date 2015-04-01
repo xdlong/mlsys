@@ -4,7 +4,7 @@ class Erp::RegistrationsController < ActionController::Base
   before_action :set_erp_reg, only: [:show, :edit, :update, :destroy]
   layout 'erp'
   def index
-    @regs = Act::Registration.where('code.code'=>params[:code]).page(params[:page]).per(params[:per]||20)
+    @regs = Act::Registration.where('ii.root'=>@organization.ii.root,'code.code'=>params[:code]).page(params[:page]).per(params[:per]||20)
     respond_to do |format|
       format.html
       format.json { render json: @regs }
@@ -30,9 +30,8 @@ class Erp::RegistrationsController < ActionController::Base
     end
   end
   def create
-    p "#{self.class.name}==================== #{erp_reg_params}"
     attrs = erp_reg_params
-    p products = attrs.delete(:subject)
+    products = attrs.delete(:subject)
     menu_id = attrs[:coverage][0][:classification][:id]
     @reg = Act::Registration.new(attrs)
     menu = Act::Classification.find(menu_id) if menu_id.present?
@@ -69,7 +68,7 @@ class Erp::RegistrationsController < ActionController::Base
     end
     respond_to do |format|
       if @reg.save
-        format.html { redirect_to action:'index'}
+        format.html { redirect_to action:'new', code:attrs[:code][:code]}
         format.json { render json: @reg }
       else
         format.html { render 'new'}
@@ -80,7 +79,7 @@ class Erp::RegistrationsController < ActionController::Base
   def update
     respond_to do |format|
       if @reg.update_attributes(erp_reg_params)
-        format.html { redirect_to action:'index'}
+        format.html { redirect_to action:'index', code:'0'}
         format.json { render json: @reg }
       else
         format.html { render 'edit'}
@@ -89,9 +88,12 @@ class Erp::RegistrationsController < ActionController::Base
     end
   end
   def destroy
+    code = @reg.code.code
+    @reg.subject.dup.each{|subject| subject.manufactured_product.destroy if subject.manufactured_product;subject.destroy}
+    @reg.coverage.dup.each{|coverage| coverage.destroy}
     @reg.destroy
     respond_to do |format|
-      format.html { redirect_to action:'index'}
+      format.html { redirect_to action:'index', code:code}
       format.json { render json: true }
     end
   end
@@ -107,7 +109,6 @@ class Erp::RegistrationsController < ActionController::Base
     @reg = Act::Registration.find(params[:id])
   end
   def erp_reg_params
-    p params
     attrs = params.require(:erp_reg).deep_symbolize_keys
     {
       ii: attrs[:ii],

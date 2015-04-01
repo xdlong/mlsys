@@ -1,1 +1,45 @@
-index
+<div class="page-header">
+  <%- case params[:code] %>
+  <% when '0' %>
+  <i class="fa fa-calendar fa-fw fa-4x"></i>
+  <h3>入库记录<small>新到产品入库记录。</small></h3>
+  <% when '1' %>
+  <i class="fa fa-calendar fa-fw fa-4x"></i>
+  <h3>出库出库<small>产品的出库记录。</small></h3>
+  <% end -%>
+</div>
+<div class="row">
+  <%- @regs.each do |reg| %>
+  <div class="col-sm-3 col-md-3 col-lg-3">
+    <div class="thumbnail">
+      <div class="caption">
+        <h3>编号：<%=reg.ii.extension%>
+          <form action="/erp/orgs/<%=@organization.id%>/registrations/<%=reg.id%>" method="post" style="display:inline">
+            <input name="_method" type="hidden" value="delete">
+            <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token%>" />
+            <button type="submit" class="btn btn-danger btn-xs pull-right"><i class="fa fa-remove"></i></button>
+          </form>
+          <small><br>操作时间：<%=reg.updated_at.strftime("%Y-%2m-%2d %H:%M:%S")%></small>
+        </h3>
+        <div class="row" style="border-top: 1px solid #eee;border-bottom: 1px solid #eee;">
+          <div class="col-sm-2 col-md-2 col-lg-2" style="text-align:center">#</div>
+          <div class="col-sm-6 col-md-6 col-lg-6" style="text-align:left">型号</div>
+          <div class="col-sm-4 col-md-4 col-lg-4" style="text-align:center">数量</div>
+        </div>
+        <ul class="select2-results" role="listbox" style="max-height: 80px;min-height: 80px;border-bottom: 1px solid #eee;">
+          <%- reg.subject.each_with_index do |subject,i| %>
+          <li role="presentation">
+            <div class="row">
+              <div class="col-sm-2 col-md-2 col-lg-2"><%=i+1%></div>
+              <div class="col-sm-6 col-md-6 col-lg-6"><%=subject.manufactured_product.ii.extension%></div>
+              <div class="col-sm-4 col-md-4 col-lg-4" style="text-align:right"><%=subject.manufactured_product.quantity%></div>
+            </div>
+          </li>
+          <% end -%>
+        </ul>
+        <h4>备注：<small><%=reg.text%></small></h4>
+      </div>
+    </div>
+  </div>
+  <% end -%>
+ </div>

@@ -11,7 +11,7 @@ class Erp::ProductsController < ActionController::Base
     end
   end
   def new
-    @product = Role::ManufacturedProduct.new()
+    @product = Entity::Product.new()
     respond_to do |format|
       format.html
       format.json { render json: @product }
@@ -45,6 +45,7 @@ class Erp::ProductsController < ActionController::Base
     end
   end
   def update
+    @product = Role::ManufacturedProduct.find(params[:id])
     respond_to do |format|
       if @product.update_attributes(erp_product_params)
         format.html { redirect_to action:'index'}
@@ -56,8 +57,12 @@ class Erp::ProductsController < ActionController::Base
     end
   end
   def destroy
-    @product.product.destroy if @product.product
-    @product.participation.dup.each{|part| part.destroy}
+    @product.playeds.dup.each do |role|
+      role.participation.dup.each do |part|
+        part.destroy if part.act.is_a?(Act::Classification)
+      end
+      role.destroy unless role.participation.present?
+    end
     @product.destroy
     respond_to do |format|
       format.html { redirect_to action:'index'}
@@ -89,7 +94,7 @@ class Erp::ProductsController < ActionController::Base
     @menu = Act::Classification.find(params[:menu_id]) if params[:menu_id]
   end
   def set_erp_product
-    @product = Role::ManufacturedProduct.find(params[:id])
+    @product = Entity::Product.find(params[:id])
   end
   def erp_product_params
     attrs = params.require(:erp_product).permit(:name, :desc, :product_id, quantity:[:value, :unit], code: [:code, :display_name, :code_system], ii: [:root, :extension]).deep_symbolize_keys
