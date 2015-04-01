@@ -3,6 +3,6 @@ class Role::ManufacturedProduct < Role
 
   def initialize attrs=nil
   	super attrs
-  	self.class_code='MANU'
+  	self.class_code||='MANU'
   end
 end

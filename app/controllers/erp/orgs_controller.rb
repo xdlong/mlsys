@@ -11,6 +11,7 @@ class Erp::OrgsController < ActionController::Base
   end
   def show
     @menus = (recs = @organization.as_located_entity.last.try(:receiver)) ? recs.asc('priority_number') : []
+    @products = Entity::Product.where('ii.root'=>@organization.ii.root).page(params[:page]).per(params[:per]||20)
     respond_to do |format|
       format.html
       format.json { render json: @organization }

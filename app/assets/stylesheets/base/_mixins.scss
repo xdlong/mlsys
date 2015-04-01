@@ -1,0 +1,21 @@
+@mixin transition-all($times) {
+	-webkit-transition: all $times ease;
+	   -moz-transition: all $times ease;
+	    -ms-transition: all $times ease;
+	     -o-transition: all $times ease;
+	        transition: all $times ease;
+}
+@mixin checkbox_i($content,$fontsize,$color) {
+	content: $content;
+	display: inline-block;
+	font-family: FontAwesome;
+	font-style: normal;
+	font-weight: normal;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-size: $fontsize;
+	line-height: 0.75em;
+	vertical-align: -15%;
+	color: $color;
+}

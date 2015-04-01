@@ -1,0 +1,114 @@
+<div class="page-header">
+  <%- case params[:code] %>
+  <% when '0' %>
+  <i class="fa fa-sign-in fa-fw fa-4x"></i>
+  <h3>产品入库<small>将新到的产品登记入库。</small></h3>
+  <% when '1' %>
+  <i class="fa fa-sign-out fa-fw fa-4x"></i>
+  <h3>产品出库<small>产品的出库登记。</small></h3>
+  <% end -%>
+</div>
+<%= form_for(@reg, :url=>"/erp/orgs/#{@organization.id}/registrations", :method=>:post, defaults: {:input_html=>{:class => "form-control"}}) do |f| %>
+  <input type="hidden" name="erp_reg[ii][root]" value="<%= @organization.ii.root%>">
+  <input type="hidden" name="erp_reg[code][code]" value="<%= @reg.code.code%>">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title" style="text-align:center"><%=params[:code]=='0' ? '入库登记' : params[:code]=='1' ? '出库登记' : ''%></h3>
+    </div>
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-sm-3 col-xs-3">
+          <div class="input-group">
+            <span class="input-group-addon">编号</span>
+            <input class="form-control" type="text" id="prescription_code" name="erp_reg[ii][extension]" placeholder="登记单编号" autofocus>
+          </div>
+        </div>
+        <div class="col-sm-4 col-xs-4">
+          <div class="input-group">
+            <span class="input-group-addon">产品类目</span>
+            <input class="form-control" type="text" name="erp_reg[menu][id]" placeholder="选择产品类目" id="erp_reg_menu">
+          </div>
+        </div>
+        <div class="col-sm-5 col-xs-5">
+          <div class="input-group">
+            <span class="input-group-addon">备注</span>
+            <input class="form-control" type="text" name="erp_reg[desc]" placeholder="备注">
+          </div>
+        </div>
+      </div>
+    </div>
+    <table class="table data-edit-table">
+      <thead>
+        <tr>
+          <th width="20%" style="text-align:center">产品型号</th>
+          <th width="15%" style="text-align:center">产品名称</th>
+          <th width="10%" style="text-align:center">数量</th>
+          <th width="10%" style="text-align:left">单位</th>
+          <th width="10%" style="text-align:center">现有库存量</th>
+          <th>描述</th>
+          <th width="2%">
+            <span class="fa fa-plus-circle fa-lg add-line" accesskey="a"></span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="product-ii-td">
+            <input class="form-control product-ii" name="erp_reg[products][0][ii][extension]" type="text" placeholder="产品型号" data-provide="typeahead">
+          </td>
+          <td class="product-name-td" style="text-align:center">
+            <input class="form-control product-name" name="erp_reg[products][0][name]" type="text" placeholder="产品名称">
+          </td>
+          <td class="product-qty-td">
+            <input class="form-control product-qty" name="erp_reg[products][0][quantity][value]" type="number" placeholder="数量" style="text-align:center">
+          </td>
+          <td class="product-unit-td">
+            <input class="form-control product-unit" name="erp_reg[products][0][quantity][unit]" type="text" placeholder="单位" style="text-align:left">
+          </td>
+          <td class="product-inventory-td" style="text-align:center"><h5>无</h5></td>
+          <td class="product-desc-td">
+            <input class="form-control product-desc" name="erp_reg[products][0][desc]" type="text" placeholder="产品描述">
+          </td>
+          <td style="line-height: 25px;">
+            <span class="fa fa-minus-circle fa-lg delete-line"></span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="panel-footer">
+      <h3 class="panel-title" style="text-align:center"><button type="submit" class="btn btn-primary" accesskey="s"><span class="fa fa-save fa-lg fa-fw"></span>提交</button></h3>
+    </div>
+  </div>
+<% end -%>
+<script type="text/javascript">
+  $.getJSON('/erp/orgs/<%=@organization.id%>/menus/array_list.json',function(data){
+    start_select2($('#erp_reg_menu'), data);
+  });
+  var tt_inputs = $('.product-ii');
+  $.getJSON('/erp/orgs/<%=@organization.id%>/products/array_list.json',function(data){
+    localStorage.setItem('erp_products_data',JSON.stringify(data));
+    get_products_data(tt_inputs, data);
+  });
+  $('#erp_reg_menu').on('input change', function() {
+    var menu_id = $(this).val();
+    var tt_inputs = $('.product-ii.tt-input');
+    if(!tt_inputs[0]) tt_inputs = $('.product-ii');
+    $.getJSON('/erp/orgs/<%=@organization.id%>/menus/'+menu_id+'/products/array_list.json',function(data){
+      localStorage.setItem('erp_products_data',JSON.stringify(data));
+      get_products_data(tt_inputs, data);
+    });
+  });
+  $('.data-edit-table').on('click', '.delete-line', function() {
+    var obj = $(this).parents('tbody');
+    if(obj.find('tr').length==1){
+      add_line($('.data-edit-table').find('tbody'))
+    }
+    $(this).parents('tr').remove();
+    refresh_trs($('.data-edit-table').find('tbody'));
+  });
+  $('.data-edit-table').on('click', '.add-line', function() {
+    var $this = $(this);
+    add_line($this.parents('.data-edit-table').find('tbody'));
+    refresh_trs($('.data-edit-table').find('tbody'));
+  });
+</script>

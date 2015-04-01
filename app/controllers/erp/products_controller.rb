@@ -2,9 +2,9 @@ class Erp::ProductsController < ActionController::Base
   before_action :authenticate_user!
   before_action :set_erp_org,:set_erp_menu
   before_action :set_erp_product, only: [:show, :edit, :update, :destroy]
-  layout 'erp'  
+  layout 'erp'
   def index
-    @products = @menu.subject
+    @products = (@menu ? @menu.subject : Entity::Product.where('ii.root'=>@organization.ii.root)).page(params[:page]).per(params[:per]||20)
     respond_to do |format|
       format.html
       format.json { render json: @products }
@@ -64,12 +64,29 @@ class Erp::ProductsController < ActionController::Base
       format.json { render json: true }
     end
   end
+  def array_list
+    list = @menu ? @menu.subject.map{|subject| role = subject.manufactured_product; {
+      ii:role.ii.extension,
+      name:role.product.name.to_s,
+      qty:role.product.quantity.to_s,
+      unit:role.product.quantity.unit,
+      desc:role.product.desc
+      } if role}.compact : Entity::Product.where('ii.root'=>@organization.ii.root).map{|product| {
+        ii:product.ii.extension,
+        name:product.name.to_s,
+        qty:product.quantity.to_s,
+        unit:product.quantity.unit.to_s,
+        desc:product.desc
+        }}
+    render json: list.to_json # [{ii:'1322',name:'3453e',qty:'34 tc',unit:'tc',desc:'dghdsh'}]
+  end
   private
   def set_erp_org
     @organization = Entity::Organization.find(params[:org_id])
+    @menus = (recs = @organization.as_located_entity.last.try(:receiver)) ? recs.asc('priority_number') : []
   end
   def set_erp_menu
-    @menu = Act::Classification.find(params[:menu_id])
+    @menu = Act::Classification.find(params[:menu_id]) if params[:menu_id]
   end
   def set_erp_product
     @product = Role::ManufacturedProduct.find(params[:id])

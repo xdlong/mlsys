@@ -14,3 +14,5 @@
 //= require jquery_ujs
 //= require_tree .
 //= require select2
+//= require twitter/typeahead
+//= require twitter/typeahead.min

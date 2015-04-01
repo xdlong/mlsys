@@ -4,18 +4,21 @@
   <link rel="shortcut icon" href="/assets/log.png" />
   <title>库存管理</title>
   <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= stylesheet_link_tag "fontawesome/font-awesome.min" %>
   <%= csrf_meta_tags %>
   <%= stylesheet_link_tag 'bootstrap/bootstrap.min' %>
   <%= stylesheet_link_tag 'bootstrap/bootstrap-theme.min' %>
+  <%= stylesheet_link_tag "base/base" %>
   <%= javascript_include_tag 'application' %>
-  <%= javascript_include_tag 'comeon' %>
+  <%= javascript_include_tag 'basic' %>
+  <%= javascript_include_tag 'erp/reg' %>
   <%= javascript_include_tag 'bootstrap/bootstrap.min' %>
+  <%= javascript_include_tag "base/sidenav" %>
+  <%= javascript_include_tag "base/handlebars" %>
 </head>
 <body>
-
-<nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
+  <div id="currentMedia"></div>
+  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
         <span class="sr-only">Toggle navigation</span>
@@ -23,23 +26,53 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="/erp">库存管理</a>
+      <a class="navbar-brand" href="#"><i class="fa fa-bars fa-lg sidenavBtn"></i></a>
+      <div class="head-icon"><img src="/assets/logs/<%=@organization.name%>.jpg"></div>
+      <a class="navbar-brand" href="/erp/orgs/<%=@organization.id%>"><%=@organization.name%></a>
     </div>
     <%= render 'layouts/userinfo' %>
-  </div><!-- /.container-fluid -->
-</nav>
-<%= render 'erp/ol' %>
-<div class="container">
-<%= yield %>
-</div>
-
-<nav class="navbar navbar-default navbar-fixed-bottom">
+  </nav>
   <div class="container-fluid">
-    <div class="navbar-right">
-      <a class="navbar-brand" href="/">HostDragon Working Office.</a>
+    <div class="list-group sidenav">
+      <a href="/erp/orgs/<%=@organization.id%>/products" class="list-group-item">
+        <i class="fa fa-indent"></i>
+        <span>库存-目录</span>
+        <%- if @menus.present? %>
+        <i class="fa fa-angle-double-right"></i>
+        <% end -%>
+      </a>
+      <div class="list-group sidenav">
+        <%- (@menus||[]).each do |menu|
+          menu = menu.classification %>
+        <a href="/erp/orgs/<%=@organization.id%>/menus/<%=menu.id%>/products" class="list-group-item">
+          <i class="fa fa-hand-o-right"></i>
+          <span><%=menu.title%></span>
+          <%- if menu.component.present? %>
+          <i class="fa fa-angle-double-right"></i>
+          <% end -%>
+        </a>
+        <%=raw render_menu(@organization,menu.component) %>
+        <% end %>
+      </div>
+      <a href="/erp/orgs/<%=@organization.id%>/registrations/new?code=0" class="list-group-item"><i class="fa fa-sign-in"></i><span>入库登记</span></a>
+      <a href="/erp/orgs/<%=@organization.id%>/registrations/new?code=1" class="list-group-item"><i class="fa fa-sign-out"></i><span>出库登记</span></a>
+      <a href="/erp/orgs/<%=@organization.id%>/registrations?code=0" class="list-group-item"><i class="fa fa-calendar"></i><span>入库记录</span></a>
+      <a href="/erp/orgs/<%=@organization.id%>/registrations?code=1" class="list-group-item"><i class="fa fa-calendar"></i><span>出库记录</span></a>
+      <a href="/erp/orgs/<%=@organization.id%>/setups" class="list-group-item"><i class="fa fa-cogs"></i><span>系统设置</span></a>
+    </div>
+    <div class="mainContent">
+    <%= yield %>
     </div>
   </div>
-</nav>
+  <!-- 侧边栏 end -->
 
-</body>
+  <nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+      <div class="navbar-right">
+        <a class="navbar-brand" href="/">HostDragon Working Office.</a>
+      </div>
+    </div>
+  </nav>
+
+  </body>
 </html>

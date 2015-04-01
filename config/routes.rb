@@ -18,12 +18,25 @@ Rails.application.routes.draw do
   namespace :erp do
     root 'home#index'
     resources :home
+    resources :stocks
     resources :orgs do
+      resources :setups
+      resources :products do
+        collection do
+          get :array_list
+        end
+      end
+      resources :registrations
       resources :menus do
         collection do
           get :init
+          get :array_list
         end
-        resources :products
+        resources :products do
+          collection do
+            get :array_list
+          end
+        end
       end
     end
   end

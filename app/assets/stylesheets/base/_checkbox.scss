@@ -1,0 +1,47 @@
+/**
+	单复选按钮
+	文件名：_checkbox.scss
+	例子：
+	<label class="check-label">
+		<input type="checkbox" value="" name=""><i></i>内容
+	</label>
+	<label class="check-label">
+		<input type="radio" value="" name=""><i></i>内容
+	</label>
+	作者：龙应菊
+	更新时间：2014-06-10
+*/
+.check-label {
+	margin-bottom:0;
+	position: relative;
+	padding-left:1.8em;
+	min-width: $font-size-base * 1.2;
+	min-height: $font-size-base;
+	font-weight:normal;
+	>input {
+		margin-top:0;
+		display: none;
+	}
+	>i {
+		position: absolute;
+		left: 0;
+	}
+	>input[type="checkbox"]~i:after {
+		@include checkbox_i("\f096",1.25em,#999999);
+	}
+	>input[type="radio"]~i:after {
+		@include checkbox_i("\f10c",1.25em,#999999);
+	}
+	>input[type="checkbox"]:checked~i:after {
+		@include checkbox_i("\f046",1.22em,$brand-primary);
+		opacity: 0.8;
+	}
+	>input[type="radio"]:checked~i:after {
+		@include checkbox_i("\f192",1.22em,$brand-primary);
+		opacity: 0.8;
+	}
+	input[type="checkbox"]:disabled~i:after {
+		opacity: 0.6;
+		background-color: #dddddd;
+	}
+}

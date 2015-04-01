@@ -6,6 +6,7 @@ class Role
   field :code,       type: Basic::ConceptDescriptor
   field :name,       type: String
   field :desc,       type: String
+  field :quantity,   type: Basic::PhysicalQuantity
   field :created_at, type: Time
   field :updated_at, type: Time
   

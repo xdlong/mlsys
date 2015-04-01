@@ -4,8 +4,8 @@ class Act::Classification < Act
 
   def initialize attrs = nil
     super attrs
-    self.class_code='ACFT'
-    self.mood_code='EVN'
-    self.status_code='N'
+    self.class_code||='ACFT'
+    self.mood_code||='EVN'
+    self.status_code||='N'
   end
 end

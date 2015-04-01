@@ -1,0 +1,60 @@
+.tt-dropdown-menu, .gist {
+    text-align: left;
+}
+.twitter-typeahead {
+    width:100%;
+    &:after {
+        content: "\f0dd";
+        position: absolute;
+        top: 5px;
+        right: 8px;
+        display: inline-block;
+        font-family: FontAwesome;
+        font-style: normal;
+        font-weight: normal;
+        line-height: 1;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+}
+.typeahead {
+    background-color: #FFFFFF;
+}
+.tt-input {
+    width:100%;
+}
+.tt-hint {
+    color: #999999;
+}
+.tt-dropdown-menu {
+    background-color: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    margin-top: 8px;
+    width: 100%;
+    padding:5px 0;     
+}
+.tt-dataset-states {
+    width:100%;
+}
+.tt-suggestions {
+    width:100%;
+    display: table;
+}
+.tt-suggestion {
+    padding: 3px 8px 3px 8px;
+    width: 100%;
+    >div {
+        display: inline-block;
+        &:first-child {
+            padding-right:8px;
+        }
+    }
+}
+.tt-suggestion.tt-cursor {
+    background-color: #0097CF;
+    color: #FFFFFF;
+}
+.tt-suggestion p {
+    margin: 0;
+}

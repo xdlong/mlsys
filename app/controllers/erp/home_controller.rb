@@ -1,6 +1,6 @@
 class Erp::HomeController < ActionController::Base
   before_action :authenticate_user!
-  layout 'erp'
+  layout 'application'
   def index
   	@organizations = Entity::Organization.all
     respond_to do |format|

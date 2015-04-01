@@ -70,6 +70,7 @@ class Erp::MenusController < ActionController::Base
     end
   end
   def init
+    @code = 0
     menus = YAML.load_file(Rails.root+"config/init_ymls/product_menu.yml").deep_symbolize_keys[:menu]
     as_located_entity = @organization.as_located_entity.last
     as_located_entity ||= @organization.as_located_entity.new()
@@ -83,6 +84,10 @@ class Erp::MenusController < ActionController::Base
     as_located_entity.save
     @organization.save
     render json: menus.to_json
+  end
+  def array_list
+    menus = (recs = @organization.as_located_entity.last.try(:receiver)) ? recs.asc('priority_number') : []
+    render json: get_menu(menus).to_json
   end
   private
   def set_erp_org
@@ -100,7 +105,7 @@ class Erp::MenusController < ActionController::Base
   def add_menu attrs
     attrs.deep_symbolize_keys!
     components = attrs[:classification].delete(:component)||[]
-    ret = Act::Classification.new(attrs[:classification])
+    ret = Act::Classification.new(attrs[:classification].merge({ii:{root:@organization.ii.to_s.gsub(' ','.'),extension:@code+=1}}))
     components.each do |component_elm|
       menu = add_menu({classification: component_elm.delete(:classification)})
       component = ret.component.new(component_elm)
@@ -109,5 +114,18 @@ class Erp::MenusController < ActionController::Base
     end
     ret.save
     ret
+  end
+  def get_menu menus,pre_name=nil
+    list ||= []
+    menus.each do |item|
+      next unless (menu = item.classification)
+      name = pre_name ? pre_name+":#{menu.title}" : menu.title.to_s
+      if menu.component.present?
+        list += get_menu(menu.component.asc('priority_number'),name)
+      else
+        list << {id:menu.id.to_s,name:name}
+      end
+    end
+    list
   end
 end
