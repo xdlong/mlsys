@@ -9,7 +9,11 @@ Rails.application.routes.draw do
     confirmations: 'users/confirmations',
     unlocks: 'users/unlocks',
   }
-  resources :users
+  resources :users do
+    get :unlock
+    get :lock
+    get :confirm
+  end
 
   namespace :ms do
     resources :drugs

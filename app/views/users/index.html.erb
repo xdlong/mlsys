@@ -1,4 +1,4 @@
-<div class="panel panel-default">
+<div class="panel panel-primary">
   <!-- Default panel contents -->
   <div class="panel-heading">用户列表</div>
   <div class="panel-body">
@@ -10,9 +10,11 @@
     <thead>
       <tr>
         <th width="5%" style="text-align:left">#</th>
-        <th width="20%" style="text-align:left">Email</th>
-        <th width="20%" style="text-align:left">认证时间</th>
+        <th width="20%" style="text-align:left">Email
+          <span class="pull-right"><button class="btn btn-default btn-xs">锁</button></span>
+        </th>
         <th width="20%" style="text-align:left">锁定时间</th>
+        <th width="20%" style="text-align:left">认证时间</th>
         <th width="25%" style="text-align:left">上次登录</th>
         <th></th>
       </tr>
@@ -21,18 +23,44 @@
       <%- @users.each_with_index do |user,i| %>
       <tr>
         <td class="text_left"><%=i %></td>
-        <td class="text_left"><%=user.email %></td>
-        <td class="text_left"><%=user.confirmed_at ? user.confirmed_at.strftime("%Y-%2m-%2d %H:%M:%S") : '未认证' %></td>
-        <td class="text_left"><%=user.locked_at ? user.locked_at.strftime("%Y-%2m-%2d %H:%M:%S") : '已激活' %></td>
-        <td class="text_left"><%=user.last_sign_in_at.strftime("%Y-%2m-%2d %H:%M:%S") %></td>
+        <td class="text_left"><%=user.email %>
+          <span class="pull-right">
+            <%- if user.locked_at %>
+            <a href="/users/<%=user.id%>/unlock?unlock_token=<%=user.unlock_token%>" class="btn btn-danger btn-xs">
+              <i class="fa fa-lock"></i>
+            </a>
+            <% elsif user.id != current_user.id %>
+            <a href="/users/<%=user.id%>/lock" class="btn btn-success btn-xs">
+              <i class="fa fa-unlock-alt"></i>
+            </a>
+            <% end -%>
+          </span>
+        </td>
+        <td class="text_left"><%=user.locked_at ? user.locked_at.strftime("%Y-%2m-%2d %H:%M:%S") : '未锁定' %></td>
+        <td class="text_left">
+          <%- if user.confirmed_at %>
+            <%=user.confirmed_at.strftime("%Y-%2m-%2d %H:%M:%S")%>
+          <% else %>
+            未认证
+            <a href="/users/<%=user.id%>/confirm?confirmation_token=<%=user.confirmation_token%>" class="btn btn-success btn-xs">
+              <i class="fa fa-paper-plane-o"></i>&nbsp;用户直通车
+            </a>
+          <% end -%>
+        </td>
+        <td class="text_left"><%=user.last_sign_in_at ? user.last_sign_in_at.strftime("%Y-%2m-%2d %H:%M:%S") : '从未登录'%></td>
         <td style="text-align:center">
           <span class="pull-right">
-            <a href="/users/<%=user.id%>/edit">
-              <i class="glyphicon glyphicon-edit"></i>
+            <a href="/users/<%=user.id%>/edit" class="btn btn-default btn-xs">
+              <i class="fa fa-edit"></i>
             </a>
-            <a href="/users/<%=user.id%>">
-              <i class="glyphicon glyphicon-chevron-right"></i>
+            <a href="/users/<%=user.id%>" class="btn btn-default btn-xs">
+              <i class="fa fa-info-circle"></i>
             </a>
+            <form action="/users/<%=user.id%>" method="post" style="display:inline">
+              <input name="_method" type="hidden" value="delete">
+              <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token%>" />
+              <button type="submit" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button>
+            </form>
           </span>
         </td>
       </tr>

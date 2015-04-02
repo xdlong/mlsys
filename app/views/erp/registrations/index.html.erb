@@ -17,7 +17,7 @@
           <form action="/erp/orgs/<%=@organization.id%>/registrations/<%=reg.id%>" method="post" style="display:inline">
             <input name="_method" type="hidden" value="delete">
             <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token%>" />
-            <button type="submit" class="btn btn-danger btn-xs pull-right"><i class="fa fa-remove"></i></button>
+            <button type="submit" class="btn btn-danger btn-xs pull-right"><i class="fa fa-trash"></i></button>
           </form>
           <small><br>操作时间：<%=reg.updated_at.strftime("%Y-%2m-%2d %H:%M:%S")%></small>
         </h3>
@@ -43,3 +43,6 @@
   </div>
   <% end -%>
  </div>
+<div>
+  <td><%= paginate @regs, :window => 3 %></td>
+</div>

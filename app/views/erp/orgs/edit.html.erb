@@ -47,7 +47,7 @@
     <form action="/erp/orgs/<%=@organization.id%>" method="post" style="display:inline">
       <input name="_method" type="hidden" value="delete">
       <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token%>" />
-      <button type="submit" class="btn btn-danger btn-sm" data-toggle="tooltip" title="删除"><i class="fa fa-remove"></i>删除</button>
+      <button type="submit" class="btn btn-danger btn-sm" data-toggle="tooltip" title="删除"><i class="fa fa-trash"></i>删除</button>
     </form>
   </div>
 </div>

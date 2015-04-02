@@ -1,7 +1,5 @@
-<p>您好 <%= @resource.email %>!</p>
+<p>Hello <%= @resource.email %>!</p>
 
-<p>由于您多次登录失败，您在HostDragon Working Office注册的账户已被封锁。</p>
+<p>HostDragon Working Office:</p>
 
-<p>请点击下面的链接以重新激活您的账户：</p>
-
-<p><%= link_to '账户激活', unlock_url(@resource, unlock_token: @token) %></p>
+<p><%= link_to 'unlock', unlock_url(@resource, unlock_token: @token) %></p>

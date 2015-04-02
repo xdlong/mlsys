@@ -4,7 +4,16 @@ class Erp::ProductsController < ActionController::Base
   before_action :set_erp_product, only: [:show, :edit, :update, :destroy]
   layout 'erp'
   def index
-    @products = (@menu ? @menu.subject : Entity::Product.where('ii.root'=>@organization.ii.root)).page(params[:page]).per(params[:per]||20)
+    if (search = params['search']||params[:search]).present?
+      match=Regexp.new search
+      if @menu
+        @products = @menu.subject.page(params[:page]).per(params[:per]||15)
+      else
+        @products = Entity::Product.where('ii.root'=>@organization.ii.root).any_of({'ii.extension'=>match},{name:match},{desc:match}).page(params[:page]).per(params[:per]||15)
+      end
+    else
+      @products = (@menu ? @menu.subject : Entity::Product.where('ii.root'=>@organization.ii.root)).page(params[:page]).per(params[:per]||15)
+    end
     respond_to do |format|
       format.html
       format.json { render json: @products }

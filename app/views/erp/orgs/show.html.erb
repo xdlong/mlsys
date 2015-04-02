@@ -6,7 +6,7 @@
   <div class="form-group">
     <div class="col-sm-4 col-xs-4">
       <div class="input-group">
-        <input type="text" class="form-control" placeholder="搜索" name="search">
+        <input type="text" class="form-control" placeholder="<%= params[:search].present? ? params[:search] : '搜索'%>" name="search">
         <span class="input-group-btn">
           <button type="submit" class="btn btn-info"><span class="fa fa-search fa-lg"></span></button>
         </span>
@@ -38,7 +38,7 @@
     <tbody>
       <%- @products.each_with_index do |product,i| %>
       <tr>
-        <td class="text_left"><%=i %></td>
+        <td class="text_left"><%=i+1 %></td>
         <td class="text_left"><%=product.ii.extension %></td>
         <td class="text_left"><%=product.name %></td>
         <td class="text_left"><%=product.quantity %></td>
@@ -52,15 +52,19 @@
             <a type='button' class='btn btn-default btn-xs' href="/erp/orgs/<%=@organization.id%>/products/<%=product.id%>">
               <i class="fa fa-info-circle"></i>
             </a>
+            <form action="/erp/orgs/<%=@organization.id%>/products/<%=product.id%>" method="post" style="display:inline">
+              <input name="_method" type="hidden" value="delete">
+              <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token%>" />
+              <button type="submit" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button>
+            </form>
           </span>
         </td>
       </tr>
       <% end -%>
     </tbody>
-    <tfoot>
-      <tr>
-        <td><%= paginate @products, :window => 3 %></td>
-      </tr>
-    </tfoot>
   </table>
 </div>
+<div>
+  <td><%= paginate @products, :window => 3 %></td>
+</div>
+

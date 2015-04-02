@@ -4,7 +4,7 @@ class Erp::RegistrationsController < ActionController::Base
   before_action :set_erp_reg, only: [:show, :edit, :update, :destroy]
   layout 'erp'
   def index
-    @regs = Act::Registration.where('ii.root'=>@organization.ii.root,'code.code'=>params[:code]).page(params[:page]).per(params[:per]||20)
+    @regs = Act::Registration.where('ii.root'=>@organization.ii.root,'code.code'=>params[:code]).page(params[:page]).per(params[:per]||12)
     respond_to do |format|
       format.html
       format.json { render json: @regs }
@@ -36,6 +36,7 @@ class Erp::RegistrationsController < ActionController::Base
     @reg = Act::Registration.new(attrs)
     menu = Act::Classification.find(menu_id) if menu_id.present?
     products.each_with_index do |product_elm,i|
+      next unless product_elm[:ii][:extension].present?
       product = Entity::Product.where('ii.root'=>product_elm[:ii][:root],'ii.extension'=>product_elm[:ii][:extension]).last
       product ||= Entity::Product.new(product_elm) if menu_id.present?
       next unless product
