@@ -23,16 +23,18 @@
         </h3>
         <div class="row" style="border-top: 1px solid #eee;border-bottom: 1px solid #eee;">
           <div class="col-sm-2 col-md-2 col-lg-2" style="text-align:center">#</div>
-          <div class="col-sm-6 col-md-6 col-lg-6" style="text-align:left">型号</div>
-          <div class="col-sm-4 col-md-4 col-lg-4" style="text-align:center">数量</div>
+          <div class="col-sm-3 col-md-3 col-lg-3" style="text-align:left">型号</div>
+          <div class="col-sm-4 col-md-4 col-lg-4" style="text-align:left">名称</div>
+          <div class="col-sm-3 col-md-3 col-lg-3" style="text-align:center">数量</div>
         </div>
         <ul class="select2-results" role="listbox" style="max-height: 80px;min-height: 80px;border-bottom: 1px solid #eee;">
           <%- reg.subject.each_with_index do |subject,i| %>
           <li role="presentation">
             <div class="row">
               <div class="col-sm-2 col-md-2 col-lg-2"><%=i+1%></div>
-              <div class="col-sm-6 col-md-6 col-lg-6"><%=subject.manufactured_product.ii.extension%></div>
-              <div class="col-sm-4 col-md-4 col-lg-4" style="text-align:right"><%=subject.manufactured_product.quantity%></div>
+              <div class="col-sm-3 col-md-3 col-lg-3"><%=subject.manufactured_product.ii.extension%></div>
+              <div class="col-sm-4 col-md-4 col-lg-4"><%=subject.manufactured_product.name%></div>
+              <div class="col-sm-3 col-md-3 col-lg-3" style="text-align:right"><%=subject.manufactured_product.quantity%></div>
             </div>
           </li>
           <% end -%>

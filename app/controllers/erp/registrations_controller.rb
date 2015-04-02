@@ -4,7 +4,7 @@ class Erp::RegistrationsController < ActionController::Base
   before_action :set_erp_reg, only: [:show, :edit, :update, :destroy]
   layout 'erp'
   def index
-    @regs = Act::Registration.where('ii.root'=>@organization.ii.root,'code.code'=>params[:code]).page(params[:page]).per(params[:per]||8)
+    @regs = Act::Registration.where('ii.root'=>@organization.ii.root,'code.code'=>/#{params[:code]}/).desc(:created_at).page(params[:page]).per(params[:per]||8)
     respond_to do |format|
       format.html
       format.json { render json: @regs }
