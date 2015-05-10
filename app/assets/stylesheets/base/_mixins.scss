@@ -1,3 +1,5 @@
+@import "bootstrap/mixins";
+
 @mixin transition-all($times) {
 	-webkit-transition: all $times ease;
 	   -moz-transition: all $times ease;

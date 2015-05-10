@@ -1,0 +1,19 @@
+/* line 2, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_table.scss */
+.hovershow {
+  visibility: hidden;
+}
+
+/* line 5, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_table.scss */
+tr:hover .hovershow {
+  visibility: visible;
+}
+
+/* line 9, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_table.scss */
+.checkw {
+  width: 30px;
+}
+
+/* line 13, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_table.scss */
+tr > td:last-child > span > a {
+  padding-right: 3.75px;
+}

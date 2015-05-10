@@ -1,0 +1,84 @@
+/* line 2, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_typeahead.scss */
+.tt-dropdown-menu, .gist {
+  text-align: left;
+}
+
+/* line 5, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_typeahead.scss */
+.twitter-typeahead {
+  width: 100%;
+}
+/* line 7, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_typeahead.scss */
+.twitter-typeahead:after {
+  content: "\f0dd";
+  position: absolute;
+  top: 5px;
+  right: 8px;
+  display: inline-block;
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* line 21, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_typeahead.scss */
+.typeahead {
+  background-color: #FFFFFF;
+}
+
+/* line 24, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_typeahead.scss */
+.tt-input {
+  width: 100%;
+}
+
+/* line 27, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_typeahead.scss */
+.tt-hint {
+  color: #999999;
+}
+
+/* line 30, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_typeahead.scss */
+.tt-dropdown-menu {
+  background-color: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  margin-top: 8px;
+  width: 100%;
+  padding: 5px 0;
+}
+
+/* line 38, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_typeahead.scss */
+.tt-dataset-states {
+  width: 100%;
+}
+
+/* line 41, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_typeahead.scss */
+.tt-suggestions {
+  width: 100%;
+  display: table;
+}
+
+/* line 45, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_typeahead.scss */
+.tt-suggestion {
+  padding: 3px 8px 3px 8px;
+  width: 100%;
+}
+/* line 48, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_typeahead.scss */
+.tt-suggestion > div {
+  display: inline-block;
+}
+/* line 50, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_typeahead.scss */
+.tt-suggestion > div:first-child {
+  padding-right: 8px;
+}
+
+/* line 55, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_typeahead.scss */
+.tt-suggestion.tt-cursor {
+  background-color: #0097CF;
+  color: #FFFFFF;
+}
+
+/* line 59, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_typeahead.scss */
+.tt-suggestion p {
+  margin: 0;
+}

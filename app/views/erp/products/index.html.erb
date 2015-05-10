@@ -2,7 +2,7 @@
   <i class="fa fa-indent fa-fw fa-4x"></i>
   <h3>产品列表<small>详情</small></h3>
 </div>
-<form class="form-horizontal" accept-charset="UTF-8" action="/erp/orgs/<%=@organization.id%>/products" method="get">
+<form class="form-horizontal" accept-charset="UTF-8" action="/erp/orgs/<%=@organization.id%>/<%=@menu ? "menus/#{@menu.id}/" : nil%>products" method="get">
     <div class="form-group">
       <div class="col-sm-4 col-xs-4">
         <div class="input-group">
@@ -48,13 +48,13 @@
         <td class="text_left"><%=product.updated_at.strftime("%Y-%2m-%2d %H:%M:%S") %></td>
         <td style="text-align:center">
           <span class="pull-right">
-            <a type='button' class='btn btn-default btn-xs' href="/erp/orgs/<%=@organization.id%>/products/<%=product.id%>/edit">
+            <a type='button' class='btn btn-default btn-xs' href="/erp/orgs/<%=@organization.id%>/<%=@menu ? "menus/#{@menu.id}/" : nil%>products/<%=product.id%>/edit">
               <i class="fa fa-pencil-square-o"></i>
             </a>
-            <a type='button' class='btn btn-default btn-xs' href="/erp/orgs/<%=@organization.id%>/products/<%=product.id%>">
+            <a type='button' class='btn btn-default btn-xs' href="/erp/orgs/<%=@organization.id%>/<%=@menu ? "menus/#{@menu.id}/" : nil%>products/<%=product.id%>">
               <i class="fa fa-info-circle"></i>
             </a>
-            <form action="/erp/orgs/<%=@organization.id%>/products/<%=product.id%>" method="post" style="display:inline">
+            <form action="/erp/orgs/<%=@organization.id%>/<%=@menu ? "menus/#{@menu.id}/" : nil%>products/<%=product.id%>" method="post" style="display:inline">
               <input name="_method" type="hidden" value="delete">
               <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token%>" />
               <button type="submit" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button>

@@ -5,7 +5,7 @@ module Erp::MenusHelper
     menus.asc('priority_number').each_with_index do |item,i|
       if menu = item.classification
         ret <<
-        "<a href='/erp/orgs/#{org.id}/menus/#{menu.id}/products' class='list-group-item'>
+        "<a href='#{menu.component.present? ? '#' : "/erp/orgs/#{org.id}/menus/#{menu.id}/products"}' class='list-group-item'>
           <i class='fa fa-hand-o-right'></i>
           <span>#{menu.title}</span>
           #{menu.component.present? ? "<i class='fa fa-angle-double-right'></i>" : "<span class='badge'>#{menu.subject.size}</span>"}

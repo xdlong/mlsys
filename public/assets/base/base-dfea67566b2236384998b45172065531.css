@@ -1,0 +1,985 @@
+@charset "UTF-8";
+/**
+	页面标题
+	文件名：_pagehead.scss
+	例子：			
+	<div class="page-header">
+    <i class="fa fa-file-text-o fa-fw fa-4x"></i>
+    <h3>主标题<small>副标题</small></h3>
+  </div>	
+	作者：龙应菊
+	更新时间：2014-06-10
+*/
+/* line 13, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_pagehead.scss */
+.page-header {
+  font-family: Consolas, "Microsoft YaHei", "Microsoft JhengHei";
+  padding: 0;
+  margin: 0 0 16px 0;
+}
+/* line 17, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_pagehead.scss */
+.page-header > i {
+  margin-left: 0px;
+}
+/* line 20, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_pagehead.scss */
+.page-header > h3 {
+  margin: 0;
+  display: inline-block;
+  width: -webkit-calc(100% - 80px);
+  width: -moz-calc(100% - 80px);
+  width: calc(100% - 80px);
+}
+/* line 26, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_pagehead.scss */
+.page-header > h3 > small {
+  margin-top: 8px;
+  display: block;
+  font-size: 14px;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/**
+	单复选按钮
+	文件名：_checkbox.scss
+	例子：
+	<label class="check-label">
+		<input type="checkbox" value="" name=""><i></i>内容
+	</label>
+	<label class="check-label">
+		<input type="radio" value="" name=""><i></i>内容
+	</label>
+	作者：龙应菊
+	更新时间：2014-06-10
+*/
+/* line 15, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_checkbox.scss */
+.check-label {
+  margin-bottom: 0;
+  position: relative;
+  padding-left: 1.8em;
+  min-width: 14.4px;
+  min-height: 12px;
+  font-weight: normal;
+}
+/* line 22, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_checkbox.scss */
+.check-label > input {
+  margin-top: 0;
+  display: none;
+}
+/* line 26, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_checkbox.scss */
+.check-label > i {
+  position: absolute;
+  left: 0;
+}
+/* line 30, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_checkbox.scss */
+.check-label > input[type="checkbox"] ~ i:after {
+  content: "\f096";
+  display: inline-block;
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 1.25em;
+  line-height: 0.75em;
+  vertical-align: -15%;
+  color: #999999;
+}
+/* line 33, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_checkbox.scss */
+.check-label > input[type="radio"] ~ i:after {
+  content: "\f10c";
+  display: inline-block;
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 1.25em;
+  line-height: 0.75em;
+  vertical-align: -15%;
+  color: #999999;
+}
+/* line 36, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_checkbox.scss */
+.check-label > input[type="checkbox"]:checked ~ i:after {
+  content: "\f046";
+  display: inline-block;
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 1.22em;
+  line-height: 0.75em;
+  vertical-align: -15%;
+  color: #428bca;
+  opacity: 0.8;
+}
+/* line 40, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_checkbox.scss */
+.check-label > input[type="radio"]:checked ~ i:after {
+  content: "\f192";
+  display: inline-block;
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 1.22em;
+  line-height: 0.75em;
+  vertical-align: -15%;
+  color: #428bca;
+  opacity: 0.8;
+}
+/* line 44, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_checkbox.scss */
+.check-label input[type="checkbox"]:disabled ~ i:after {
+  opacity: 0.6;
+  background-color: #dddddd;
+}
+
+/**
+	侧边栏
+	文件名：_sidenav.scss
+	说明：
+		1.依赖于DIYscript.js
+		2.需要自己写js代码给相应链接加上类 link
+	例子：
+			<div id="currentMedia"></div> // 测试屏幕大小使用，id不可更改，直接放在body下,不要限制宽度大小
+			<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+			  ...
+			  <a class="navbar-brand" href="#"><i class="fa fa-bars fa-lg sidenavBtn"></i></a> // 在导航条brand里加入侧边栏开关图标，sidenavBtn 
+			  ...
+			</nav>
+			<div class="container">
+			  <div class="list-group sidenav"> //主要class sidenav
+			    // 只有一级菜单 
+			    <a href="#" class="list-group-item link"><i class="fa fa-user fa-lg"></i><span>菜单一</span></a>// link：显示激活状态 
+			    <a href="#" class="list-group-item"><i class="fa fa-user fa-lg"></i><span>菜单二</span></a>
+			    <a href="#" class="list-group-item"><i class="fa fa-user fa-lg"></i><span>菜单三</span></a>
+			    // end 
+
+			    // 有二级菜单 
+			    <a href="#" class="list-group-item"><i class="fa fa-user fa-lg"></i><span>菜单一</span></a>
+			    <div class="list-group open">// open：二级菜单展开状态 
+			      <a href="#" class="list-group-item link"><i class="fa fa-user fa-lg"></i><span>菜单一(1)</span></a>// link：显示激活状态 
+			      <a href="#" class="list-group-item"><i class="fa fa-user fa-lg"></i><span>菜单一(2)</span></a>
+			    </div>
+
+			    <a href="#" class="list-group-item"><i class="fa fa-user fa-lg"></i><span>菜单二</span></a>
+			    <div class="list-group">
+			      <a href="#" class="list-group-item"><i class="fa fa-user fa-lg"></i><span>菜单二(1)</span></a>
+			      <a href="#" class="list-group-item"><i class="fa fa-user fa-lg"></i><span>菜单二(2)</span></a>
+			    </div>
+
+			    // end 
+			    </div>
+			  </div>
+			  <div class="mainContent">
+			    // 主要业务代码 
+			  </div>
+			</div>
+			// 侧边栏 end 
+			
+			// 不需要侧边栏时 
+			<div class="container">
+			  // 主要业务代码 
+			</div>
+	作者：龙应菊
+	更新时间：2014-06-10
+*/
+/* line 52, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+#currentMedia {
+  display: none;
+}
+
+/* line 55, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+a.list-group-item.active, a.list-group-item.active:hover, a.list-group-item.active:focus {
+  z-index: 2;
+  color: #555555;
+  background-color: transparent;
+  border: 1px solid #dddddd;
+}
+
+/* line 61, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+.sidenavBtn {
+  display: none;
+}
+
+/* line 67, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+.sidenavBtn,
+.sidenav,
+.list-group,
+.mainContent {
+  z-index: 1000;
+  -webkit-transition: all 0.25s ease;
+  -moz-transition: all 0.25s ease;
+  -ms-transition: all 0.25s ease;
+  -o-transition: all 0.25s ease;
+  transition: all 0.25s ease;
+}
+
+/* line 71, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+.sidenav {
+  width: 180px;
+  float: left;
+  margin-right: 15px;
+}
+/* line 76, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+.sidenav .list-group-item > span {
+  margin-left: 5px;
+}
+/* line 78, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+.sidenav .list-group-item > span + i {
+  float: right;
+  margin-top: 4px;
+  margin-right: -3px;
+}
+/* line 82, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+.sidenav .list-group-item > span + i.up {
+  -webkit-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+/* line 88, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+.sidenav > .list-group-item.link {
+  color: #428bca;
+}
+/* line 91, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+.sidenav > .list-group-item.link:before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2px;
+  height: 100%;
+  background-color: #428bca;
+  content: "";
+}
+/* line 100, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+.sidenav > .list-group {
+  position: absolute;
+  display: none;
+  margin-bottom: 0;
+  margin-top: -41px;
+  left: 195px;
+}
+/* line 106, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+.sidenav > .list-group > .sidenav {
+  left: 180px;
+}
+/* line 109, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+.sidenav > .list-group > .list-group-item {
+  padding-left: 22.5px;
+}
+/* line 112, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+.sidenav > .list-group > .list-group-item.link {
+  color: #428bca;
+}
+/* line 115, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+.sidenav > .list-group > .list-group-item.link:before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 100%;
+  background-color: #428bca;
+  content: "";
+}
+/* line 124, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+.sidenav > .list-group > .list-group-item:last-child {
+  border-bottom: 0 solid #fff;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+/* line 128, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+.sidenav > .list-group > .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+/* line 132, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+.sidenav > .list-group.open {
+  display: block;
+}
+/* line 135, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+.sidenav + .mainContent {
+  float: left;
+  width: -webkit-calc(100% - 180px - 15px);
+  widt-moz-h: calc(100% - 180px - 15px);
+  width: calc(100% - 180px - 15px);
+}
+
+@media screen and (min-width: 768px) and (max-width: 1200px) {
+  /* line 143, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+  #currentMedia {
+    min-width: 768px;
+    max-width: 1200px;
+  }
+
+  /* line 147, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+  .sidenav {
+    width: 43px;
+  }
+  /* line 149, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+  .sidenav > .list-group-item {
+    position: relative;
+  }
+  /* line 151, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+  .sidenav > .list-group-item > *:not(:first-child) {
+    display: none;
+  }
+  /* line 154, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+  .sidenav > .list-group-item > span {
+    position: absolute;
+    width: 137px;
+    top: -1px;
+    margin-left: 0;
+    left: 41px;
+    padding: 6.5px 9.75px;
+    background-color: whitesmoke;
+    border: 1px solid #dddddd;
+    z-index: 1000;
+  }
+  /* line 165, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+  .sidenav > .list-group-item > .list-group {
+    position: absolute;
+    width: 136px;
+    left: 42px;
+    top: 30px;
+    z-index: 1000;
+  }
+  /* line 171, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+  .sidenav > .list-group-item > .list-group > .list-group-item {
+    padding-left: 9.75px;
+  }
+  /* line 174, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+  .sidenav > .list-group-item > .list-group > .list-group-item:first-child {
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+  }
+  /* line 177, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+  .sidenav > .list-group-item > .list-group > .list-group-item:last-child {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  /* line 182, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+  .sidenav > .list-group-item:hover > span {
+    display: block;
+  }
+  /* line 185, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+  .sidenav > .list-group-item:hover > .list-group {
+    display: block;
+  }
+  /* line 188, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+  .sidenav + .mainContent {
+    width: -webkit-calc(100% - 43px - 15px);
+    width: -moz-calc(100% - 43px - 15px);
+    width: calc(100% - 43px - 15px);
+  }
+}
+@media screen and (max-width: 768px) {
+  /* line 196, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+  #currentMedia {
+    max-width: 768px;
+  }
+
+  /* line 199, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+  .sidenavBtn {
+    display: inline-block;
+  }
+  /* line 201, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+  .sidenavBtn.open {
+    color: #428bca;
+  }
+
+  /* line 205, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+  .sidenav {
+    width: 180px;
+    margin-left: -205px;
+  }
+  /* line 208, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+  .sidenav + .mainContent {
+    display: inline-block;
+    width: 100%;
+  }
+  /* line 212, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+  .sidenav.open {
+    margin-left: 0;
+  }
+  /* line 214, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+  .sidenav.open + .mainContent {
+    width: -webkit-calc(100% - 180px - 15px);
+    width: -moz-calc(100% - 180px - 15px);
+    width: calc(100% - 180px - 15px);
+  }
+}
+/* line 223, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+html {
+  height: 100%;
+}
+
+/* line 226, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+body {
+  min-height: 100%;
+}
+
+/* line 229, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+.container {
+  height: calc(100% - 40px - 2px);
+}
+
+/* line 237, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+.mainContent {
+  height: calc(100% - 15px);
+}
+
+/* line 2, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_table.scss */
+.hovershow {
+  visibility: hidden;
+}
+
+/* line 5, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_table.scss */
+tr:hover .hovershow {
+  visibility: visible;
+}
+
+/* line 9, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_table.scss */
+.checkw {
+  width: 30px;
+}
+
+/* line 13, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_table.scss */
+tr > td:last-child > span > a {
+  padding-right: 3.75px;
+}
+
+/* line 2, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_panel.scss */
+.panel .panel-body .pull-right {
+  margin-right: 9.75px;
+}
+
+/* line 6, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_panel.scss */
+.panel .panel-body + .table tr > td:first-child,
+.panel .panel-body + .table tr > th:first-child {
+  padding-left: 9.75px;
+}
+
+/* line 10, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_panel.scss */
+.panel .panel-body + .table tr > td:last-child,
+.panel .panel-body + .table tr > th:last-child {
+  padding-right: 9.75px;
+}
+
+/**
+	页面标题
+	文件名：wizard.scss	
+	作者：龙应菊
+	更新时间：2014-06-10
+	使用说明：
+		1.依赖DIYscript.js
+		2.主要使用在新建页面上
+	例子：
+		1.箭头类型：
+			<ul class="wizard arrow justed">
+			  <li class="active"><a href="#home" data-toggle="tab"><span class="badge">1</span>步骤一</a></li>
+			  <li><a href="#red" data-toggle="tab"><span class="badge">2</span>步骤二</a></li>
+			  <li><a href="#green" data-toggle="tab"><span class="badge">3</span>步骤三</a></li>
+			</ul>
+			<div class="tab-content">
+				<div class="tab-pane active" id="home">
+				</div>
+				<div class="tab-pane" id="red">
+				</div>
+				<div class="tab-pane" id="green">
+				</div>
+				<div class="wizardFooter">
+					  <button type="button" class="btn btn-default btn-mini btnPrev" data-toggle="tooltip" data-placement="top" title="" data-original-title="上一步"><i class="fa fa-chevron-left fa-lg"></i></button>
+					  <button type="button" class="btn btn-default btn-mini btnNext" data-toggle="tooltip" data-placement="top" title="" data-original-title="下一步"><i class="fa fa-chevron-right fa-lg"></i></button>
+					  <button type="submit" class="btn btn-primary btn-mini btnSave save" data-toggle="tooltip" data-placement="top" title="" data-original-title="保存"><i class="fa fa-floppy-o fa-lg"></i></button>
+					  <a href="/admin/users" type="button" class="btn btn-default btnBack" data-toggle="tooltip" data-placement="top" title="" data-original-title="取消"><i class="fa fa-undo fa-lg"></i></a>
+				</div>
+			</div>
+			
+		2.圆形类型：
+			<div class="panel panel-default wizard-panel">
+			  	<div class="panel-heading">
+			    	<div class="panel-title">新建</div>
+			  	</div>
+				<ul class="wizard circle justed">
+				  <li class="active"><a href="#home" data-toggle="tab"><span class="badge">1</span><span>步骤一</span></a></li>
+				  <li><a href="#red" data-toggle="tab"><span class="badge">2</span><span>步骤二</span></a></li>
+				  <li><a href="#yellow" data-toggle="tab"><span class="badge">3</span><span>步骤三</span></a></li>
+				  <li><a href="#green" data-toggle="tab"><span class="badge">3</span><span>步骤四</span></a></li>
+				</ul>
+				<div class="tab-content">
+					<div class="tab-pane active" id="home">
+					</div>
+					<div class="tab-pane" id="red">
+					</div>
+					<div class="tab-pane" id="yellow">
+					</div>
+					<div class="tab-pane" id="green">
+					</div>
+				  	<div class="wizardFooter">
+				  		<button type="button" class="btn btn-default btn-mini btnPrev" data-toggle="tooltip" data-placement="top" title="" data-original-title="上一步"><i class="fa fa-chevron-left fa-lg"></i></button>
+				  		<button type="button" class="btn btn-default btn-mini btnNext" data-toggle="tooltip" data-placement="top" title="" data-original-title="下一步"><i class="fa fa-chevron-right fa-lg"></i></button>
+				  		<button type="submit" class="btn btn-primary btn-mini btnSave save" data-toggle="tooltip" data-placement="top" title="" data-original-title="保存"><i class="fa fa-floppy-o fa-lg"></i></button>
+				  		<a href="/admin/users" type="button" class="btn btn-default btnBack" data-toggle="tooltip" data-placement="top" title="" data-original-title="取消"><i class="fa fa-undo fa-lg"></i></a>
+				  	</div>
+				</div>
+			</div>
+			// 给.tab-content设置高度 
+			// 如：.tab-content {
+					height:-webkit-calc(100% - 200px);
+					height:-moz-calc(100% - 200px);
+					height:calc(100% - 200px);
+				} 
+*/
+/* line 72, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 14px;
+}
+/* line 79, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard > li {
+  margin: 0;
+}
+/* line 81, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard > li > a {
+  display: block;
+  color: #555555;
+}
+/* line 85, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard > li > a:hover, .wizard > li > a:focus {
+  text-decoration: none;
+}
+/* line 90, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard > li:first-child {
+  border-top-left-radius: 4px;
+}
+/* line 93, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard > li:last-child {
+  border-top-right-radius: 4px;
+}
+/* line 97, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard > li.completeStep > a {
+  color: #3c763d;
+}
+/* line 99, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard > li.completeStep > a:before {
+  border-left-color: #dff0d8;
+}
+/* line 105, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard > li.active > a {
+  color: #31708f;
+}
+/* line 107, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard > li.active > a:before {
+  border-left-color: #d9edf7;
+}
+/* line 112, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard.justed {
+  display: table;
+}
+/* line 114, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard.justed > li {
+  float: none;
+  display: table-cell;
+}
+/* line 119, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard + .tab-content {
+  display: block;
+  margin: 0;
+  padding: 9.75px;
+  padding-bottom: 0;
+  position: relative;
+}
+/* line 125, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard + .tab-content > .wizardFooter {
+  position: absolute;
+  text-align: right;
+  bottom: -42px;
+  right: 0;
+}
+/* line 130, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard + .tab-content > .wizardFooter .btnSave {
+  display: none;
+}
+/* line 134, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard + .tab-content > .tab-pane:first-of-type.active ~ .wizardFooter .btnPrev {
+  display: none;
+}
+/* line 137, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard + .tab-content > .tab-pane:nth-last-child(2).active ~ .wizardFooter .btnNext {
+  display: none;
+}
+/* line 140, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard + .tab-content > .tab-pane:nth-last-child(2).active ~ .wizardFooter .btnSave {
+  display: inline-block;
+}
+/* line 144, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard + form .tab-content {
+  display: block;
+  margin: 0;
+  padding: 9.75px;
+  padding-bottom: 0;
+  position: relative;
+}
+/* line 150, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard + form .tab-content > .wizardFooter {
+  position: absolute;
+  text-align: right;
+  bottom: -30px;
+  right: 0;
+}
+/* line 155, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard + form .tab-content > .wizardFooter .btnSave {
+  display: none;
+}
+/* line 159, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard + form .tab-content > .tab-pane:first-of-type.active ~ .wizardFooter .btnPrev {
+  display: none;
+}
+/* line 162, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard + form .tab-content > .tab-pane:nth-last-child(2).active ~ .wizardFooter .btnNext {
+  display: none;
+}
+/* line 165, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard + form .tab-content > .tab-pane:nth-last-child(2).active ~ .wizardFooter .btnSave {
+  display: inline-block;
+}
+
+/* line 171, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard.arrow > li {
+  border: 1px solid #dddddd;
+  background-color: #f0f0f0;
+}
+/* line 174, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard.arrow > li > a {
+  padding: 8px 9.75px;
+}
+/* line 177, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard.arrow > li > a:hover, .wizard.arrow > li > a:focus {
+  background-color: #eeeeee;
+}
+/* line 180, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard.arrow > li > a > .badge {
+  padding: 0.3em 0.7em;
+  margin-right: 1em;
+}
+/* line 187, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard.arrow > li:not(:last-child) > a {
+  position: relative;
+}
+/* line 189, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard.arrow > li:not(:last-child) > a:after {
+  position: absolute;
+  top: -14px;
+  right: -28px;
+  content: "";
+  width: 0;
+  height: 0;
+  border-top: 32px solid transparent;
+  border-left: 40px solid white;
+  border-bottom: 32px solid transparent;
+  z-index: 3;
+}
+/* line 201, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard.arrow > li:not(:last-child) > a:before {
+  position: absolute;
+  top: -1px;
+  right: -12px;
+  content: "";
+  width: 0;
+  height: 0;
+  border-top: 19px solid transparent;
+  border-left: 24px solid #f0f0f0;
+  border-bottom: 19px solid transparent;
+  z-index: 4;
+}
+/* line 215, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard.arrow > li.completeStep {
+  border-color: #d6e9c6;
+  background-color: #dff0d8;
+}
+/* line 218, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard.arrow > li.completeStep > a {
+  background-color: #dff0d8;
+}
+/* line 220, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard.arrow > li.completeStep > a:before {
+  border-left-color: #dff0d8;
+}
+/* line 223, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard.arrow > li.completeStep > a > .badge {
+  background-color: #3c763d;
+}
+/* line 228, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard.arrow > li.active {
+  border-color: #bce8f1;
+  background-color: #d9edf7;
+}
+/* line 231, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard.arrow > li.active > a {
+  background-color: #d9edf7;
+}
+/* line 233, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard.arrow > li.active > a:before {
+  border-left-color: #d9edf7;
+}
+/* line 236, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard.arrow > li.active > a > .badge {
+  background-color: #31708f;
+}
+/* line 241, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard.arrow > li:not(:first-child) {
+  padding-left: 26px;
+}
+/* line 244, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard.arrow + .tab-content {
+  border: 1px solid #dddddd;
+  border-top-color: transparent;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+/* line 249, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard.arrow + form .tab-content {
+  border: 1px solid #dddddd;
+  border-top-color: transparent;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+/* line 255, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard.circle {
+  padding-top: 9.75px;
+}
+/* line 258, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard.circle > li > a {
+  text-align: center;
+  vertical-align: middle;
+}
+/* line 261, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard.circle > li > a > .badge {
+  border-bottom-right-radius: 50%;
+  border-bottom-left-radius: 50%;
+  border-top-right-radius: 50%;
+  border-top-left-radius: 50%;
+  padding: 0.8em 1em;
+  font-size: 14px;
+  color: #555555;
+  position: relative;
+  z-index: 10;
+  background-color: transparent;
+  border: 4px solid #dddddd;
+}
+/* line 272, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard.circle > li > a > *:not(.badge) {
+  margin-top: 5px;
+  display: block;
+}
+/* line 279, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard.circle > li:not(:first-child) > a {
+  position: relative;
+}
+/* line 281, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard.circle > li:not(:first-child) > a:before {
+  position: absolute;
+  content: "";
+  width: -webkit-calc(50% - 1.5em);
+  width: -moz-calc(50% - 1.5em);
+  width: calc(50% - 1.5em);
+  height: 5px;
+  top: 28%;
+  left: 0;
+  background-color: #dddddd;
+}
+/* line 295, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard.circle > li:not(:last-child) > a {
+  position: relative;
+}
+/* line 297, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard.circle > li:not(:last-child) > a:after {
+  position: absolute;
+  content: "";
+  width: -webkit-calc(50% - 1.5em);
+  width: -moz-calc(50% - 1.5em);
+  width: calc(50% - 1.5em);
+  height: 5px;
+  top: 28%;
+  right: 0;
+  background-color: #dddddd;
+}
+/* line 312, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard.circle > li.completeStep > a > .badge {
+  border-color: #bbdba1;
+}
+/* line 315, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard.circle > li.completeStep > a:after {
+  background-color: #bbdba1;
+}
+/* line 318, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard.circle > li.completeStep > a:before {
+  background-color: #bbdba1;
+}
+/* line 325, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard.circle > li.active > a > .badge {
+  border-color: #67cbdf;
+}
+/* line 328, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard.circle > li.active > a:after {
+  background-color: #67cbdf;
+}
+/* line 331, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard.circle > li.active > a:before {
+  background-color: #67cbdf;
+}
+
+/* line 2, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_typeahead.scss */
+.tt-dropdown-menu, .gist {
+  text-align: left;
+}
+
+/* line 5, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_typeahead.scss */
+.twitter-typeahead {
+  width: 100%;
+}
+/* line 7, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_typeahead.scss */
+.twitter-typeahead:after {
+  content: "\f0dd";
+  position: absolute;
+  top: 5px;
+  right: 8px;
+  display: inline-block;
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* line 21, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_typeahead.scss */
+.typeahead {
+  background-color: #FFFFFF;
+}
+
+/* line 24, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_typeahead.scss */
+.tt-input {
+  width: 100%;
+}
+
+/* line 27, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_typeahead.scss */
+.tt-hint {
+  color: #999999;
+}
+
+/* line 30, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_typeahead.scss */
+.tt-dropdown-menu {
+  background-color: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  margin-top: 8px;
+  width: 100%;
+  padding: 5px 0;
+}
+
+/* line 38, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_typeahead.scss */
+.tt-dataset-states {
+  width: 100%;
+}
+
+/* line 41, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_typeahead.scss */
+.tt-suggestions {
+  width: 100%;
+  display: table;
+}
+
+/* line 45, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_typeahead.scss */
+.tt-suggestion {
+  padding: 3px 8px 3px 8px;
+  width: 100%;
+}
+/* line 48, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_typeahead.scss */
+.tt-suggestion > div {
+  display: inline-block;
+}
+/* line 50, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_typeahead.scss */
+.tt-suggestion > div:first-child {
+  padding-right: 8px;
+}
+
+/* line 55, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_typeahead.scss */
+.tt-suggestion.tt-cursor {
+  background-color: #0097CF;
+  color: #FFFFFF;
+}
+
+/* line 59, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_typeahead.scss */
+.tt-suggestion p {
+  margin: 0;
+}
+
+/**
+	关于form样式
+	文件名：_form.scss
+	作者：龙应菊
+	更新时间：2014-06-10
+*/
+/*
+	输入框带按钮样式
+	例子：
+		<div class="input-unit">
+		  <input type="text" class="form-control" placeholder="Search" name="search" for="resources" value="" autofocus>
+		  <button type="button" class="btn btn-default" id="searchBtn"><i class="fa fa-search fa-fw fa-lg"></i></button>
+		</div>
+*/
+/* line 17, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_form.scss */
+.input-unit {
+  position: relative;
+}
+/* line 19, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_form.scss */
+.input-unit > input {
+  padding-right: 2.5em;
+}
+/* line 21, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_form.scss */
+.input-unit > input:focus + .btn {
+  color: #66afe9;
+}
+/* line 25, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_form.scss */
+.input-unit > .btn {
+  position: absolute;
+  top: 2px;
+  right: 1px;
+  border: 0 solid #fff;
+  padding: 2.8px 6.8px;
+  font-size: 12px;
+  line-height: 1.33333;
+  border-radius: 4px;
+  color: #999;
+}
+/* line 35, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_form.scss */
+.input-unit > .btn:hover, .input-unit > .btn:focus, .input-unit > .btn:active, .input-unit > .btn.active {
+  color: #999;
+  background-color: #fff;
+  border-color: #fff;
+  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0);
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0);
+}
+
+/* 针对Chrome图标不清晰 */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  @font-face {
+    font-family: 'FontAwesome';
+    src: url("/assets/fontawesome/fontawesome-webfont.eot?v=4.1.0");
+    src: url("/assets/fontawesome/fontawesome-webfont.eot?#iefix&v=4.1.0") format("embedded-opentype"), url("/assets/fontawesome/fontawesome-webfont.svg?v=4.1.0") format("svg"), url("/assets/fontawesome/fontawesome-webfont.woff?v=4.1.0") format("woff"), url("/assets/fontawesome/fontawesome-webfont.ttf?v=4.1.0") format("truetype");
+}
+}
+/* end */
+/* line 23, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/base.scss */
+article {
+  margin-bottom: 16px;
+}

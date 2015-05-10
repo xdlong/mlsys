@@ -1,0 +1,3 @@
+@media print
+.toprint {display:block}
+.noprint {display:hidden}

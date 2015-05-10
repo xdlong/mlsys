@@ -4,7 +4,7 @@ class Erp::ProductsController < ActionController::Base
   before_action :set_erp_product, only: [:show, :edit, :update, :destroy]
   layout 'erp'
   def index
-    if (search = params['search']||params[:search]).present?
+    if (search = params[:search]).present?
       match=Regexp.new search
       if @menu
         @products = @menu.subject.page(params[:page]).per(params[:per]||15)
@@ -19,13 +19,6 @@ class Erp::ProductsController < ActionController::Base
       format.json { render json: @products }
     end
   end
-  def new
-    @product = Entity::Product.new()
-    respond_to do |format|
-      format.html
-      format.json { render json: @product }
-    end
-  end
   def show
     respond_to do |format|
       format.html
@@ -38,25 +31,12 @@ class Erp::ProductsController < ActionController::Base
       format.json { render json: @product }
     end
   end
-  def create
-    @product = Role::ManufacturedProduct.new(erp_product_params)
-    @product.save
-    subject = @menu.subject.new()
-    subject.manufactured_product = @product
-    respond_to do |format|
-      if @menu.save
-        format.html { redirect_to action:'index'}
-        format.json { render json: @product }
-      else
-        format.html { render 'new'}
-        format.json { render json: @product }
-      end
-    end
-  end
   def update
-    @product = Role::ManufacturedProduct.find(params[:id])
+    product_params = erp_product_params
     respond_to do |format|
-      if @product.update_attributes(erp_product_params)
+      if @product.update_attributes(product_params)
+        product_params.delete(:quantity)
+        @product.playeds.each{|role| role.update_attributes(product_params)}
         format.html { redirect_to action:'index'}
         format.json { render json: @product }
       else
@@ -106,19 +86,6 @@ class Erp::ProductsController < ActionController::Base
     @product = Entity::Product.find(params[:id])
   end
   def erp_product_params
-    attrs = params.require(:erp_product).permit(:name, :desc, :product_id, quantity:[:value, :unit], code: [:code, :display_name, :code_system], ii: [:root, :extension]).deep_symbolize_keys
-    {
-      ii: attrs[:ii],
-      code: attrs[:code],
-      name: attrs[:name],
-      desc: attrs[:desc],
-      product: {
-        id:attrs[:product_id],
-        ii:attrs[:ii],
-        code: attrs[:code],
-        name: attrs[:name],
-        quantity: attrs[:quantity]
-      }
-    }
+    params.require(:erp_product).permit(:name, :desc, quantity:[:value, :unit], code: [:code, :display_name, :code_system], ii: [:root, :extension]).deep_symbolize_keys
   end
 end

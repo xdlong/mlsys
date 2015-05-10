@@ -67,7 +67,7 @@ function get_products_data(obj,source){
     // 显示模板
     templates: {
       empty: '<a>未找到</a>',
-      suggestion: Handlebars.compile('<div class="row" style="width: 100%;"><div class="col-sm-6 col-md-6 col-lg-6">{{ii}}</div><div class="col-sm-6 col-md-6 col-lg-6">{{qty}}</div></div>')
+      suggestion: Handlebars.compile('<div class="row" style="width: 100%;"><div class="col-sm-6 col-md-6 col-lg-6">{{ii}}</div><div class="col-sm-6 col-md-6 col-lg-6">现有{{qty}}</div></div>')
     }
   }).on('typeahead:selected', function(e, data) {
     selected_product($(this), data);

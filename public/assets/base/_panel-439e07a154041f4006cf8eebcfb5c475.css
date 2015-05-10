@@ -1,0 +1,16 @@
+/* line 2, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_panel.scss */
+.panel .panel-body .pull-right {
+  margin-right: 9.75px;
+}
+
+/* line 6, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_panel.scss */
+.panel .panel-body + .table tr > td:first-child,
+.panel .panel-body + .table tr > th:first-child {
+  padding-left: 9.75px;
+}
+
+/* line 10, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_panel.scss */
+.panel .panel-body + .table tr > td:last-child,
+.panel .panel-body + .table tr > th:last-child {
+  padding-right: 9.75px;
+}

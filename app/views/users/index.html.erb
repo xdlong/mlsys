@@ -1,8 +1,22 @@
+<style type="text/css">
+  .panel-footer nav .pagination {
+    margin: 0;
+  }
+</style>
 <div class="panel panel-primary">
   <!-- Default panel contents -->
   <div class="panel-heading">用户列表</div>
   <div class="panel-body">
-    <p>...</p>
+    <form class="form-horizontal" accept-charset="UTF-8" action="/users" method="get">
+      <div class="col-sm-4 col-xs-4 pull-right">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="<%= params[:search].present? ? params[:search] : '搜索'%>" name="search">
+          <span class="input-group-btn">
+            <button type="submit" class="btn btn-info"><span class="fa fa-search fa-lg"></span></button>
+          </span>
+        </div>
+      </div>
+    </form>
   </div>
 
   <!-- Table -->
@@ -36,7 +50,7 @@
             <% end -%>
           </span>
         </td>
-        <td class="text_left"><%=user.locked_at ? user.locked_at.strftime("%Y-%2m-%2d %H:%M:%S") : '未锁定' %></td>
+        <td class="text_left"><%=user.locked_at ? user.locked_at.strftime("%Y-%2m-%2d %H:%M:%S") : '已激活' %></td>
         <td class="text_left">
           <%- if user.confirmed_at %>
             <%=user.confirmed_at.strftime("%Y-%2m-%2d %H:%M:%S")%>
@@ -68,6 +82,6 @@
     </tbody>
   </table>
   <div class="panel-footer">
-    <p>...</p>
+    <%= paginate @users, :window => 3 %>
   </div>
 </div>
