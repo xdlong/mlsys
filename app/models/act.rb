@@ -138,7 +138,7 @@ class Act
     end
   end
 
-  def set_act_relationship name, element
+  def set_act_relationship name,element
     relate=eval(name).new
     case element
     when Array
@@ -172,8 +172,8 @@ class Act
             else
               act=eval(act_name).new act_elm
               self.outbounds<<eval(name).new(relate_elm.merge({:target=>act})) if meta.inverse_of[/target/]
-              self.inbounds<<eval(name).new(relate_elm.merge({:source=>act})) if meta.inverse_of[/source/]              
-            end            
+              self.inbounds<<eval(name).new(relate_elm.merge({:source=>act})) if meta.inverse_of[/source/]
+            end
           end
         end
       end
@@ -208,7 +208,7 @@ class Act
               else
                 act=eval(act_name).new act_elm
                 self.outbounds<<eval(name).new(relate_elm.merge({:target=>act})) if meta.inverse_of[/target/]
-                self.inbounds<<eval(name).new(relate_elm.merge({:source=>act})) if meta.inverse_of[/source/]              
+                self.inbounds<<eval(name).new(relate_elm.merge({:source=>act})) if meta.inverse_of[/source/]
               end    
           when Array
             act_elm.each do |elm|
@@ -237,7 +237,7 @@ class Act
               else
                 act=eval(act_name).new elm
                 self.outbounds<<eval(name).new(relate_elm.merge({:target=>act})) if meta.inverse_of[/target/]
-                self.inbounds<<eval(name).new(relate_elm.merge({:source=>act})) if meta.inverse_of[/source/]              
+                self.inbounds<<eval(name).new(relate_elm.merge({:source=>act})) if meta.inverse_of[/source/]
               end
             end
           end
@@ -248,13 +248,13 @@ class Act
 
   def to_hash
     ret={}
-    self.attribute_names.each{|att| ret.merge!(att.to_sym=>self.send(att.to_sym))}    
+    self.attribute_names.each{|att| ret.merge!(att.to_sym=>self.send(att.to_sym))}
     ret
   end
 
   def to_hash_no_nil
     ret={}
-    self.attributes.each{|key,val| ret.merge!(key.to_sym=>val) if val}    
+    self.attributes.each{|key,val| ret.merge!(key.to_sym=>val) if val}
     ret
   end
 end

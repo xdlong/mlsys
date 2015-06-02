@@ -6,9 +6,9 @@ class Entity::Organization < Entity
   has_many :as_located_entity, class_name: 'Role::LocatedEntity', inverse_of: 'playeds', foreign_key: 'player_id', autosave: true
 
   def initialize attrs=nil
-  	super attrs
-  	self.class_code||='ORG'
-  	self.determiner||='INSTANCE'
+    super attrs
+    self.class_code||='ORG'
+    self.determiner||='INSTANCE'
     self.status_code||='N'
   end
 end
