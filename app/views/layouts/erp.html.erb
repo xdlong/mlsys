@@ -17,7 +17,7 @@
   <%= javascript_include_tag "base/handlebars" %>
 </head>
 <body>
-  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <nav class="noprint navbar navbar-default navbar-fixed-top" role="navigation">
     <a class="navbar-brand" href="#"><i class="fa fa-bars fa-lg sidenavBtn"></i></a>
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -33,7 +33,7 @@
   </nav>
   <div id="currentMedia"></div>
   <div class="container-fluid">
-    <div class="list-group sidenav sidenav-header">
+    <div class="noprint list-group sidenav sidenav-header">
       <a href="/erp/orgs/<%=@organization.id%>/products" class="list-group-item">
         <i class="fa fa-indent"></i>
         <span>库存-目录</span>
@@ -72,7 +72,7 @@
   </div>
   <!-- 侧边栏 end -->
 
-  <nav class="navbar navbar-default navbar-fixed-bottom">
+  <nav class="noprint navbar navbar-default navbar-fixed-bottom">
     <div class="container-fluid">
       <div class="navbar-right">
         <a class="navbar-brand" href="/">HostDragon Working Office.</a>
@@ -80,5 +80,5 @@
     </div>
   </nav>
 
-  </body>
+</body>
 </html>
