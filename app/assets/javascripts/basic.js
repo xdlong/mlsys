@@ -21,3 +21,10 @@ function start_select2(obj,data){
     }
   })
 }
+//打印指定元素
+function print_element(elem){
+  var body = document.body.innerHTML
+  document.body.innerHTML = elem.innerHTML;
+  window.print();
+  document.body.innerHTML = body;
+}

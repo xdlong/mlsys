@@ -1,10 +1,10 @@
 <center class=noprint>
   <a type="btn" class="btn btn-info btn-xs printbtn">打印</a>
 </center>
-<div>sdlakgh;gh;g;jg;dkjgldkjfs</div>
+<div id="toprint">sdlakgh;gh;g;jg;dkjgldkjfs</div>
 
 <script type="text/javascript">
   $(".printbtn").click(function(){
-    window.print();
+    print_element($(".toprint"));
   });
 </script>
