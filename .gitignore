@@ -15,8 +15,4 @@
 /log/*.log
 /tmp
 
-<<<<<<< HEAD
 /sftp-config.json
-=======
-sftp-config.json
->>>>>>> fb4e51b97af45e6c2ce6e07a12e4de7a69ccd1b8
