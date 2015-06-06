@@ -1,0 +1,53 @@
+<%= form_for @organization , :url=> {:controller =>'orgs', :action => 'update'} , :html=>{:class=>"form-horizontal"} do |f| %>
+<input name="erp_org[ii][extension]" value="0" hidden>
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <div class="pull-right" >
+      <button type="submit" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="" data-original-title="保存"><i class="fa fa-save fa-lg"></i>保存</button>
+    </div>
+    <div class="panel-title">信息修改</div>
+  </div>
+  <div class="row panel-body">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-10 col-md-10">
+          <div class="form-group">
+            <label class="col-sm-4 col-md-4 control-label">名称</label>
+            <div class="col-sm-5 col-md-5 ">
+              <%= f.text_field :name, :name=>"erp_org[name]", :placeholder=>"请输入组织机构名称" ,:class=>"form-control" ,:autofocus => true %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-10 col-sm-10">
+          <div class="form-group">
+            <label class="col-md-4 col-sm-4 control-label">标识码</label>
+            <div class="col-md-5 col-sm-4">
+              <input id="type_form" type="text" class="form-control" placeholder="请输入标识码" name="erp_org[ii][root]" value='<%=@organization.ii.root%>'>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-10 col-sm-10">
+          <div class="form-group">
+            <label class="col-md-4 col-sm-4 control-label">简要介绍</label>
+            <div class="col-md-5 col-sm-5">
+              <%= f.text_area :desc, :name=>'erp_org[desc]', :placeholder=>'请输入20字符以内',:class=>"form-control",:rows =>6 %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% end %>
+  <div class="panel-footer">
+    <a href="/erp" type='button' class="btn btn-default btn-sm"><i class="fa fa-arrow-left"></i>返回</a>
+    <form action="/erp/orgs/<%=@organization.id%>" method="post" style="display:inline">
+      <input name="_method" type="hidden" value="delete">
+      <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token%>" />
+      <button type="submit" class="btn btn-danger btn-sm" data-toggle="tooltip" title="删除"><i class="fa fa-trash"></i>删除</button>
+    </form>
+  </div>
+</div>

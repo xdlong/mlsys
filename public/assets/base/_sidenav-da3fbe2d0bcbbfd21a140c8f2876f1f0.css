@@ -1,0 +1,294 @@
+@charset "UTF-8";
+/**
+	侧边栏
+	文件名：_sidenav.scss
+	说明：
+		1.依赖于DIYscript.js
+		2.需要自己写js代码给相应链接加上类 link
+	例子：
+			<div id="currentMedia"></div> // 测试屏幕大小使用，id不可更改，直接放在body下,不要限制宽度大小
+			<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+			  ...
+			  <a class="navbar-brand" href="#"><i class="fa fa-bars fa-lg sidenavBtn"></i></a> // 在导航条brand里加入侧边栏开关图标，sidenavBtn 
+			  ...
+			</nav>
+			<div class="container">
+			  <div class="list-group sidenav"> //主要class sidenav
+			    // 只有一级菜单 
+			    <a href="#" class="list-group-item link"><i class="fa fa-user fa-lg"></i><span>菜单一</span></a>// link：显示激活状态 
+			    <a href="#" class="list-group-item"><i class="fa fa-user fa-lg"></i><span>菜单二</span></a>
+			    <a href="#" class="list-group-item"><i class="fa fa-user fa-lg"></i><span>菜单三</span></a>
+			    // end 
+
+			    // 有二级菜单 
+			    <a href="#" class="list-group-item"><i class="fa fa-user fa-lg"></i><span>菜单一</span></a>
+			    <div class="list-group open">// open：二级菜单展开状态 
+			      <a href="#" class="list-group-item link"><i class="fa fa-user fa-lg"></i><span>菜单一(1)</span></a>// link：显示激活状态 
+			      <a href="#" class="list-group-item"><i class="fa fa-user fa-lg"></i><span>菜单一(2)</span></a>
+			    </div>
+
+			    <a href="#" class="list-group-item"><i class="fa fa-user fa-lg"></i><span>菜单二</span></a>
+			    <div class="list-group">
+			      <a href="#" class="list-group-item"><i class="fa fa-user fa-lg"></i><span>菜单二(1)</span></a>
+			      <a href="#" class="list-group-item"><i class="fa fa-user fa-lg"></i><span>菜单二(2)</span></a>
+			    </div>
+
+			    // end 
+			    </div>
+			  </div>
+			  <div class="mainContent">
+			    // 主要业务代码 
+			  </div>
+			</div>
+			// 侧边栏 end 
+			
+			// 不需要侧边栏时 
+			<div class="container">
+			  // 主要业务代码 
+			</div>
+	作者：龙应菊
+	更新时间：2014-06-10
+*/
+/* line 52, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+#currentMedia {
+  display: none;
+}
+
+/* line 55, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+a.list-group-item.active, a.list-group-item.active:hover, a.list-group-item.active:focus {
+  z-index: 2;
+  color: #555555;
+  background-color: transparent;
+  border: 1px solid #dddddd;
+}
+
+/* line 61, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+.sidenavBtn {
+  display: none;
+}
+
+/* line 67, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+.sidenavBtn,
+.sidenav,
+.list-group,
+.mainContent {
+  z-index: 1000;
+  -webkit-transition: all 0.25s ease;
+  -moz-transition: all 0.25s ease;
+  -ms-transition: all 0.25s ease;
+  -o-transition: all 0.25s ease;
+  transition: all 0.25s ease;
+}
+
+/* line 71, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+.sidenav {
+  width: 180px;
+  float: left;
+  margin-right: 15px;
+}
+/* line 76, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+.sidenav .list-group-item > span {
+  margin-left: 5px;
+}
+/* line 78, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+.sidenav .list-group-item > span + i {
+  float: right;
+  margin-top: 4px;
+  margin-right: -3px;
+}
+/* line 82, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+.sidenav .list-group-item > span + i.up {
+  -webkit-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+/* line 88, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+.sidenav > .list-group-item.link {
+  color: #428bca;
+}
+/* line 91, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+.sidenav > .list-group-item.link:before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2px;
+  height: 100%;
+  background-color: #428bca;
+  content: "";
+}
+/* line 100, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+.sidenav > .list-group {
+  position: absolute;
+  display: none;
+  margin-bottom: 0;
+  margin-top: -41px;
+  left: 195px;
+}
+/* line 106, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+.sidenav > .list-group > .sidenav {
+  left: 180px;
+}
+/* line 109, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+.sidenav > .list-group > .list-group-item {
+  padding-left: 22.5px;
+}
+/* line 112, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+.sidenav > .list-group > .list-group-item.link {
+  color: #428bca;
+}
+/* line 115, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+.sidenav > .list-group > .list-group-item.link:before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 100%;
+  background-color: #428bca;
+  content: "";
+}
+/* line 124, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+.sidenav > .list-group > .list-group-item:last-child {
+  border-bottom: 0 solid #fff;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+/* line 128, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+.sidenav > .list-group > .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+/* line 132, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+.sidenav > .list-group.open {
+  display: block;
+}
+/* line 135, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+.sidenav + .mainContent {
+  float: left;
+  width: -webkit-calc(100% - 180px - 15px);
+  widt-moz-h: calc(100% - 180px - 15px);
+  width: calc(100% - 180px - 15px);
+}
+
+@media screen and (min-width: 768px) and (max-width: 1200px) {
+  /* line 143, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+  #currentMedia {
+    min-width: 768px;
+    max-width: 1200px;
+  }
+
+  /* line 147, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+  .sidenav {
+    width: 43px;
+  }
+  /* line 149, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+  .sidenav > .list-group-item {
+    position: relative;
+  }
+  /* line 151, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+  .sidenav > .list-group-item > *:not(:first-child) {
+    display: none;
+  }
+  /* line 154, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+  .sidenav > .list-group-item > span {
+    position: absolute;
+    width: 137px;
+    top: -1px;
+    margin-left: 0;
+    left: 41px;
+    padding: 6.5px 9.75px;
+    background-color: whitesmoke;
+    border: 1px solid #dddddd;
+    z-index: 1000;
+  }
+  /* line 165, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+  .sidenav > .list-group-item > .list-group {
+    position: absolute;
+    width: 136px;
+    left: 42px;
+    top: 30px;
+    z-index: 1000;
+  }
+  /* line 171, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+  .sidenav > .list-group-item > .list-group > .list-group-item {
+    padding-left: 9.75px;
+  }
+  /* line 174, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+  .sidenav > .list-group-item > .list-group > .list-group-item:first-child {
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+  }
+  /* line 177, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+  .sidenav > .list-group-item > .list-group > .list-group-item:last-child {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  /* line 182, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+  .sidenav > .list-group-item:hover > span {
+    display: block;
+  }
+  /* line 185, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+  .sidenav > .list-group-item:hover > .list-group {
+    display: block;
+  }
+  /* line 188, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+  .sidenav + .mainContent {
+    width: -webkit-calc(100% - 43px - 15px);
+    width: -moz-calc(100% - 43px - 15px);
+    width: calc(100% - 43px - 15px);
+  }
+}
+@media screen and (max-width: 768px) {
+  /* line 196, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+  #currentMedia {
+    max-width: 768px;
+  }
+
+  /* line 199, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+  .sidenavBtn {
+    display: inline-block;
+  }
+  /* line 201, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+  .sidenavBtn.open {
+    color: #428bca;
+  }
+
+  /* line 205, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+  .sidenav {
+    width: 180px;
+    margin-left: -205px;
+  }
+  /* line 208, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+  .sidenav + .mainContent {
+    display: inline-block;
+    width: 100%;
+  }
+  /* line 212, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+  .sidenav.open {
+    margin-left: 0;
+  }
+  /* line 214, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+  .sidenav.open + .mainContent {
+    width: -webkit-calc(100% - 180px - 15px);
+    width: -moz-calc(100% - 180px - 15px);
+    width: calc(100% - 180px - 15px);
+  }
+}
+/* line 223, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+html {
+  height: 100%;
+}
+
+/* line 226, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+body {
+  min-height: 100%;
+}
+
+/* line 229, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+.container {
+  height: calc(100% - 40px - 2px);
+}
+
+/* line 237, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_sidenav.scss */
+.mainContent {
+  height: calc(100% - 15px);
+}

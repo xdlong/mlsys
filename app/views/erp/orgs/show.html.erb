@@ -1,0 +1,70 @@
+<div class="page-header">
+  <i class="fa fa-list fa-fw fa-4x"></i>
+  <h3>库存-清单<small>详情</small></h3>
+</div>
+<form class="form-horizontal" accept-charset="UTF-8" action="/erp/orgs/<%=@organization.id%>" method="get">
+  <div class="form-group">
+    <div class="col-sm-4 col-xs-4">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="<%= params[:search].present? ? params[:search] : '搜索'%>" name="search">
+        <span class="input-group-btn">
+          <button type="submit" class="btn btn-info"><span class="fa fa-search fa-lg"></span></button>
+        </span>
+      </div>
+    </div>
+    <div class="col-sm-2 col-xs-2">
+    </div>
+    <div class="col-sm-6 col-xs-6">
+      <div class="pull-right">
+        <a class="btn btn-default list_modal" data-toggle="tooltip" title="" data-original-title="帮助"><span class="fa fa-question-circle fa-lg fa-fw"></span></a>
+      </div>
+    </div>
+  </div>
+</form>
+<div class="panel panel-default">
+  <!-- Table -->
+  <table class="table table-hover datatable table_list">
+    <thead>
+      <tr>
+        <th width="5%" style="text-align:left">#</th>
+        <th width="15%" style="text-align:left">型号</th>
+        <th width="15%" style="text-align:left">名称</th>
+        <th width="15%" style="text-align:left">库存量</th>
+        <th width="25%" style="text-align:left">描述</th>
+        <th width="15%" style="text-align:left">上次修改</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <%- @products.each_with_index do |product,i| %>
+      <tr>
+        <td class="text_left"><%=i+1 %></td>
+        <td class="text_left"><%=product.ii.extension %></td>
+        <td class="text_left"><%=product.name %></td>
+        <td class="text_left"><%=product.quantity %></td>
+        <td class="text_left"><%=product.desc %></td>
+        <td class="text_left"><%=product.updated_at.strftime("%Y-%2m-%2d %H:%M:%S") %></td>
+        <td style="text-align:center">
+          <span class="pull-right">
+            <a type='button' class='btn btn-default btn-xs' href="/erp/orgs/<%=@organization.id%>/products/<%=product.id%>/edit">
+              <i class="fa fa-pencil-square-o"></i>
+            </a>
+            <a type='button' class='btn btn-default btn-xs' href="/erp/orgs/<%=@organization.id%>/products/<%=product.id%>">
+              <i class="fa fa-info-circle"></i>
+            </a>
+            <form action="/erp/orgs/<%=@organization.id%>/products/<%=product.id%>" method="post" style="display:inline">
+              <input name="_method" type="hidden" value="delete">
+              <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token%>" />
+              <button type="submit" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button>
+            </form>
+          </span>
+        </td>
+      </tr>
+      <% end -%>
+    </tbody>
+  </table>
+</div>
+<div>
+  <td><%= paginate @products, :window => 3 %></td>
+</div>
+

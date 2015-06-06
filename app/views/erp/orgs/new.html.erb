@@ -1,0 +1,46 @@
+<%= form_for @organization , :url=> {:controller =>'orgs', :action => 'create'} , :html=>{:class=>"form-horizontal"} do |f| %>
+<input name="erp_org[ii][extension]" value="0" hidden>
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <div class="pull-right" >
+      <button type="submit" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="" data-original-title="保存"><i class="glyphicon glyphicon-floppy-open"></i>保存</button>
+    </div>
+    <div class="panel-title"><h5>信息录入：<small>请输入组织机构信息以便新建您自己的组织或机构。</small></h5></div>
+  </div>
+  <div class="row panel-body">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-10 col-md-10">
+          <div class="form-group">
+            <label class="col-sm-4 col-md-4 control-label">名称</label>
+            <div class="col-sm-5 col-md-5 ">
+              <input id="type_form" type="text" class="form-control" placeholder="请输入组织机构名称" name="erp_org[name]" autofocus>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-10 col-sm-10">
+          <div class="form-group">
+            <label class="col-md-4 col-sm-4 control-label">标识码</label>
+            <div class="col-md-5 col-sm-5">
+              <input id="type_form" type="text" class="form-control" placeholder="请输入标识码" name="erp_org[ii][root]">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-10 col-sm-10">
+          <div class="form-group">
+            <label class="col-md-4 col-sm-4 control-label">简要介绍</label>
+            <div class="col-md-5 col-sm-5">
+              <%= f.text_area :desc, :name=>'erp_org[desc]', :placeholder=>'请输入20字符以内',:class=>"form-control",:rows =>6, :autofocus => true %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="panel-footer"><p><a href="/erp" type='button' class="btn btn-default btn-sm"><i class="glyphicon glyphicon-arrow-left"></i>返回</a></p></div>
+</div>
+<% end %>

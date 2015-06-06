@@ -1,0 +1,29 @@
+<!-- Collect the nav links, forms, and other content for toggling -->
+<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+  <ul class="nav navbar-nav navbar-right">
+    <li><a href="/helper"><%= h = Time.now.hour;  case ;  when h>=5&&h<11;    '上午';  when h>=11&&h<13;    '中午';  when h>=13&&h<19;    '下午';  when h>=19||h<5;    '晚上';  end %>好！(^_^)</a></li>
+    <li class="dropdown">
+      <%- if current_user %>
+      <a href="/users/<%=current_user.id%>" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><%=current_user.email%><span class="caret"></span></a>
+      <ul class="dropdown-menu" role="menu">
+        <li><a href="/users/<%=current_user.id%>">个人信息</a></li>
+        <li><a href="/users/password/new">修改密码</a></li>
+        <li><a href="/users/cancel">账户注销</a></li>
+        <li class="divider"></li>
+        <li><a><form action="/users/sign_out" method="post" style="display:inline">
+            <input name="_method" type="hidden" value="delete">
+            <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token%>" />
+            <button type="submit" class="btn btn-info btn-sm">登出系统</button>
+          </form></a>
+        </li>
+      </ul>
+      <% else %>
+      <a href="/users/sign_in" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">请登录<span class="caret"></span></a>
+      <ul class="dropdown-menu" role="menu">
+        <li><a href="/users/sign_in">登录</a></li>
+        <li><a href="/users/sign_up">注册</a></li>
+      </ul>
+      <% end -%>
+    </li>
+  </ul>
+</div><!-- /.navbar-collapse -->

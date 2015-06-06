@@ -1,0 +1,47 @@
+@charset "UTF-8";
+/**
+	关于form样式
+	文件名：_form.scss
+	作者：龙应菊
+	更新时间：2014-06-10
+*/
+/*
+	输入框带按钮样式
+	例子：
+		<div class="input-unit">
+		  <input type="text" class="form-control" placeholder="Search" name="search" for="resources" value="" autofocus>
+		  <button type="button" class="btn btn-default" id="searchBtn"><i class="fa fa-search fa-fw fa-lg"></i></button>
+		</div>
+*/
+/* line 17, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_form.scss */
+.input-unit {
+  position: relative;
+}
+/* line 19, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_form.scss */
+.input-unit > input {
+  padding-right: 2.5em;
+}
+/* line 21, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_form.scss */
+.input-unit > input:focus + .btn {
+  color: #66afe9;
+}
+/* line 25, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_form.scss */
+.input-unit > .btn {
+  position: absolute;
+  top: 2px;
+  right: 1px;
+  border: 0 solid #fff;
+  padding: 2.8px 6.8px;
+  font-size: 12px;
+  line-height: 1.33333;
+  border-radius: 4px;
+  color: #999;
+}
+/* line 35, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_form.scss */
+.input-unit > .btn:hover, .input-unit > .btn:focus, .input-unit > .btn:active, .input-unit > .btn.active {
+  color: #999;
+  background-color: #fff;
+  border-color: #fff;
+  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0);
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0);
+}

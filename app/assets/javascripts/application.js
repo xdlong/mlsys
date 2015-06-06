@@ -12,5 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
 //= require_tree .
+//= require select2
+//= require twitter/typeahead
+//= require twitter/typeahead.min

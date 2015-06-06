@@ -1,0 +1,19 @@
+<div class="row container">
+  <div class="col-sm-4 col-md-4 col-lg-4"></div>
+  <div class="col-sm-4 col-md-4 col-lg-4">
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <center><h2>云上工作室</h2><hr></center>
+      <%= f.email_field :email, :class => "form-control", :placeholder => "您的电子邮箱", autofocus: true %><br>
+      <%= f.password_field :password, :class => "form-control", :placeholder => "登录密码", autocomplete: "off" %>
+      <div class="checkbox">
+        <label>
+          <%= f.check_box :remember_me %> 记住登录密码
+        </label>
+      </div>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+    <% end %><hr>
+  </div>
+  <div class="col-sm-4 col-md-4 col-lg-4"></div>
+</div> <!-- /container -->
+<%= render "users/shared/links" %>
+

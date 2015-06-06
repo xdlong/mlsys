@@ -1,0 +1,241 @@
+@import "base-x";
+/**
+	侧边栏
+	文件名：_sidenav.scss
+	说明：
+		1.依赖于DIYscript.js
+		2.需要自己写js代码给相应链接加上类 link
+	例子：
+			<div id="currentMedia"></div> // 测试屏幕大小使用，id不可更改，直接放在body下,不要限制宽度大小
+			<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+			  ...
+			  <a class="navbar-brand" href="#"><i class="fa fa-bars fa-lg sidenavBtn"></i></a> // 在导航条brand里加入侧边栏开关图标，sidenavBtn 
+			  ...
+			</nav>
+			<div class="container">
+			  <div class="list-group sidenav"> //主要class sidenav
+			    // 只有一级菜单 
+			    <a href="#" class="list-group-item link"><i class="fa fa-user fa-lg"></i><span>菜单一</span></a>// link：显示激活状态 
+			    <a href="#" class="list-group-item"><i class="fa fa-user fa-lg"></i><span>菜单二</span></a>
+			    <a href="#" class="list-group-item"><i class="fa fa-user fa-lg"></i><span>菜单三</span></a>
+			    // end 
+
+			    // 有二级菜单 
+			    <a href="#" class="list-group-item"><i class="fa fa-user fa-lg"></i><span>菜单一</span></a>
+			    <div class="list-group open">// open：二级菜单展开状态 
+			      <a href="#" class="list-group-item link"><i class="fa fa-user fa-lg"></i><span>菜单一(1)</span></a>// link：显示激活状态 
+			      <a href="#" class="list-group-item"><i class="fa fa-user fa-lg"></i><span>菜单一(2)</span></a>
+			    </div>
+
+			    <a href="#" class="list-group-item"><i class="fa fa-user fa-lg"></i><span>菜单二</span></a>
+			    <div class="list-group">
+			      <a href="#" class="list-group-item"><i class="fa fa-user fa-lg"></i><span>菜单二(1)</span></a>
+			      <a href="#" class="list-group-item"><i class="fa fa-user fa-lg"></i><span>菜单二(2)</span></a>
+			    </div>
+
+			    // end 
+			    </div>
+			  </div>
+			  <div class="mainContent">
+			    // 主要业务代码 
+			  </div>
+			</div>
+			// 侧边栏 end 
+			
+			// 不需要侧边栏时 
+			<div class="container">
+			  // 主要业务代码 
+			</div>
+	作者：龙应菊
+	更新时间：2014-06-10
+*/
+#currentMedia {
+    display: none;
+}
+a.list-group-item.active, a.list-group-item.active:hover, a.list-group-item.active:focus {
+	z-index: 2;
+	color: #555555;
+	background-color: transparent;
+	border: 1px solid #dddddd;
+}
+.sidenavBtn {
+	display:none;
+}
+.sidenavBtn,
+.sidenav,
+.list-group,
+.mainContent{
+	z-index: 1000;
+	@include transition-all(0.25s);
+}
+.sidenav {
+	width:$sidenav-width;
+	float: left;
+	margin-right:$line-height-computed;
+	.list-group-item {
+		> span {
+			margin-left:($line-height-computed / 3);
+			+ i {
+				float: right;
+				margin-top: 4px;
+				margin-right: -3px;
+				&.up {
+					@include rotate(180deg);
+				}
+			}
+		}
+	}
+	>.list-group-item.link {
+		color: $brand-primary;
+	}
+	>.list-group-item.link:before {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 2px;
+		height: 100%;
+		background-color: $brand-primary;
+		content: "";
+	}
+	>.list-group {
+		position: absolute;
+		display: none;
+		margin-bottom: 0;
+		margin-top: -41px;
+		left: 195px;
+		>.sidenav {
+			left: 180px;
+		}
+		>.list-group-item {
+			padding-left:($line-height-computed * 1.5);
+		}
+		>.list-group-item.link {
+			color: $brand-primary;
+		}
+		>.list-group-item.link:before {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 1px;
+			height: 100%;
+			background-color: $brand-primary;
+			content: "";
+		}
+		>.list-group-item:last-child {
+			border-bottom:0 solid #fff;
+			@include border-bottom-radius(0);
+		}
+		>.list-group-item:first-child {
+			@include border-top-radius(0);
+		}
+	}
+	>.list-group.open {
+		display: block;
+	}
+	+ .mainContent {
+		float: left;
+		width: -webkit-calc(100% - #{$sidenav-width} - #{$line-height-computed});
+		widt-moz-h: calc(100% - #{$sidenav-width} - #{$line-height-computed});
+		width: calc(100% - #{$sidenav-width} - #{$line-height-computed});
+	}
+}
+@media screen and (min-width: $sc-sm ) and (max-width: $sc-lg) {
+	#currentMedia {
+		min-width: $sc-sm;
+        max-width: $sc-lg;
+    }
+	.sidenav {
+		width: $sidenav-md-width;
+		>.list-group-item {
+			position:relative;
+			>*:not(:first-child){
+				display: none;
+			}
+			>span {
+				position:absolute;
+				width: ($sidenav-width - $sidenav-md-width);
+				top: -1px;
+				margin-left: 0;
+				left: ($sidenav-md-width - 2px);
+				padding:(10px * $padding-change-percentage) (15px * $padding-change-percentage);
+				background-color: $list-group-hover-bg;
+				border: 1px solid $list-group-border;
+				z-index: 1000;
+			}
+			>.list-group {
+				position:absolute;
+				width: ($sidenav-width - $sidenav-md-width - 1);
+				left: $sidenav-md-width - 1;
+				top:30px;
+				z-index: 1000;
+				>.list-group-item {
+					padding-left:(15px * $padding-change-percentage);
+				}
+				>.list-group-item:first-child {
+					@include border-top-radius(0);
+				}
+				>.list-group-item:last-child {
+					@include border-bottom-radius(0);
+				}
+			}
+		}
+		>.list-group-item:hover > span {
+			display: block;
+		}
+		>.list-group-item:hover >.list-group {
+			display: block;
+		}
+		+.mainContent {
+			width: -webkit-calc(100% - #{$sidenav-md-width} - #{$line-height-computed});
+			width: -moz-calc(100% - #{$sidenav-md-width} - #{$line-height-computed});
+			width: calc(100% - #{$sidenav-md-width} - #{$line-height-computed});
+		}
+	}	
+}
+@media screen and (max-width: $sc-sm) {
+	#currentMedia {
+        max-width: $sc-sm;
+    }
+    .sidenavBtn {
+    	display: inline-block;
+    	&.open {
+    		color: $brand-primary;
+    	}
+    }
+    .sidenav {
+		width: $sidenav-width;
+		margin-left: - ($sidenav-width + $line-height-computed + 10);
+		+ .mainContent {
+			display: inline-block;
+			width: 100%;
+		}
+		&.open {
+			margin-left: 0;
+			+.mainContent {
+				width: -webkit-calc(100% - #{$sidenav-width} - #{$line-height-computed});
+				width: -moz-calc(100% - #{$sidenav-width} - #{$line-height-computed});
+				width: calc(100% - #{$sidenav-width} - #{$line-height-computed});
+			}
+		}
+	}
+
+}
+html {
+	height:100%;
+}
+body {
+	min-height:100%;
+}
+.container {
+	// border:1px solid red;
+	height:calc(100% - #{$navbar-height} - 2px);
+	// min-height:calc(100% - #{$navbar-height} - 2px);
+}
+.container {
+	// padding-top: calc(#{$navbar-height} + #{$line-height-computed});
+}
+.mainContent {
+	// border:1px solid green;
+	height:calc(100% - #{$line-height-computed});
+	// min-height:calc(100% - #{$line-height-computed});
+}

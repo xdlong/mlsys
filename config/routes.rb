@@ -1,4 +1,56 @@
 Rails.application.routes.draw do
+  root 'application#index'
+  resources :tests
+
+  devise_for :users, controllers: {
+    sessions: 'users/sessions',
+    passwords: 'users/passwords',
+    registrations: 'users/registrations',
+    confirmations: 'users/confirmations',
+    unlocks: 'users/unlocks',
+  }
+  resources :users do
+    get :unlock
+    get :lock
+    get :confirm
+  end
+
+  namespace :ms do
+    resources :drugs
+  end
+
+  namespace :erp do
+    root 'home#index'
+    resources :home
+    resources :stocks
+    resources :orgs do
+      resources :setups
+      resources :products do
+        collection do
+          get :array_list
+        end
+      end
+      resources :registrations
+      resources :menus do
+        collection do
+          get :init
+          get :array_list
+        end
+        resources :products do
+          collection do
+            get :array_list
+          end
+        end
+      end
+    end
+  end
+
+  namespace :language_identification do
+    namespace :lexicon do
+      resources :characters
+    end
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

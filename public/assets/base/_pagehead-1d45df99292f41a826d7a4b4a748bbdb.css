@@ -1,0 +1,39 @@
+@charset "UTF-8";
+/**
+	页面标题
+	文件名：_pagehead.scss
+	例子：			
+	<div class="page-header">
+    <i class="fa fa-file-text-o fa-fw fa-4x"></i>
+    <h3>主标题<small>副标题</small></h3>
+  </div>	
+	作者：龙应菊
+	更新时间：2014-06-10
+*/
+/* line 13, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_pagehead.scss */
+.page-header {
+  font-family: Consolas, "Microsoft YaHei", "Microsoft JhengHei";
+  padding: 0;
+  margin: 0 0 16px 0;
+}
+/* line 17, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_pagehead.scss */
+.page-header > i {
+  margin-left: 0px;
+}
+/* line 20, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_pagehead.scss */
+.page-header > h3 {
+  margin: 0;
+  display: inline-block;
+  width: -webkit-calc(100% - 80px);
+  width: -moz-calc(100% - 80px);
+  width: calc(100% - 80px);
+}
+/* line 26, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_pagehead.scss */
+.page-header > h3 > small {
+  margin-top: 8px;
+  display: block;
+  font-size: 14px;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+}

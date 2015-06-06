@@ -1,0 +1,369 @@
+@charset "UTF-8";
+/**
+	页面标题
+	文件名：wizard.scss	
+	作者：龙应菊
+	更新时间：2014-06-10
+	使用说明：
+		1.依赖DIYscript.js
+		2.主要使用在新建页面上
+	例子：
+		1.箭头类型：
+			<ul class="wizard arrow justed">
+			  <li class="active"><a href="#home" data-toggle="tab"><span class="badge">1</span>步骤一</a></li>
+			  <li><a href="#red" data-toggle="tab"><span class="badge">2</span>步骤二</a></li>
+			  <li><a href="#green" data-toggle="tab"><span class="badge">3</span>步骤三</a></li>
+			</ul>
+			<div class="tab-content">
+				<div class="tab-pane active" id="home">
+				</div>
+				<div class="tab-pane" id="red">
+				</div>
+				<div class="tab-pane" id="green">
+				</div>
+				<div class="wizardFooter">
+					  <button type="button" class="btn btn-default btn-mini btnPrev" data-toggle="tooltip" data-placement="top" title="" data-original-title="上一步"><i class="fa fa-chevron-left fa-lg"></i></button>
+					  <button type="button" class="btn btn-default btn-mini btnNext" data-toggle="tooltip" data-placement="top" title="" data-original-title="下一步"><i class="fa fa-chevron-right fa-lg"></i></button>
+					  <button type="submit" class="btn btn-primary btn-mini btnSave save" data-toggle="tooltip" data-placement="top" title="" data-original-title="保存"><i class="fa fa-floppy-o fa-lg"></i></button>
+					  <a href="/admin/users" type="button" class="btn btn-default btnBack" data-toggle="tooltip" data-placement="top" title="" data-original-title="取消"><i class="fa fa-undo fa-lg"></i></a>
+				</div>
+			</div>
+			
+		2.圆形类型：
+			<div class="panel panel-default wizard-panel">
+			  	<div class="panel-heading">
+			    	<div class="panel-title">新建</div>
+			  	</div>
+				<ul class="wizard circle justed">
+				  <li class="active"><a href="#home" data-toggle="tab"><span class="badge">1</span><span>步骤一</span></a></li>
+				  <li><a href="#red" data-toggle="tab"><span class="badge">2</span><span>步骤二</span></a></li>
+				  <li><a href="#yellow" data-toggle="tab"><span class="badge">3</span><span>步骤三</span></a></li>
+				  <li><a href="#green" data-toggle="tab"><span class="badge">3</span><span>步骤四</span></a></li>
+				</ul>
+				<div class="tab-content">
+					<div class="tab-pane active" id="home">
+					</div>
+					<div class="tab-pane" id="red">
+					</div>
+					<div class="tab-pane" id="yellow">
+					</div>
+					<div class="tab-pane" id="green">
+					</div>
+				  	<div class="wizardFooter">
+				  		<button type="button" class="btn btn-default btn-mini btnPrev" data-toggle="tooltip" data-placement="top" title="" data-original-title="上一步"><i class="fa fa-chevron-left fa-lg"></i></button>
+				  		<button type="button" class="btn btn-default btn-mini btnNext" data-toggle="tooltip" data-placement="top" title="" data-original-title="下一步"><i class="fa fa-chevron-right fa-lg"></i></button>
+				  		<button type="submit" class="btn btn-primary btn-mini btnSave save" data-toggle="tooltip" data-placement="top" title="" data-original-title="保存"><i class="fa fa-floppy-o fa-lg"></i></button>
+				  		<a href="/admin/users" type="button" class="btn btn-default btnBack" data-toggle="tooltip" data-placement="top" title="" data-original-title="取消"><i class="fa fa-undo fa-lg"></i></a>
+				  	</div>
+				</div>
+			</div>
+			// 给.tab-content设置高度 
+			// 如：.tab-content {
+					height:-webkit-calc(100% - 200px);
+					height:-moz-calc(100% - 200px);
+					height:calc(100% - 200px);
+				} 
+*/
+/* line 72, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 14px;
+}
+/* line 79, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard > li {
+  margin: 0;
+}
+/* line 81, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard > li > a {
+  display: block;
+  color: #555555;
+}
+/* line 85, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard > li > a:hover, .wizard > li > a:focus {
+  text-decoration: none;
+}
+/* line 90, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard > li:first-child {
+  border-top-left-radius: 4px;
+}
+/* line 93, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard > li:last-child {
+  border-top-right-radius: 4px;
+}
+/* line 97, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard > li.completeStep > a {
+  color: #3c763d;
+}
+/* line 99, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard > li.completeStep > a:before {
+  border-left-color: #dff0d8;
+}
+/* line 105, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard > li.active > a {
+  color: #31708f;
+}
+/* line 107, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard > li.active > a:before {
+  border-left-color: #d9edf7;
+}
+/* line 112, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard.justed {
+  display: table;
+}
+/* line 114, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard.justed > li {
+  float: none;
+  display: table-cell;
+}
+/* line 119, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard + .tab-content {
+  display: block;
+  margin: 0;
+  padding: 9.75px;
+  padding-bottom: 0;
+  position: relative;
+}
+/* line 125, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard + .tab-content > .wizardFooter {
+  position: absolute;
+  text-align: right;
+  bottom: -42px;
+  right: 0;
+}
+/* line 130, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard + .tab-content > .wizardFooter .btnSave {
+  display: none;
+}
+/* line 134, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard + .tab-content > .tab-pane:first-of-type.active ~ .wizardFooter .btnPrev {
+  display: none;
+}
+/* line 137, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard + .tab-content > .tab-pane:nth-last-child(2).active ~ .wizardFooter .btnNext {
+  display: none;
+}
+/* line 140, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard + .tab-content > .tab-pane:nth-last-child(2).active ~ .wizardFooter .btnSave {
+  display: inline-block;
+}
+/* line 144, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard + form .tab-content {
+  display: block;
+  margin: 0;
+  padding: 9.75px;
+  padding-bottom: 0;
+  position: relative;
+}
+/* line 150, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard + form .tab-content > .wizardFooter {
+  position: absolute;
+  text-align: right;
+  bottom: -30px;
+  right: 0;
+}
+/* line 155, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard + form .tab-content > .wizardFooter .btnSave {
+  display: none;
+}
+/* line 159, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard + form .tab-content > .tab-pane:first-of-type.active ~ .wizardFooter .btnPrev {
+  display: none;
+}
+/* line 162, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard + form .tab-content > .tab-pane:nth-last-child(2).active ~ .wizardFooter .btnNext {
+  display: none;
+}
+/* line 165, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard + form .tab-content > .tab-pane:nth-last-child(2).active ~ .wizardFooter .btnSave {
+  display: inline-block;
+}
+
+/* line 171, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard.arrow > li {
+  border: 1px solid #dddddd;
+  background-color: #f0f0f0;
+}
+/* line 174, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard.arrow > li > a {
+  padding: 8px 9.75px;
+}
+/* line 177, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard.arrow > li > a:hover, .wizard.arrow > li > a:focus {
+  background-color: #eeeeee;
+}
+/* line 180, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard.arrow > li > a > .badge {
+  padding: 0.3em 0.7em;
+  margin-right: 1em;
+}
+/* line 187, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard.arrow > li:not(:last-child) > a {
+  position: relative;
+}
+/* line 189, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard.arrow > li:not(:last-child) > a:after {
+  position: absolute;
+  top: -14px;
+  right: -28px;
+  content: "";
+  width: 0;
+  height: 0;
+  border-top: 32px solid transparent;
+  border-left: 40px solid white;
+  border-bottom: 32px solid transparent;
+  z-index: 3;
+}
+/* line 201, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard.arrow > li:not(:last-child) > a:before {
+  position: absolute;
+  top: -1px;
+  right: -12px;
+  content: "";
+  width: 0;
+  height: 0;
+  border-top: 19px solid transparent;
+  border-left: 24px solid #f0f0f0;
+  border-bottom: 19px solid transparent;
+  z-index: 4;
+}
+/* line 215, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard.arrow > li.completeStep {
+  border-color: #d6e9c6;
+  background-color: #dff0d8;
+}
+/* line 218, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard.arrow > li.completeStep > a {
+  background-color: #dff0d8;
+}
+/* line 220, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard.arrow > li.completeStep > a:before {
+  border-left-color: #dff0d8;
+}
+/* line 223, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard.arrow > li.completeStep > a > .badge {
+  background-color: #3c763d;
+}
+/* line 228, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard.arrow > li.active {
+  border-color: #bce8f1;
+  background-color: #d9edf7;
+}
+/* line 231, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard.arrow > li.active > a {
+  background-color: #d9edf7;
+}
+/* line 233, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard.arrow > li.active > a:before {
+  border-left-color: #d9edf7;
+}
+/* line 236, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard.arrow > li.active > a > .badge {
+  background-color: #31708f;
+}
+/* line 241, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard.arrow > li:not(:first-child) {
+  padding-left: 26px;
+}
+/* line 244, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard.arrow + .tab-content {
+  border: 1px solid #dddddd;
+  border-top-color: transparent;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+/* line 249, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard.arrow + form .tab-content {
+  border: 1px solid #dddddd;
+  border-top-color: transparent;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+/* line 255, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard.circle {
+  padding-top: 9.75px;
+}
+/* line 258, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard.circle > li > a {
+  text-align: center;
+  vertical-align: middle;
+}
+/* line 261, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard.circle > li > a > .badge {
+  border-bottom-right-radius: 50%;
+  border-bottom-left-radius: 50%;
+  border-top-right-radius: 50%;
+  border-top-left-radius: 50%;
+  padding: 0.8em 1em;
+  font-size: 14px;
+  color: #555555;
+  position: relative;
+  z-index: 10;
+  background-color: transparent;
+  border: 4px solid #dddddd;
+}
+/* line 272, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard.circle > li > a > *:not(.badge) {
+  margin-top: 5px;
+  display: block;
+}
+/* line 279, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard.circle > li:not(:first-child) > a {
+  position: relative;
+}
+/* line 281, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard.circle > li:not(:first-child) > a:before {
+  position: absolute;
+  content: "";
+  width: -webkit-calc(50% - 1.5em);
+  width: -moz-calc(50% - 1.5em);
+  width: calc(50% - 1.5em);
+  height: 5px;
+  top: 28%;
+  left: 0;
+  background-color: #dddddd;
+}
+/* line 295, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard.circle > li:not(:last-child) > a {
+  position: relative;
+}
+/* line 297, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard.circle > li:not(:last-child) > a:after {
+  position: absolute;
+  content: "";
+  width: -webkit-calc(50% - 1.5em);
+  width: -moz-calc(50% - 1.5em);
+  width: calc(50% - 1.5em);
+  height: 5px;
+  top: 28%;
+  right: 0;
+  background-color: #dddddd;
+}
+/* line 312, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard.circle > li.completeStep > a > .badge {
+  border-color: #bbdba1;
+}
+/* line 315, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard.circle > li.completeStep > a:after {
+  background-color: #bbdba1;
+}
+/* line 318, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard.circle > li.completeStep > a:before {
+  background-color: #bbdba1;
+}
+/* line 325, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard.circle > li.active > a > .badge {
+  border-color: #67cbdf;
+}
+/* line 328, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard.circle > li.active > a:after {
+  background-color: #67cbdf;
+}
+/* line 331, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_wizard.scss */
+.wizard.circle > li.active > a:before {
+  background-color: #67cbdf;
+}

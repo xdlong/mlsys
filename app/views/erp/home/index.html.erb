@@ -1,0 +1,44 @@
+<div class="panel panel-primary">
+  <!-- Default panel contents -->
+  <div class="panel-heading">组织机构</div>
+  <div class="panel-body">
+    <p><h4>下表列出了正在使用此软件的组织或机构。请选择自己的组织或机构进入，您也可以新建自己的组织或机构。</h4></p>
+  </div>
+
+  <!-- List group -->
+  <ul class="list-group">
+    <li class="list-group-item">
+      <div class="row">
+        <div class="col-sm-8 col-md-8 col-lg-8 pull-left">
+          <a href="/erp/orgs/new" type="button" class="btn btn-default btn-sm"><i class="fa fa-plus"></i>添加</a>
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="查找...">
+            <span class="input-group-btn">
+              <button class="btn btn-info" type="button"><i class="fa fa-search"></i></button>
+            </span>
+          </div><!-- /input-group -->
+        </div><!-- /.col-lg-6 -->
+      </div><!-- /.row -->
+
+    </li>
+    <%- if @organizations.empty? %>
+    <li class="list-group-item"><h5>没有信息可以显示。</h5></li>
+    <% else %>
+      <% @organizations.each do |org| %>
+      <li class="list-group-item">
+        <h2><%=org.name%><small>（代码：<%=org.ii%>）<a type='button' href="/erp/orgs/<%=org.id%>/edit" class="btn btn-default btn-xs"><i class="fa fa-pencil-square-o"></i></a></small></h2>
+        <span class="pull-right">
+          <a href="/erp/orgs/<%=org.id%>" type='button' class="btn btn-default btn-mini">进入<i class="fa fa-arrow-right"></i></a>
+        </span>
+        <p><h3>简介：<small><%=org.desc%></small></h3></p>
+      </li>
+      <% end %>
+    <% end -%>
+  </ul>
+
+  <div class="panel-footer">
+    <p>...</p>
+  </div>
+</div>

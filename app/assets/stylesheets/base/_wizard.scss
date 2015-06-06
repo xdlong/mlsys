@@ -1,0 +1,336 @@
+@import "base-x";
+/**
+	页面标题
+	文件名：wizard.scss	
+	作者：龙应菊
+	更新时间：2014-06-10
+	使用说明：
+		1.依赖DIYscript.js
+		2.主要使用在新建页面上
+	例子：
+		1.箭头类型：
+			<ul class="wizard arrow justed">
+			  <li class="active"><a href="#home" data-toggle="tab"><span class="badge">1</span>步骤一</a></li>
+			  <li><a href="#red" data-toggle="tab"><span class="badge">2</span>步骤二</a></li>
+			  <li><a href="#green" data-toggle="tab"><span class="badge">3</span>步骤三</a></li>
+			</ul>
+			<div class="tab-content">
+				<div class="tab-pane active" id="home">
+				</div>
+				<div class="tab-pane" id="red">
+				</div>
+				<div class="tab-pane" id="green">
+				</div>
+				<div class="wizardFooter">
+					  <button type="button" class="btn btn-default btn-mini btnPrev" data-toggle="tooltip" data-placement="top" title="" data-original-title="上一步"><i class="fa fa-chevron-left fa-lg"></i></button>
+					  <button type="button" class="btn btn-default btn-mini btnNext" data-toggle="tooltip" data-placement="top" title="" data-original-title="下一步"><i class="fa fa-chevron-right fa-lg"></i></button>
+					  <button type="submit" class="btn btn-primary btn-mini btnSave save" data-toggle="tooltip" data-placement="top" title="" data-original-title="保存"><i class="fa fa-floppy-o fa-lg"></i></button>
+					  <a href="/admin/users" type="button" class="btn btn-default btnBack" data-toggle="tooltip" data-placement="top" title="" data-original-title="取消"><i class="fa fa-undo fa-lg"></i></a>
+				</div>
+			</div>
+			
+		2.圆形类型：
+			<div class="panel panel-default wizard-panel">
+			  	<div class="panel-heading">
+			    	<div class="panel-title">新建</div>
+			  	</div>
+				<ul class="wizard circle justed">
+				  <li class="active"><a href="#home" data-toggle="tab"><span class="badge">1</span><span>步骤一</span></a></li>
+				  <li><a href="#red" data-toggle="tab"><span class="badge">2</span><span>步骤二</span></a></li>
+				  <li><a href="#yellow" data-toggle="tab"><span class="badge">3</span><span>步骤三</span></a></li>
+				  <li><a href="#green" data-toggle="tab"><span class="badge">3</span><span>步骤四</span></a></li>
+				</ul>
+				<div class="tab-content">
+					<div class="tab-pane active" id="home">
+					</div>
+					<div class="tab-pane" id="red">
+					</div>
+					<div class="tab-pane" id="yellow">
+					</div>
+					<div class="tab-pane" id="green">
+					</div>
+				  	<div class="wizardFooter">
+				  		<button type="button" class="btn btn-default btn-mini btnPrev" data-toggle="tooltip" data-placement="top" title="" data-original-title="上一步"><i class="fa fa-chevron-left fa-lg"></i></button>
+				  		<button type="button" class="btn btn-default btn-mini btnNext" data-toggle="tooltip" data-placement="top" title="" data-original-title="下一步"><i class="fa fa-chevron-right fa-lg"></i></button>
+				  		<button type="submit" class="btn btn-primary btn-mini btnSave save" data-toggle="tooltip" data-placement="top" title="" data-original-title="保存"><i class="fa fa-floppy-o fa-lg"></i></button>
+				  		<a href="/admin/users" type="button" class="btn btn-default btnBack" data-toggle="tooltip" data-placement="top" title="" data-original-title="取消"><i class="fa fa-undo fa-lg"></i></a>
+				  	</div>
+				</div>
+			</div>
+			// 给.tab-content设置高度 
+			// 如：.tab-content {
+					height:-webkit-calc(100% - 200px);
+					height:-moz-calc(100% - 200px);
+					height:calc(100% - 200px);
+				} 
+*/
+
+$triangle-top:19px;
+$triangle-left:24px;
+$triangle-top-out:32px;
+$triangle-left-out:40px;
+.wizard {
+	display:block;
+	width: 100%;
+	margin:0;
+	padding:0;
+	list-style:none;
+	font-size: ceil(($font-size-base * 1.125));
+	>li {
+		margin:0;
+		>a {
+			display: block;
+			color: $nav-tabs-active-link-hover-color;
+			&:hover,
+			&:focus {
+			  text-decoration: none;
+			}
+		}
+	}
+	>li:first-child {
+		border-top-left-radius:$border-radius-base;
+	}
+	>li:last-child {
+		border-top-right-radius:$border-radius-base;
+	}
+	>li.completeStep {
+		>a {
+			color:$state-success-text;
+			&:before {
+				border-left-color: $state-success-bg;
+			}
+		}
+	}
+	>li.active {
+		>a {
+			color:$state-info-text;
+			&:before {
+				border-left-color: $state-info-bg;
+			}
+		}
+	}
+	&.justed {
+		display: table;
+		>li {
+			float:none;
+			display: table-cell;
+		}
+	}
+	+.tab-content {
+		display: block;
+		margin: 0;
+		padding: $panel-body-padding;
+		padding-bottom:0;
+		position:relative;
+		>.wizardFooter {
+			position:absolute;
+			text-align: right;
+			bottom:-($line-height-computed + 27px);
+			right: 0;
+			.btnSave {
+				display: none;
+			}
+		}
+		> .tab-pane:first-of-type.active ~ .wizardFooter .btnPrev {
+			display: none;
+		}
+		> .tab-pane:nth-last-child(2).active ~ .wizardFooter .btnNext {
+			display: none;
+		}
+		> .tab-pane:nth-last-child(2).active ~ .wizardFooter .btnSave {
+			display: inline-block;	
+		}
+	}
+	+form .tab-content {
+		display: block;
+		margin: 0;
+		padding: $panel-body-padding;
+		padding-bottom:0;
+		position:relative;
+		>.wizardFooter {
+			position:absolute;
+			text-align: right;
+			bottom:-($line-height-computed + 15px);
+			right: 0;
+			.btnSave {
+				display: none;
+			}
+		}
+		> .tab-pane:first-of-type.active ~ .wizardFooter .btnPrev {
+			display: none;
+		}
+		> .tab-pane:nth-last-child(2).active ~ .wizardFooter .btnNext {
+			display: none;
+		}
+		> .tab-pane:nth-last-child(2).active ~ .wizardFooter .btnSave {
+			display: inline-block;	
+		}
+	}
+}
+.wizard.arrow {
+	>li {
+		border:1px solid $table-border-color;
+		background-color:$table-bg-hover;
+		>a {
+			padding:$nav-link-padding;
+			&:hover,
+			&:focus {
+			  background-color: $nav-link-hover-bg;
+			}
+			>.badge {
+				padding:0.3em 0.7em;
+				margin-right: 1em;
+			}
+		}
+	}
+	>li:not(:last-child) {
+		> a {
+			position: relative;
+			&:after {
+				position:absolute;
+				top: -14px;
+				right: -28px;
+				content: "";
+				width: 0;
+				height: 0;
+				border-top: $triangle-top-out solid transparent;
+				border-left: $triangle-left-out solid #fff;
+				border-bottom: $triangle-top-out solid transparent;
+				z-index: 3;
+			}
+			&:before {
+				position:absolute;
+				top: -1px;
+				right: -12px;
+				content: "";
+				width: 0;
+				height: 0;
+				border-top: $triangle-top solid transparent;
+				border-left: $triangle-left solid $table-bg-hover;
+				border-bottom: $triangle-top solid transparent;
+				z-index: 4;
+			}
+		}
+	}
+	>li.completeStep {
+		border-color:$state-success-border;
+		background-color:$state-success-bg;
+		>a {
+			background-color:$state-success-bg;
+			&:before {
+				border-left-color: $state-success-bg;
+			}
+			>.badge {
+				background-color:$state-success-text;
+			}
+		}
+	}
+	>li.active {
+		border-color:$state-info-border;
+		background-color:$state-info-bg;
+		>a {
+			background-color:$state-info-bg;
+			&:before {
+				border-left-color: $state-info-bg;
+			}
+			>.badge {
+				background-color:$state-info-text;
+			}
+		}
+	}
+	>li:not(:first-child){
+		padding-left:26px;
+	}
+	+.tab-content {
+		border:1px solid $table-border-color;
+		border-top-color:transparent;
+		@include border-bottom-radius($border-radius-base);
+	}
+	+form .tab-content {
+		border:1px solid $table-border-color;
+		border-top-color:transparent;
+		@include border-bottom-radius($border-radius-base);
+	}
+}
+.wizard.circle {
+	padding-top: $panel-body-padding;
+	>li {
+		>a {
+			text-align: center;
+			vertical-align:middle;
+			>.badge {
+				@include border-bottom-radius(50%);
+				@include border-top-radius(50%);
+				padding:0.8em 1em;
+				font-size: ceil(($font-size-base * 1.125));
+				color: $nav-tabs-active-link-hover-color;
+				position:relative;
+				z-index: 10;
+				background-color:transparent;
+				border:4px solid $table-border-color;
+			}
+			>*:not(.badge) {
+				margin-top: 5px;
+				display: block;
+			}
+		}
+	}
+	>li:not(:first-child){
+		>a{
+			position:relative;
+			&:before {
+				position:absolute;
+				content: "";
+				width: -webkit-calc(50% - 1.5em);
+				width: -moz-calc(50% - 1.5em);
+				width: calc(50% - 1.5em);
+				height: 5px;
+				top: 28%;
+				left: 0;
+				background-color:$table-border-color;
+			}
+		}
+	}
+	>li:not(:last-child){
+		>a{
+			position:relative;
+			&:after {
+				position:absolute;
+				content: "";
+				width: -webkit-calc(50% - 1.5em);
+				width: -moz-calc(50% - 1.5em);
+				width: calc(50% - 1.5em);
+				height: 5px;
+				top: 28%;
+				right: 0;
+				background-color:$table-border-color;
+			}
+		}
+	}
+	>li.completeStep {
+		>a {
+			>.badge {
+				border-color:darken($state-success-border,10%);
+			}
+			&:after {
+				background-color:darken($state-success-border,10%);
+			}
+			&:before {
+				background-color:darken($state-success-border,10%);
+			}
+		}
+	}
+	>li.active {
+		>a {
+			>.badge {
+				border-color:darken($state-info-border,20%);
+			}
+			&:after {
+				background-color:darken($state-info-border,20%);
+			}
+			&:before {
+				background-color:darken($state-info-border,20%);
+			}
+		}
+	}
+}

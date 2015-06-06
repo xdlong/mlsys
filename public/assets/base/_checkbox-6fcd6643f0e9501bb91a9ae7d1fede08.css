@@ -1,0 +1,100 @@
+@charset "UTF-8";
+/**
+	单复选按钮
+	文件名：_checkbox.scss
+	例子：
+	<label class="check-label">
+		<input type="checkbox" value="" name=""><i></i>内容
+	</label>
+	<label class="check-label">
+		<input type="radio" value="" name=""><i></i>内容
+	</label>
+	作者：龙应菊
+	更新时间：2014-06-10
+*/
+/* line 15, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_checkbox.scss */
+.check-label {
+  margin-bottom: 0;
+  position: relative;
+  padding-left: 1.8em;
+  min-width: 14.4px;
+  min-height: 12px;
+  font-weight: normal;
+}
+/* line 22, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_checkbox.scss */
+.check-label > input {
+  margin-top: 0;
+  display: none;
+}
+/* line 26, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_checkbox.scss */
+.check-label > i {
+  position: absolute;
+  left: 0;
+}
+/* line 30, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_checkbox.scss */
+.check-label > input[type="checkbox"] ~ i:after {
+  content: "\f096";
+  display: inline-block;
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 1.25em;
+  line-height: 0.75em;
+  vertical-align: -15%;
+  color: #999999;
+}
+/* line 33, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_checkbox.scss */
+.check-label > input[type="radio"] ~ i:after {
+  content: "\f10c";
+  display: inline-block;
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 1.25em;
+  line-height: 0.75em;
+  vertical-align: -15%;
+  color: #999999;
+}
+/* line 36, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_checkbox.scss */
+.check-label > input[type="checkbox"]:checked ~ i:after {
+  content: "\f046";
+  display: inline-block;
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 1.22em;
+  line-height: 0.75em;
+  vertical-align: -15%;
+  color: #428bca;
+  opacity: 0.8;
+}
+/* line 40, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_checkbox.scss */
+.check-label > input[type="radio"]:checked ~ i:after {
+  content: "\f192";
+  display: inline-block;
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 1.22em;
+  line-height: 0.75em;
+  vertical-align: -15%;
+  color: #428bca;
+  opacity: 0.8;
+}
+/* line 44, D:/MyWork/mlsys/machine_learning/app/assets/stylesheets/base/_checkbox.scss */
+.check-label input[type="checkbox"]:disabled ~ i:after {
+  opacity: 0.6;
+  background-color: #dddddd;
+}

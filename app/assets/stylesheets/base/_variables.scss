@@ -1,0 +1,32 @@
+@import "bootstrap/variables";
+
+$sc-lg: 1200px !default;
+$sc-md: 992px !default;
+$sc-sm: 768px !default;
+$sc-xs: 480px !default;
+
+$module-margin-bottom: 16px !default;// 大模块上下之间间距
+
+//侧边栏
+$fa-lg-width: 22px;
+$sidenav-width: 180px !default;
+$sidenav-md-width:43px !default;
+$item-padding-top: 9px;
+$item-padding-left: 12px;
+$sidenav-width-sm-lg : $item-padding-left * 2 + $fa-lg-width;
+$sidenav-margin-right-sm-lg : $module-margin-bottom / 2;
+//侧边栏 end
+
+body {
+	// background: whiteSmoke;
+	// background-image: initial;
+	// background-position-x: initial;
+	// background-position-y: initial;
+	// background-size: initial;
+	// background-repeat-x: initial;
+	// background-repeat-y: initial;
+	// background-attachment: initial;
+	// background-origin: initial;
+	// background-clip: initial;
+	// background-color: rgb(245, 245, 245);
+}

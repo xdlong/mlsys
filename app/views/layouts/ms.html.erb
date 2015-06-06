@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="shortcut icon" href="/assets/log.png" />
+  <title>药房系统</title>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= stylesheet_link_tag "fontawesome/font-awesome.min" %>
+  <%= stylesheet_link_tag "base/base" %>
+  <%= csrf_meta_tags %>
+  <%= stylesheet_link_tag 'bootstrap/bootstrap.min' %>
+  <%= stylesheet_link_tag 'bootstrap/bootstrap-theme.min' %>
+  <%= javascript_include_tag 'application' %>
+  <%= javascript_include_tag 'basic' %>
+  <%= javascript_include_tag 'bootstrap/bootstrap.min' %>
+  <%= javascript_include_tag "base/sidenav" %>
+</head>
+<body>
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/ms/drugs">中药</a></li>
+        <li><a href="#">西药</a></li>
+        <li><a href="#">自制药</a></li>
+      </ul>
+      <%= render 'layouts/userinfo' %>
+    </div>
+  </nav>
+  <div class="container">
+    <%= yield %>
+  </div>
+  <nav class="navbar navbar-inverse navbar-fixed-bottom">
+    <div class="container">
+      <div class="navbar-header">
+        <a href="" class="btn btn-link"><h4><font face="楷体" color=#fefefe>熊家药店</font></h4></a>
+      </div>
+      <div class="pull-left">
+        <h5>
+          <font face="楷体" color=#fefefe >药店地址：德江县煎茶镇老街</font>
+          <br>
+          <font face="楷体" color=#fefefe >联系电话：15121668909(熊医生)</font>
+        </h5>
+      </div>
+      <div class="navbar-right">
+        <a class="navbar-brand" href="/">HostDragon Working Office.</a>
+      </div>
+    </div>
+  </nav>
+</body>
+</html>

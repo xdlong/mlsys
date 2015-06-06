@@ -1,0 +1,16 @@
+@import "base-x";
+.hovershow {
+	visibility:hidden;
+}
+tr:hover .hovershow {
+	visibility:visible;
+}
+
+.checkw {
+	width:30px;
+}
+tr > td:last-child {
+	>span > a {
+		padding-right:($line-height-computed / 4);
+	}
+}  	

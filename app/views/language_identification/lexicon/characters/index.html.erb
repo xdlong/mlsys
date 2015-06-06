@@ -1,0 +1,55 @@
+<div class="panel panel-default" style="margin-bottom:0">
+  <!-- Default panel contents -->
+  <div class="panel-heading">
+    <div class="row">
+      <div class="col-lg-8 col-xs-8">
+        <span class="glyphicon glyphicon-list glyphicon-lg" style="font-size:30px"></span>
+      </div><!-- /.col-lg-8 -->
+      <div class="col-lg-4 col-xs-4">
+        <form accept-charset="UTF-8" action="/language_identification/lexicon/characters" method="get">
+          <div class="input-group">
+            <input name="search" type="text" class="form-control" placeholder="Search for...">
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="submit">Go!</button>
+            </span>
+          </div><!-- /input-group -->
+        </form>
+      </div><!-- /.col-lg-4 -->
+    </div><!-- /.row -->
+  </div>
+  <div class="panel-body">
+    Listing language identification lexicon characters
+  </div>
+  <!-- Table -->
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Contained</th>
+        <th>Next Characters Num</th>
+        <th>Seat Num</th>
+        <th>End Ind</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @language_identification_lexicon_characters.each_with_index do |language_identification_lexicon_character,i| %>
+        <tr>
+          <td><%= i+1 %></td>
+          <td><%= language_identification_lexicon_character.contained %></td>
+          <td><%= language_identification_lexicon_character.next_character.size %></td>
+          <td><%= language_identification_lexicon_character.seat_num %></td>
+          <td><%= language_identification_lexicon_character.end_ind %></td>
+          <td class="text_center">
+            <span class="pull-right">
+              <%= link_to raw('<span class="glyphicon glyphicon-chevron-right"></span>'),language_identification_lexicon_character %>
+            </span>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<div>
+<%= paginate @language_identification_lexicon_characters, :window => 3 %>
+</div>

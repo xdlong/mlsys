@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @ms_drug.name %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @ms_drug.type %>
+</p>
+
+<p>
+  <strong>Unit:</strong>
+  <%= @ms_drug.unit %>
+</p>
+
+<p>
+  <strong>Unit price:</strong>
+  <%= @ms_drug.unit_price %>
+</p>
+
+<p>
+  <strong>Inventory:</strong>
+  <%= @ms_drug.inventory %>
+</p>
+
+<p>
+  <strong>Byname:</strong>
+  <%= @ms_drug.byname %>
+</p>
+
+<p>
+  <strong>Resume:</strong>
+  <%= @ms_drug.resume %>
+</p>
+
+<p>
+  <strong>Notice:</strong>
+  <%= @ms_drug.notice %>
+</p>
+
+<%= link_to 'Edit', edit_ms_drug_path(@ms_drug) %> |
+<%= link_to 'Back', ms_drugs_path %>

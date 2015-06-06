@@ -1,0 +1,16 @@
+<h2>账户认证</h2>
+
+<%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div class="field">
+    <%= f.label "电子邮箱" %><br />
+    <%= f.email_field :email, autofocus: true %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "获取账户认证信息" %>
+  </div>
+<% end %>
+
+<%= render "users/shared/links" %>

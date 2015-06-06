@@ -1,0 +1,21 @@
+<%= form_for(@language_identification_lexicon_character) do |f| %>
+  <% if @language_identification_lexicon_character.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@language_identification_lexicon_character.errors.count, "error") %> prohibited this language_identification_lexicon_character from being saved:</h2>
+
+      <ul>
+      <% @language_identification_lexicon_character.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :contained %><br>
+    <%= f.text_field :contained %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,14 +1,48 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>MachineLearning</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <link rel="shortcut icon" href="/assets/log.png" />
+  <title>ML</title>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= stylesheet_link_tag "fontawesome/font-awesome.min" %>
+  <%= stylesheet_link_tag "base/base" %>
   <%= csrf_meta_tags %>
+  <%= stylesheet_link_tag 'bootstrap/bootstrap.min' %>
+  <%= stylesheet_link_tag 'bootstrap/bootstrap-theme.min' %>
+  <%= javascript_include_tag 'application' %>
+  <%= javascript_include_tag 'basic' %>
+  <%= javascript_include_tag 'bootstrap/bootstrap.min' %>
+  <%= javascript_include_tag "base/sidenav" %>
 </head>
 <body>
 
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">@ML@</a>
+    </div>
+    <%= render 'layouts/userinfo' %>
+  </div><!-- /.container-fluid -->
+</nav>
+
+<div class="container">
 <%= yield %>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+  <div class="container-fluid">
+    <div class="navbar-right">
+      <a class="navbar-brand" href="/">HostDragon Working Office.</a>
+    </div>
+  </div>
+</nav>
 
 </body>
 </html>
