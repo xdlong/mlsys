@@ -1,4 +1,0 @@
-  MOPED: Could not resolve IP for: xiongdl2009.vicp.cc:16097 runtime: n/a
-  MOPED: Retrying connection attempt 1 more time(s). runtime: n/a
-  MOPED: 220.170.79.231:16097 COMMAND      database=admin command={:ismaster=>1} runtime: 2300.0350ms
-  MOPED: 220.170.79.231:16097 COMMAND      database=admin command={:ismaster=>1} runtime: 2336.0360ms
