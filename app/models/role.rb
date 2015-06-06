@@ -66,7 +66,7 @@ class Role
           set_role_link meta.class_name, inverse_elm
         end
       end
-    end 
+    end
   end
 
   def set_participation name,element
@@ -116,7 +116,7 @@ class Role
               end
             end
           end
-        end 
+        end
       end
     when Array
       element.each do |elm|
@@ -142,25 +142,25 @@ class Role
                 self.participation<<eval(name).new(part_elm.merge({:act=>act}))
               end
             end
-          end 
-        end      
+          end
+        end
       end
     end
   end
 
   def to_hash
     ret={}
-    self.attribute_names.each{|att| ret.merge!(att.to_sym=>self.send(att.to_sym))}    
+    self.attribute_names.each{|att| ret.merge!(att.to_sym=>self.send(att.to_sym))}
     ret
   end
 
   def to_hash_no_nil
     ret={}
-    self.attributes.each{|key,val| ret.merge!(key.to_sym=>val) if val}    
+    self.attributes.each{|key,val| ret.merge!(key.to_sym=>val) if val}
     ret
   end
 
-  def set_role_link name, element
+  def set_role_link name,element
     link=eval(name).new
     case element
     when Array

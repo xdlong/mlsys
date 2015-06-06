@@ -9,13 +9,13 @@ class ActRelationship
 
   def to_hash
     ret={}
-    self.attribute_names.each{|att| ret.merge!(att.to_sym=>self.send(att.to_sym))}    
+    self.attribute_names.each{|att| ret.merge!(att.to_sym=>self.send(att.to_sym))}
     ret
   end
 
   def to_hash_no_nil
     ret={}
-    self.attributes.each{|key,val| ret.merge!(key.to_sym=>val) if val}    
+    self.attributes.each{|key,val| ret.merge!(key.to_sym=>val) if val}
     ret
   end
 end
