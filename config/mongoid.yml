@@ -4,6 +4,7 @@ development:
       database: machine_learning_development
       hosts:
         - localhost:27018
+        # - xiongdl2009.vicp.cc:16097
       options:
   options:
 production:
@@ -12,6 +13,7 @@ production:
       database: machine_learning_development
       hosts:
         - localhost:27018
+        # - xiongdl2009.vicp.cc:16097
       options:
   options:
 test:
@@ -20,6 +22,7 @@ test:
       database: machine_learning_test
       hosts:
         - localhost:27018
+        # - xiongdl2009.vicp.cc:16097
       options:
         read: primary
         # In the test environment we lower the retries and retry interval to

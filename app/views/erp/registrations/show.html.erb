@@ -1,11 +1,11 @@
-<%= stylesheet_link_tag 'print', media: 'print' %>
-<center class=noprint>
-  <a type="btn" class="btn btn-info btn-xs printbtn">打印</a>
+<center class='noprint'>
+  <a type="btn" class="btn btn-info btn-xs print-btn">打印</a>
 </center>
-<div class=toprint>sdlakgh;gh;g;jg;dkjgldkjfs</div>
+<div id="toprint">sdlakgh;gh;g;jg;dkjgldkjfs</div>
 
 <script type="text/javascript">
-  $(".printbtn").click(function(){
-    window.print();
+  $(".print-btn").click(function(){
+  	console.log($("#toprint")[0])
+    print_element($("#toprint")[0]);
   });
 </script>
