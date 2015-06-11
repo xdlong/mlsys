@@ -1,4 +1,5 @@
 ./tools/push-work
+./tools/pull
 git checkout dev
 git merge dev
 git push origin dev
