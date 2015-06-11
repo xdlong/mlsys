@@ -27,5 +27,6 @@ function print_element(elem){
   var body = document.body.innerHTML;
   document.body.innerHTML = elem.innerHTML;
   window.print();
-  document.body.innerHTML = body;
+  location.reload();
+  // document.body.innerHTML = body;
 };
