@@ -1,0 +1,8 @@
+./tools/push-work
+git checkout dev
+git merge dev
+git push origin dev
+git checkout master
+git merge master
+git push origin master
+git checkout work

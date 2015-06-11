@@ -3,7 +3,7 @@ development:
     default:
       database: machine_learning_development
       hosts:
-        - localhost:27018
+        - localhost:27017
         # - xiongdl2009.vicp.cc:16097
       options:
   options:
@@ -12,7 +12,7 @@ production:
     default:
       database: machine_learning_development
       hosts:
-        - localhost:27018
+        - localhost:27017
         # - xiongdl2009.vicp.cc:16097
       options:
   options:
@@ -21,7 +21,7 @@ test:
     default:
       database: machine_learning_test
       hosts:
-        - localhost:27018
+        - localhost:27017
         # - xiongdl2009.vicp.cc:16097
       options:
         read: primary

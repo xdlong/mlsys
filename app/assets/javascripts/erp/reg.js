@@ -165,6 +165,3 @@ document.onkeydown = function (e) {
     $('[accesskey="p"]').click();
   }
 }
-
-$(function(){
-})
